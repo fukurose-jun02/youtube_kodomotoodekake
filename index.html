@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>こどもとおでかけ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Zen Maru Gothic', sans-serif; background: #f7f0e3; color: #3d2e1e; min-height: 100vh; }
+  #root { min-height: 100vh; }
+  input::placeholder { color: #b0a090; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #f0ebe0; }
+  ::-webkit-scrollbar-thumb { background: #a0b880; border-radius: 3px; }
+
+  /* ── InView fade-up ───────────────────────── */
+  .inview {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.8s cubic-bezier(.25,.8,.25,1),
+                transform 0.8s cubic-bezier(.25,.8,.25,1);
+    will-change: opacity, transform;
+  }
+  .inview.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Card hover ───────────────────────────── */
+  .card-hover {
+    transition: transform 0.28s cubic-bezier(.34,1.2,.64,1),
+                box-shadow 0.28s ease !important;
+  }
+  .card-hover:hover {
+    transform: translateY(-5px) scale(1.025) !important;
+    box-shadow: 0 14px 40px rgba(60,40,10,0.22) !important;
+  }
+
+  /* ── Button hover ─────────────────────────── */
+  .btn-hover {
+    transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  .btn-hover:hover {
+    transform: translateY(-2px) !important;
+    filter: brightness(1.08) !important;
+    box-shadow: 0 6px 18px rgba(60,40,10,0.2) !important;
+  }
+
+  /* ── Link underline left→right ───────────── */
+  .link-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 0; height: 1.5px;
+    background: currentColor;
+    transition: width 0.35s cubic-bezier(.25,.8,.25,1);
+  }
+  .link-underline:hover::after { width: 100%; }
+
+  /* ── Category badge hover ─────────────────── */
+  .cat-badge-hover {
+    transition: transform 0.18s ease, filter 0.18s ease !important;
+    cursor: pointer;
+  }
+  .cat-badge-hover:hover {
+    transform: scale(1.07) !important;
+    filter: brightness(1.06) !important;
+  }
+
+  /* ── Filter button hover ──────────────────── */
+  .filter-btn {
+    transition: transform 0.18s ease, background 0.18s ease,
+                color 0.18s ease, border-color 0.18s ease !important;
+  }
+  .filter-btn:hover {
+    transform: translateY(-1px) !important;
+  }
+
+  /* ── Image scale on hover (inside card) ──── */
+  .thumb-scale {
+    transition: transform 0.45s cubic-bezier(.25,.8,.25,1) !important;
+  }
+  .thumb-scale:hover { transform: scale(1.06) !important; }
+
+  /* ── Play button pulse ────────────────────── */
+  @keyframes pulse-play {
+    0%   { box-shadow: 0 0 0 0 rgba(255,250,240,0.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(255,250,240,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,250,240,0); }
+  }
+  .play-btn-pulse { animation: pulse-play 1.8s ease infinite; }
+
+  /* ── Header title shimmer ─────────────────── */
+  @keyframes shimmer {
+    0%   { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+
+  /* ── Floating leaves (header decorations) ─── */
+  @keyframes floatLeaf {
+    0%   { transform: translateY(0px) rotate(0deg); }
+    50%  { transform: translateY(-8px) rotate(3deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+  .float-leaf { animation: floatLeaf 5s ease-in-out infinite; }
+  .float-leaf-slow { animation: floatLeaf 7s ease-in-out infinite 1s; }
+
+  /* ── Bear wobble on load ──────────────────── */
+  @keyframes bearWobble {
+    0%,100% { transform: rotate(0deg); }
+    20%     { transform: rotate(-4deg); }
+    40%     { transform: rotate(4deg); }
+    60%     { transform: rotate(-2deg); }
+    80%     { transform: rotate(2deg); }
+  }
+  .bear-wobble { animation: bearWobble 3.5s ease-in-out 0.5s 1; }
+
+  /* ── Spin for AI loading ──────────────────── */
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Stagger delay helpers ────────────────── */
+  .delay-0  { transition-delay: 0ms !important; }
+  .delay-1  { transition-delay: 80ms !important; }
+  .delay-2  { transition-delay: 160ms !important; }
+  .delay-3  { transition-delay: 240ms !important; }
+  .delay-4  { transition-delay: 320ms !important; }
+  .delay-5  { transition-delay: 400ms !important; }
+  .delay-6  { transition-delay: 480ms !important; }
+  .delay-7  { transition-delay: 560ms !important; }
+
+  /* reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .inview { opacity: 1; transform: none; transition: none; }
+    .card-hover:hover, .btn-hover:hover { transform: none; }
+    .float-leaf, .float-leaf-slow, .bear-wobble { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+// ─────────────────────────────────────────────
+// useInView hook — IntersectionObserver でフェードイン
+// ─────────────────────────────────────────────
+function useInView(options = {}) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px', ...options });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+}
+
+// グリッド全体の子要素を一括でInViewに登録するhook
+function useInViewGrid(deps = []) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+    const items = container.querySelectorAll('.inview');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    items.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, deps);
+  return ref;
+}
+
+// ─────────────────────────────────────────────
+// TWEAK DEFAULTS
+// ─────────────────────────────────────────────
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "variant": "A",
+  "siteName": "こどもとおでかけ",
+  "siteSubtitle": "双子との大切な思い出",
+  "primaryColor": "#5a7a3a",
+  "accentColor": "#b5651d",
+  "bgColor": "#f7f0e3"
+}/*EDITMODE-END*/;
+
+// ─────────────────────────────────────────────
+// VIDEO DATA (実際のYouTube動画)
+// ─────────────────────────────────────────────
+const VIDEOS = [
+  { id:'ZcqUjiy82PE', title:'服部緑地ウォーターランドにまどともと行ってきた', desc:'諏訪家と服部緑地のウォーターランドに行ってきたよ。雨だったから空いていて楽しめました。', cat:'プール', year:2025 },
+  { id:'mAS7SAnGu_k', title:'アマラーゴ行ってきた', desc:'2025年初のプールはアマラーゴに決定。子ども用プールもたくさんあって楽しめました。', cat:'プール', year:2025 },
+  { id:'nbJ5unhtvss', title:'アドベンチャーワールド 2025', desc:'毎年恒例！？今年も諏訪家と白浜旅行してきたよ', cat:'旅行', year:2025 },
+  { id:'wyeDG4dDnqM', title:'おやつタウン行ってきた', desc:'三重にあるおやつタウンに行ってきたよ。チキンラーメンたくさん食べて、お腹もいっぱいになったよ', cat:'旅行', year:2025 },
+  { id:'jFuITu9glfY', title:'鈴鹿サーキット行ってきた', desc:'三重にある鈴鹿サーキットに行ってきたよ。たくさん乗り物があって楽しかったよ', cat:'旅行', year:2025 },
+  { id:'1AncYm8MaE8', title:'レモン組発表会「大きなおいも」', desc:'レモン組では大きなおいもを劇でやったよ', cat:'保育園', year:2025 },
+  { id:'qPoDpqxY5gk', title:'イトマン体験会行ってきた', desc:'スイミングスクールの体験会に行ってきたよ。はじめての習い事でドキドキ', cat:'体験', year:2025 },
+  { id:'FqtdxRH5rVg', title:'キッズプラザ大阪に行ってきた', desc:'室内遊び場のキッズプラザに行ってきたよ。広くて駆け回って遊びました', cat:'おでかけ', year:2025 },
+  { id:'cMK8fuAJNTg', title:'福知山児童館行ってきた', desc:'濱口家と福知山にお出かけしたよ', cat:'おでかけ', year:2025 },
+  { id:'h0_848YlNwk', title:'関西スポーツサイクルセンター行ってきた', desc:'すみっコが関西にきた！？', cat:'おでかけ', year:2024 },
+  { id:'UUmYqewz86k', title:'樫原保育園それいけ発表会', desc:'いちご組の発表会', cat:'保育園', year:2024 },
+  { id:'ox0t2PiO9ns', title:'樫原保育園運動会 2024', desc:'さくらんぼ組運動会', cat:'保育園', year:2024 },
+  { id:'TMeI60c10Fk', title:'神戸フルーツ・フラワーパーク行ってきた', desc:'花と果実をテーマにした複合型レジャー施設', cat:'おでかけ', year:2024 },
+  { id:'LwqfmfsPo8A', title:'けいはんな記念公園行ってきた', desc:'諏訪家と大きな公園行ってきたよ', cat:'おでかけ', year:2024 },
+  { id:'GJFYVp9R7FE', title:'ばぁばとカレーを作ろう', desc:'ばぁばの家でカレーづくり体験したよ', cat:'体験', year:2024 },
+  { id:'J4q2SZ29600', title:'八幡市スポーツ公園行ってきた', desc:'京都のおおきな公園', cat:'おでかけ', year:2024 },
+  { id:'lLPHj_QPZ5Y', title:'三世代旅行', desc:'鍵谷、濱口、袋瀬の大所帯旅行', cat:'旅行', year:2024 },
+  { id:'kuAfARRClkY', title:'七五三のスタジオ撮影してきた', desc:'七五三の3歳のお祝い', cat:'おもいで', year:2024 },
+  { id:'p_SwyiSqo_s', title:'かめプー行ってきた', desc:'ばぁばと亀岡のプール行ってきたよ', cat:'プール', year:2024 },
+  { id:'Wpds4mdrP7g', title:'デカパトス行ってきた', desc:'健ジィジと神戸市六甲アイランドのウォーターランド行ってきた', cat:'プール', year:2024 },
+  { id:'e53OgeuTk2c', title:'石垣小浜島旅行 ダイジェストVer.', desc:'沖縄旅行のおもいで', cat:'おもいで', year:2024 },
+  { id:'7MIPROpqfBI', title:'父の日にピザ作ったよ', desc:'お父さんにピザを作ったよ', cat:'体験', year:2024 },
+  { id:'A2Du4bLR9c8', title:'沖縄石垣旅行', desc:'2024年の旅行は沖縄・石垣旅行', cat:'旅行', year:2024 },
+  { id:'m5L6LvTuXXg', title:'それいけ！さくらんぼ', desc:'さくらんぼ組の発表会', cat:'保育園', year:2024 },
+  { id:'-4cr0NCSCzM', title:'ユニバ行ってきた', desc:'3歳の誕生日はUSJで大好きなおさるのジョージに会おう', cat:'おでかけ', year:2024 },
+  { id:'LnMsZGVSqmY', title:'Happy 3rd Birthday', desc:'3歳のお誕生日おめでとう！', cat:'おもいで', year:2024 },
+  { id:'8iipQanlXnY', title:'母の日にケーキ作ったよ', desc:'お母さんにケーキを作ったよ', cat:'体験', year:2024 },
+  { id:'PNomK_iVBl0', title:'二色浜に潮干狩りに行ってきた', desc:'貫たちと人生初の潮干狩り', cat:'おでかけ', year:2024 },
+  { id:'kavQEhdpwv4', title:'七谷川BBQ行ってきた', desc:'毎年恒例！？鍵谷BBQ', cat:'おでかけ', year:2024 },
+  { id:'xY9-jK1q6ss', title:'諏訪ファミリーとアドベンチャーワールド行ってきた', desc:'諏訪家と白浜旅行行ってきた', cat:'旅行', year:2024 },
+  { id:'hEhw5jgmKzg', title:'大宮交通公園行ってきた', desc:'自転車乗れるかな！？', cat:'おでかけ', year:2024 },
+  { id:'GyFUeR_07OM', title:'神戸動物王国に行ってきた', desc:'余ったチケットで久々の動物園', cat:'おでかけ', year:2024 },
+  { id:'8qED0ONC1s0', title:'バレンタインに手作りクッキーを作ったよ', desc:'お父さんにチョコを作ったよ', cat:'体験', year:2024 },
+  { id:'0xpFFWRRPOA', title:'鳥取砂丘行ってきた', desc:'鳥取旅行2日目', cat:'旅行', year:2024 },
+  { id:'1EM_AiFL_mQ', title:'城崎温泉行ってきた', desc:'鳥取旅行1日目', cat:'旅行', year:2024 },
+  { id:'6WIhPUPh6Aw', title:'それいけ発表会', desc:'レモン組の発表会「おでんの湯」', cat:'保育園', year:2024 },
+  { id:'M1oPQJc4ZOg', title:'リトルプラネットに行ってきた', desc:'ARやプロジェクションマッピングなど次世代型体験テーマパーク！', cat:'おでかけ', year:2024 },
+];
+
+const CATS = ['すべて','プール','旅行','保育園','体験','おでかけ','おもいで'];
+const YEARS = ['すべて','2025','2024'];
+
+const CAT_COLORS = {
+  'プール':   { bg:'#dbeafe', text:'#1d4ed8' },
+  '旅行':     { bg:'#dcfce7', text:'#15803d' },
+  '保育園':   { bg:'#fef9c3', text:'#a16207' },
+  '体験':     { bg:'#fce7f3', text:'#be185d' },
+  'おでかけ': { bg:'#ede9fe', text:'#7c3aed' },
+  'おもいで': { bg:'#ffedd5', text:'#c2410c' },
+};
+
+// ─────────────────────────────────────────────
+// WATERCOLOR FOREST BACKGROUND (Ghibli-inspired)
+// ─────────────────────────────────────────────
+
+// Full-width watercolor forest scene for hero header
+const WatercolorForest = ({ height = 420 }) => (
+  <svg viewBox={`0 0 1440 ${height}`} preserveAspectRatio="xMidYMid slice"
+    xmlns="http://www.w3.org/2000/svg" style={{display:'block',width:'100%',height:'100%',position:'absolute',inset:0}}>
+    <defs>
+      {/* Sky gradient - golden hour */}
+      <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#b8d4f0" stopOpacity="1"/>
+        <stop offset="35%" stopColor="#d4e8c8" stopOpacity="1"/>
+        <stop offset="70%" stopColor="#c8dba0" stopOpacity="1"/>
+        <stop offset="100%" stopColor="#8aaa50" stopOpacity="1"/>
+      </linearGradient>
+      {/* Mist / watercolor wash overlay */}
+      <filter id="blur1"><feGaussianBlur stdDeviation="8"/></filter>
+      <filter id="blur2"><feGaussianBlur stdDeviation="18"/></filter>
+      <filter id="blur3"><feGaussianBlur stdDeviation="4"/></filter>
+      <filter id="watercolor">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="2" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="watercolor2">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="softEdge">
+        <feGaussianBlur stdDeviation="3"/>
+      </filter>
+      {/* Leaf texture */}
+      <radialGradient id="leafLight" cx="30%" cy="25%">
+        <stop offset="0%" stopColor="#d4f0a0" stopOpacity="0.9"/>
+        <stop offset="100%" stopColor="#4a7a20" stopOpacity="0.6"/>
+      </radialGradient>
+      <radialGradient id="leafDark" cx="30%" cy="25%">
+        <stop offset="0%" stopColor="#7ab040" stopOpacity="0.8"/>
+        <stop offset="100%" stopColor="#2a5010" stopOpacity="0.7"/>
+      </radialGradient>
+      <radialGradient id="sunbeam" cx="55%" cy="0%">
+        <stop offset="0%" stopColor="#fff8d0" stopOpacity="0.55"/>
+        <stop offset="100%" stopColor="#fff8d0" stopOpacity="0"/>
+      </radialGradient>
+      <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#6a9a30"/>
+        <stop offset="100%" stopColor="#3a6010"/>
+      </linearGradient>
+      <linearGradient id="mistGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#e8f4d8" stopOpacity="0"/>
+        <stop offset="60%" stopColor="#e8f4d8" stopOpacity="0.55"/>
+        <stop offset="100%" stopColor="#e8f4d8" stopOpacity="0"/>
+      </linearGradient>
+      <linearGradient id="fogGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="0"/>
+        <stop offset="100%" stopColor="#f0f8e0" stopOpacity="0.45"/>
+      </linearGradient>
+    </defs>
+
+    {/* Sky */}
+    <rect width="1440" height={height} fill="url(#skyGrad)"/>
+
+    {/* Sunbeam rays */}
+    <ellipse cx="820" cy="0" rx="480" ry="380" fill="url(#sunbeam)" filter="url(#blur2)"/>
+
+    {/* Far distant hills - pale watercolor wash */}
+    <ellipse cx="200" cy={height*0.48} rx="380" ry="160" fill="#a8c878" opacity="0.35" filter="url(#blur2)"/>
+    <ellipse cx="700" cy={height*0.46} rx="420" ry="140" fill="#90b860" opacity="0.3" filter="url(#blur2)"/>
+    <ellipse cx="1200" cy={height*0.5} rx="360" ry="150" fill="#a0c068" opacity="0.32" filter="url(#blur2)"/>
+
+    {/* Mid ground treeline - watercolor blobs */}
+    <g filter="url(#watercolor)">
+      {/* Left forest mass */}
+      <ellipse cx="100" cy={height*0.68} rx="160" ry="200" fill="#4a7820" opacity="0.72"/>
+      <ellipse cx="180" cy={height*0.62} rx="140" ry="190" fill="#5a8a28" opacity="0.65"/>
+      <ellipse cx="60" cy={height*0.72} rx="120" ry="160" fill="#3a6018" opacity="0.7"/>
+      <ellipse cx="250" cy={height*0.70} rx="130" ry="170" fill="#6a9a30" opacity="0.6"/>
+      {/* Right forest mass */}
+      <ellipse cx="1340" cy={height*0.66} rx="160" ry="200" fill="#4a7820" opacity="0.72"/>
+      <ellipse cx="1260" cy={height*0.60} rx="140" ry="185" fill="#5a8a28" opacity="0.65"/>
+      <ellipse cx="1390" cy={height*0.72} rx="120" ry="155" fill="#3a6018" opacity="0.7"/>
+      <ellipse cx="1190" cy={height*0.68} rx="130" ry="175" fill="#6a9a30" opacity="0.6"/>
+      {/* Center gap trees */}
+      <ellipse cx="550" cy={height*0.72} rx="100" ry="165" fill="#4a7820" opacity="0.55"/>
+      <ellipse cx="900" cy={height*0.70} rx="110" ry="170" fill="#5a8828" opacity="0.5"/>
+    </g>
+
+    {/* Big foreground trees - detailed with trunks */}
+    {/* Left big tree */}
+    <g filter="url(#watercolor2)">
+      <rect x="55" y={height*0.45} width="22" height={height*0.6} rx="8" fill="#4a3010" opacity="0.85"/>
+      <ellipse cx="66" cy={height*0.4} rx="90" ry="110" fill="#2a5810" opacity="0.8"/>
+      <ellipse cx="40" cy={height*0.38} rx="70" ry="90" fill="#3a7018" opacity="0.7"/>
+      <ellipse cx="95" cy={height*0.42} rx="75" ry="85" fill="#4a8820" opacity="0.65"/>
+      <ellipse cx="66" cy={height*0.35} rx="55" ry="70" fill="#5a9828" opacity="0.6"/>
+    </g>
+    {/* Right big tree */}
+    <g filter="url(#watercolor2)">
+      <rect x="1363" y={height*0.42} width="22" height={height*0.6} rx="8" fill="#4a3010" opacity="0.85"/>
+      <ellipse cx="1374" cy={height*0.37} rx="90" ry="110" fill="#2a5810" opacity="0.8"/>
+      <ellipse cx="1350" cy={height*0.35} rx="70" ry="88" fill="#3a7018" opacity="0.7"/>
+      <ellipse cx="1400" cy={height*0.39} rx="72" ry="82" fill="#4a8820" opacity="0.65"/>
+      <ellipse cx="1374" cy={height*0.32} rx="55" ry="68" fill="#5a9828" opacity="0.6"/>
+    </g>
+    {/* Center-left tree */}
+    <g filter="url(#softEdge)" opacity="0.7">
+      <rect x="338" y={height*0.5} width="14" height={height*0.6} rx="5" fill="#3a2808" opacity="0.8"/>
+      <ellipse cx="345" cy={height*0.44} rx="62" ry="78" fill="#336614" opacity="0.72"/>
+      <ellipse cx="328" cy={height*0.42} rx="48" ry="62" fill="#448820" opacity="0.65"/>
+      <ellipse cx="362" cy={height*0.46} rx="50" ry="60" fill="#559A28" opacity="0.6"/>
+    </g>
+    {/* Center-right tree */}
+    <g filter="url(#softEdge)" opacity="0.7">
+      <rect x="1092" y={height*0.52} width="14" height={height*0.6} rx="5" fill="#3a2808" opacity="0.8"/>
+      <ellipse cx="1099" cy={height*0.46} rx="60" ry="75" fill="#336614" opacity="0.72"/>
+      <ellipse cx="1082" cy={height*0.44} rx="46" ry="60" fill="#448820" opacity="0.65"/>
+      <ellipse cx="1116" cy={height*0.48} rx="48" ry="58" fill="#559A28" opacity="0.6"/>
+    </g>
+
+    {/* Ground / meadow */}
+    <ellipse cx="720" cy={height} rx="900" ry="160" fill="#6a9a30" opacity="0.8"/>
+    <ellipse cx="720" cy={height+20} rx="980" ry="130" fill="#5a8a28" opacity="0.7"/>
+    <rect x="0" y={height*0.82} width="1440" height={height*0.25} fill="url(#groundGrad)" opacity="0.7"/>
+
+    {/* Grass tufts foreground */}
+    <g filter="url(#watercolor2)" opacity="0.75">
+      <ellipse cx="180" cy={height*0.88} rx="60" ry="28" fill="#7ab030"/>
+      <ellipse cx="420" cy={height*0.90} rx="50" ry="22" fill="#6aa028"/>
+      <ellipse cx="700" cy={height*0.87} rx="70" ry="26" fill="#80b838"/>
+      <ellipse cx="980" cy={height*0.89} rx="55" ry="24" fill="#6aa028"/>
+      <ellipse cx="1230" cy={height*0.88} rx="65" ry="27" fill="#78b030"/>
+    </g>
+
+    {/* Hanging leaves top - like Totoro's camphor tree */}
+    <g opacity="0.55" filter="url(#watercolor)">
+      <ellipse cx="0" cy="0" rx="200" ry="120" fill="#3a6818"/>
+      <ellipse cx="100" cy="30" rx="160" ry="100" fill="#4a8020" opacity="0.8"/>
+      <ellipse cx="1440" cy="0" rx="200" ry="120" fill="#3a6818"/>
+      <ellipse cx="1340" cy="30" rx="160" ry="100" fill="#4a8020" opacity="0.8"/>
+    </g>
+
+    {/* Watercolor mist layer */}
+    <rect width="1440" height={height} fill="url(#mistGrad)" filter="url(#blur1)"/>
+
+    {/* Dappled light spots - kodama forest feeling */}
+    <g filter="url(#blur1)" opacity="0.35">
+      <circle cx="380" cy={height*0.3} r="80" fill="#fff8d0"/>
+      <circle cx="720" cy={height*0.25} r="60" fill="#fff8e0"/>
+      <circle cx="1060" cy={height*0.32} r="70" fill="#fff8d0"/>
+    </g>
+
+    {/* Bottom fog - soft watercolor bleed */}
+    <rect x="0" y={height*0.72} width="1440" height={height*0.35} fill="url(#fogGrad)"/>
+
+    {/* Tiny flowers in meadow */}
+    <g opacity="0.6">
+      {[200,340,480,620,760,900,1040,1180,1300].map((x,i)=>(
+        <g key={i} transform={`translate(${x},${height*0.84+((i%3)*8)})`}>
+          <circle r="5" fill={['#fff8d0','#ffd8e0','#d8f0ff'][i%3]}/>
+          <circle r="2.5" fill={['#e8c820','#e86080','#6098d0'][i%3]}/>
+        </g>
+      ))}
+    </g>
+
+    {/* Final soft vignette */}
+    <radialGradient id="vignette" cx="50%" cy="50%">
+      <stop offset="60%" stopColor="transparent"/>
+      <stop offset="100%" stopColor="#2a4010" stopOpacity="0.25"/>
+    </radialGradient>
+    <rect width="1440" height={height} fill="url(#vignette)"/>
+  </svg>
+);
+
+// Watercolor texture strip for content background
+const WatercolorStrip = () => (
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg" style={{display:'block',width:'100%',height:'60px',marginTop:'-2px'}}>
+    <defs>
+      <filter id="wstrip">
+        <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="3" seed="5"/>
+        <feDisplacementMap in="SourceGraphic" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+    <path d="M0,20 Q180,0 360,18 Q540,36 720,16 Q900,0 1080,20 Q1260,40 1440,18 L1440,80 L0,80Z"
+      fill="#f7f0e3" filter="url(#wstrip)"/>
+  </svg>
+);
+
+// Small leaf decoration (watercolor style)
+const SvgLeaf = ({w=60,style={}}) => (
+  <svg width={w} viewBox="0 0 60 80" style={style} xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="lf1"><feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="3"/>
+        <feDisplacementMap in="SourceGraphic" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+    <path d="M30 4 Q54 20 48 48 Q42 72 18 68 Q2 58 8 32 Q14 4 30 4Z" fill="#7aab52" opacity="0.82" filter="url(#lf1)"/>
+    <path d="M30 4 Q26 36 18 68" stroke="#4a7a2a" strokeWidth="1.5" fill="none" opacity="0.5"/>
+    <path d="M30 20 Q42 30 44 44" stroke="#4a7a2a" strokeWidth="1" fill="none" opacity="0.35"/>
+    <path d="M30 20 Q18 32 20 48" stroke="#4a7a2a" strokeWidth="1" fill="none" opacity="0.35"/>
+  </svg>
+);
+const SvgLeaf2 = ({w=50,style={}}) => (
+  <svg width={w} viewBox="0 0 50 70" style={style} xmlns="http://www.w3.org/2000/svg">
+    <path d="M25 3 Q46 18 40 44 Q34 66 13 60 Q-2 48 7 27 Q14 3 25 3Z" fill="#a8d070" opacity="0.7"/>
+    <path d="M25 3 Q20 34 13 60" stroke="#5a8a30" strokeWidth="1.2" fill="none" opacity="0.4"/>
+  </svg>
+);
+const SvgAcorn = ({w=36,style={}}) => (
+  <svg width={w} viewBox="0 0 40 52" style={style} xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="20" cy="16" rx="15" ry="10" fill="#7a5510"/>
+    <path d="M10 22 Q20 46 20 46 Q20 46 30 22Z" fill="#c4973a"/>
+    <rect x="18" y="6" width="4" height="10" rx="2" fill="#5a3a10"/>
+  </svg>
+);
+const SvgMushroom = ({w=44,style={}}) => (
+  <svg width={w} viewBox="0 0 50 62" style={style} xmlns="http://www.w3.org/2000/svg">
+    <rect x="18" y="38" width="14" height="20" rx="5" fill="#e8ddd0"/>
+    <path d="M5 38 Q25 4 45 38Z" fill="#c04040"/>
+    <circle cx="17" cy="26" r="4" fill="white" opacity="0.75"/>
+    <circle cx="30" cy="18" r="3" fill="white" opacity="0.75"/>
+    <circle cx="36" cy="29" r="3.5" fill="white" opacity="0.75"/>
+  </svg>
+);
+const SvgBear = ({w=80,style={}}) => (
+  <svg width={w} viewBox="0 0 90 90" style={style} xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="54" r="24" fill="#c4973a"/>
+    <circle cx="25" cy="32" r="12" fill="#c4973a"/>
+    <circle cx="65" cy="32" r="12" fill="#c4973a"/>
+    <circle cx="25" cy="30" r="7" fill="#d4a84a"/>
+    <circle cx="65" cy="30" r="7" fill="#d4a84a"/>
+    <circle cx="45" cy="50" r="13" fill="#d4a84a"/>
+    <circle cx="38" cy="50" r="3.5" fill="#3d2e1e"/>
+    <circle cx="52" cy="50" r="3.5" fill="#3d2e1e"/>
+    <ellipse cx="45" cy="59" rx="5" ry="3" fill="#a06828"/>
+    <circle cx="37" cy="48" r="1.2" fill="white"/>
+    <circle cx="50" cy="48" r="1.2" fill="white"/>
+  </svg>
+);
+const SvgRabbit = ({w=56,style={}}) => (
+  <svg width={w} viewBox="0 0 60 92" style={style} xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="18" cy="26" rx="7" ry="20" fill="#ddd4c8"/>
+    <ellipse cx="42" cy="26" rx="7" ry="20" fill="#ddd4c8"/>
+    <ellipse cx="18" cy="26" rx="3.5" ry="15" fill="#f0b8b8" opacity="0.7"/>
+    <ellipse cx="42" cy="26" rx="3.5" ry="15" fill="#f0b8b8" opacity="0.7"/>
+    <circle cx="30" cy="56" r="22" fill="#ddd4c8"/>
+    <circle cx="22" cy="51" r="3.5" fill="#3d2e1e"/>
+    <circle cx="38" cy="51" r="3.5" fill="#3d2e1e"/>
+    <ellipse cx="30" cy="60" rx="4.5" ry="3" fill="#e0a0a0"/>
+    <circle cx="21" cy="49" r="1.2" fill="white"/>
+    <circle cx="37" cy="49" r="1.2" fill="white"/>
+  </svg>
+);
+
+// ─────────────────────────────────────────────
+// VIDEO MODAL (YouTube embed)
+// ─────────────────────────────────────────────
+function VideoModal({ video, onClose }) {
+  useEffect(() => {
+    const fn = e => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', fn);
+    return () => document.removeEventListener('keydown', fn);
+  }, [onClose]);
+
+  const cc = CAT_COLORS[video.cat] || { bg:'#e8f5e0', text:'#5a7a3a' };
+
+  return (
+    <div onClick={onClose} style={{
+      position:'fixed', inset:0, background:'rgba(20,12,4,0.78)',
+      zIndex:1000, display:'flex', alignItems:'center', justifyContent:'center', padding:'16px'
+    }}>
+      <div onClick={e=>e.stopPropagation()} style={{
+        background:'#fffaf3', borderRadius:'22px', overflow:'hidden',
+        maxWidth:'800px', width:'100%',
+        boxShadow:'0 24px 72px rgba(40,20,4,0.45)',
+        position:'relative'
+      }}>
+        <button onClick={onClose} style={{
+          position:'absolute', top:'12px', right:'14px',
+          background:'rgba(255,250,243,0.92)', border:'none', borderRadius:'50%',
+          width:'34px', height:'34px', fontSize:'18px', cursor:'pointer',
+          color:'#5a7a3a', fontWeight:'bold', zIndex:10,
+          display:'flex', alignItems:'center', justifyContent:'center',
+          boxShadow:'0 2px 8px rgba(40,20,4,0.15)'
+        }}>✕</button>
+        {/* YouTube embed */}
+        <div style={{background:'#1a1008', aspectRatio:'16/9'}}>
+          <iframe
+            width="100%" height="100%"
+            src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0`}
+            title={video.title}
+            frameBorder="0"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            style={{display:'block', border:'none'}}
+          />
+        </div>
+        <div style={{padding:'18px 22px 22px'}}>
+          <div style={{display:'flex', alignItems:'center', gap:'8px', marginBottom:'8px'}}>
+            <span style={{
+              background:cc.bg, color:cc.text,
+              fontSize:'11px', fontWeight:'700', padding:'3px 11px', borderRadius:'20px'
+            }}>{video.cat}</span>
+            <span style={{fontSize:'11px', color:'#a09080'}}>{video.year}</span>
+          </div>
+          <h2 style={{fontSize:'18px', fontWeight:'700', color:'#3d2e1e', lineHeight:1.4, marginBottom:'6px'}}>
+            {video.title}
+          </h2>
+          {video.desc && (
+            <p style={{fontSize:'13px', color:'#6a5a4a', lineHeight:1.7}}>{video.desc}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// AI MODAL (Gemini suggestion)
+// ─────────────────────────────────────────────
+function AiModal({ onClose }) {
+  const [theme, setTheme] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [ideas, setIdeas] = useState(null);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fn = e => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', fn);
+    return () => document.removeEventListener('keydown', fn);
+  }, [onClose]);
+
+  const handleGenerate = async () => {
+    if (!theme.trim()) { setError('テーマを入力してください'); return; }
+    setError(''); setLoading(true); setIdeas(null);
+    try {
+      const prompt = `「${theme}」をテーマにした、日本の関西地方の4歳の双子の子どもとのお出かけ先アイデアを3つ、具体的な場所を含めてJSON形式で提案してください。各アイデアには title（場所の名前）と description（おすすめポイント）を含めてください。`;
+      const res = await window.claude.complete({
+        messages: [{ role:'user', content: prompt + '\n\nJSON配列形式のみで返答してください。例: [{"title":"場所名","description":"説明"}]' }]
+      });
+      const match = res.match(/\[[\s\S]*\]/);
+      if (match) {
+        const parsed = JSON.parse(match[0]);
+        setIdeas(parsed);
+      } else {
+        setError('提案の取得に失敗しました。もう一度お試しください。');
+      }
+    } catch(e) {
+      setError('エラーが発生しました。もう一度お試しください。');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div onClick={onClose} style={{
+      position:'fixed', inset:0, background:'rgba(20,12,4,0.72)',
+      zIndex:1000, display:'flex', alignItems:'center', justifyContent:'center', padding:'16px'
+    }}>
+      <div onClick={e=>e.stopPropagation()} style={{
+        background:'#fffaf3', borderRadius:'22px', padding:'28px',
+        maxWidth:'480px', width:'100%',
+        boxShadow:'0 24px 72px rgba(40,20,4,0.4)'
+      }}>
+        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'16px'}}>
+          <h2 style={{fontSize:'20px', fontWeight:'700', color:'#3d2e1e', display:'flex', alignItems:'center', gap:'8px'}}>
+            <span style={{fontSize:'24px'}}>✨</span>AIおでかけプランナー
+          </h2>
+          <button onClick={onClose} style={{
+            background:'none', border:'none', fontSize:'22px', cursor:'pointer', color:'#a09080', lineHeight:1
+          }}>✕</button>
+        </div>
+        <p style={{fontSize:'13px', color:'#6a5a4a', marginBottom:'18px', lineHeight:1.7}}>
+          どんなおでかけにしたいですか？<br/>
+          <span style={{fontSize:'12px', opacity:0.7}}>例：雨の日でも楽しめる、体を動かしたい、自然を感じたい</span>
+        </p>
+        <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
+          <input
+            type="text"
+            value={theme}
+            onChange={e=>setTheme(e.target.value)}
+            onKeyDown={e=>{if(e.key==='Enter') handleGenerate();}}
+            placeholder="テーマを入力…"
+            style={{
+              border:'2px solid #d4c8b8', borderRadius:'12px', padding:'12px 16px',
+              fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'15px', color:'#3d2e1e',
+              outline:'none', background:'#fffdf8',
+              transition:'border-color 0.2s'
+            }}
+            onFocus={e=>e.target.style.borderColor='#5a7a3a'}
+            onBlur={e=>e.target.style.borderColor='#d4c8b8'}
+          />
+          <button
+            onClick={handleGenerate}
+            disabled={loading}
+            style={{
+              background: loading ? '#a0b880' : '#5a7a3a',
+              color:'white', border:'none', borderRadius:'12px',
+              padding:'13px 20px', fontFamily:"'Zen Maru Gothic',sans-serif",
+              fontSize:'15px', fontWeight:'700', cursor: loading ? 'default' : 'pointer',
+              display:'flex', alignItems:'center', justifyContent:'center', gap:'8px',
+              transition:'background 0.2s'
+            }}
+          >
+            {loading ? (
+              <>
+                <span style={{
+                  display:'inline-block', width:'16px', height:'16px',
+                  border:'2px solid rgba(255,255,255,0.4)',
+                  borderTopColor:'white', borderRadius:'50%',
+                  animation:'spin 0.8s linear infinite'
+                }}/>
+                考え中…
+              </>
+            ) : '提案してもらう'}
+          </button>
+        </div>
+        {error && (
+          <p style={{marginTop:'12px', fontSize:'13px', color:'#c04040'}}>{error}</p>
+        )}
+        {ideas && ideas.length > 0 && (
+          <div style={{marginTop:'20px'}}>
+            <p style={{fontSize:'13px', fontWeight:'700', color:'#5a7a3a', marginBottom:'10px'}}>
+              AIからの提案はこちら 🌿
+            </p>
+            <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+              {ideas.map((idea,i)=>(
+                <div key={i} style={{
+                  background:'#f0f8e8', border:'1px solid #c8ddb0',
+                  borderRadius:'12px', padding:'14px 16px'
+                }}>
+                  <div style={{fontWeight:'700', color:'#3a5a20', fontSize:'14px', marginBottom:'5px'}}>
+                    {idea.title}
+                  </div>
+                  <div style={{fontSize:'12px', color:'#5a7a4a', lineHeight:1.7}}>
+                    {idea.description}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// CATEGORY BADGE
+// ─────────────────────────────────────────────
+function CatBadge({ cat, style={} }) {
+  const cc = CAT_COLORS[cat] || { bg:'#e8f0e0', text:'#5a7a3a' };
+  return (
+    <span style={{
+      background:cc.bg, color:cc.text,
+      fontSize:'11px', fontWeight:'700',
+      padding:'3px 10px', borderRadius:'20px',
+      display:'inline-block', ...style
+    }}>{cat}</span>
+  );
+}
+
+// ─────────────────────────────────────────────
+// FILTER BAR (shared)
+// ─────────────────────────────────────────────
+function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, primary, count, variant }) {
+  const isTabStyle = variant === 'B';
+  return (
+    <div>
+      {/* Search */}
+      <div className="inview visible" style={{
+        background:'white', borderRadius:'14px', padding:'8px 16px',
+        display:'flex', alignItems:'center', gap:'10px',
+        boxShadow:'0 2px 12px rgba(60,40,10,0.1)',
+        maxWidth:'480px', margin:'0 auto 18px'
+      }}>
+        <span style={{fontSize:'17px', opacity:0.45}}>🔍</span>
+        <input
+          type="text" value={search} onChange={e=>onSearch(e.target.value)}
+          placeholder="動画を検索…"
+          style={{
+            border:'none', outline:'none', width:'100%',
+            fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'14px',
+            color:'#3d2e1e', background:'transparent'
+          }}
+        />
+        {search && (
+          <button onClick={()=>onSearch('')} style={{
+            background:'none', border:'none', cursor:'pointer',
+            color:'#a09080', fontSize:'16px', lineHeight:1
+          }}>×</button>
+        )}
+      </div>
+      {/* Year filter */}
+      <div style={{display:'flex', justifyContent:'center', gap:'6px', marginBottom:'12px', flexWrap:'wrap'}}>
+        {YEARS.map(y=>(
+          <button key={y} onClick={()=>onYear(y)} style={{
+            padding:'5px 16px', borderRadius:'20px',
+            border: y===activeYear ? `2px solid ${primary}` : '2px solid #d4c8b8',
+            background: y===activeYear ? primary : 'white',
+            color: y===activeYear ? 'white' : '#6a5a4a',
+            fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'12px', fontWeight:'700',
+            cursor:'pointer', transition:'all 0.18s'
+          }}>{y==='すべて' ? 'すべての年' : y}</button>
+        ))}
+      </div>
+      {/* Category filter */}
+      <div style={{display:'flex', justifyContent:'center', gap:'6px', flexWrap:'wrap', marginBottom:'8px'}}>
+        {CATS.map(cat=>{
+          const active = cat===activeCat;
+          const cc = CAT_COLORS[cat] || { bg:'#e8f0e0', text:'#5a7a3a' };
+          return (
+            <button key={cat} onClick={()=>onCat(cat)} className="filter-btn" style={{
+              padding:'5px 14px', borderRadius:'20px',
+              border: active ? `2px solid ${cc.text}` : '2px solid #d4c8b8',
+              background: active ? cc.bg : 'white',
+              color: active ? cc.text : '#6a5a4a',
+              fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'12px', fontWeight:'700',
+              cursor:'pointer', transition:'all 0.18s'
+            }}>{cat}</button>
+          );
+        })}
+      </div>
+      <p style={{textAlign:'center', fontSize:'12px', color:'#a09080', marginTop:'8px'}}>
+        {count}本の思い出動画
+      </p>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// VIDEO CARD A — カード (YouTube thumbnail)
+// ─────────────────────────────────────────────
+function CardA({ video, onPlay, primary, delayIdx=0 }) {
+  const [hovered, setHovered] = useState(false);
+  const thumb = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
+  const delayClass = `delay-${Math.min(delayIdx % 8, 7)}`;
+  return (
+    <div
+      className={`inview card-hover ${delayClass}`}
+      onMouseEnter={()=>setHovered(true)}
+      onMouseLeave={()=>setHovered(false)}
+      onClick={()=>onPlay(video)}
+      style={{
+        background:'white', borderRadius:'16px', overflow:'hidden', cursor:'pointer',
+        boxShadow:'0 3px 12px rgba(60,40,10,0.09)'
+      }}
+    >
+      <div style={{position:'relative', aspectRatio:'16/9', background:'#e8ddd0', overflow:'hidden'}}>
+        <img src={thumb} alt={video.title} style={{
+          width:'100%', height:'100%', objectFit:'cover', display:'block',
+          transition:'transform 0.45s cubic-bezier(.25,.8,.25,1)',
+          transform: hovered ? 'scale(1.06)' : 'scale(1)'
+        }}/>
+        <div style={{
+          position:'absolute', inset:0,
+          background: hovered ? 'rgba(10,30,5,0.32)' : 'rgba(10,30,5,0)',
+          transition:'background 0.28s',
+          display:'flex', alignItems:'center', justifyContent:'center'
+        }}>
+          {hovered && (
+            <div className="play-btn-pulse" style={{
+              width:'52px', height:'52px', borderRadius:'50%',
+              background:'rgba(255,250,240,0.95)', display:'flex',
+              alignItems:'center', justifyContent:'center',
+              fontSize:'20px', paddingLeft:'4px',
+              boxShadow:'0 4px 16px rgba(40,20,4,0.3)'
+            }}>▶</div>
+          )}
+        </div>
+      </div>
+      <div style={{padding:'12px 14px 16px'}}>
+        <div style={{display:'flex', alignItems:'center', gap:'6px', marginBottom:'7px'}}>
+          <CatBadge cat={video.cat}/>
+          <span style={{fontSize:'11px', color:'#b0a090'}}>{video.year}</span>
+        </div>
+        <h3 className="link-underline" style={{
+          fontSize:'14px', fontWeight:'700', color:'#3d2e1e',
+          lineHeight:1.4, marginBottom:'5px',
+          display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden'
+        }}>{video.title}</h3>
+        {video.desc && (
+          <p style={{
+            fontSize:'11px', color:'#8a7a6a', lineHeight:1.6,
+            display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden'
+          }}>{video.desc}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// VIDEO CARD B — マガジン風 (横長リスト)
+// ─────────────────────────────────────────────
+function CardB({ video, onPlay, primary, featured=false, delayIdx=0 }) {
+  const [hovered, setHovered] = useState(false);
+  const thumb = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
+  const delayClass = `delay-${Math.min(delayIdx % 8, 7)}`;
+
+  if (featured) {
+    return (
+      <div
+        className={`inview card-hover`}
+        onClick={()=>onPlay(video)}
+        onMouseEnter={()=>setHovered(true)}
+        onMouseLeave={()=>setHovered(false)}
+        style={{
+          display:'grid', gridTemplateColumns:'1.2fr 1fr',
+          borderRadius:'20px', overflow:'hidden', background:'white', cursor:'pointer',
+          boxShadow:'0 3px 16px rgba(60,40,10,0.1)',
+          marginBottom:'24px'
+        }}
+      >
+        <div style={{position:'relative', minHeight:'220px', background:'#e8ddd0', overflow:'hidden'}}>
+          <img src={thumb} alt={video.title} style={{
+            width:'100%', height:'100%', objectFit:'cover', position:'absolute', inset:0,
+            transform: hovered ? 'scale(1.05)' : 'scale(1)', transition:'transform 0.4s ease'
+          }}/>
+          <div style={{position:'absolute', inset:0, background:'linear-gradient(to right, transparent, rgba(10,20,4,0.18))'}}/>
+          <span style={{
+            position:'absolute', top:'14px', left:'14px',
+            background:'#b5651d', color:'white', fontSize:'11px', fontWeight:'700',
+            padding:'4px 12px', borderRadius:'20px'
+          }}>⭐ 最新動画</span>
+        </div>
+        <div style={{padding:'28px 26px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
+          <CatBadge cat={video.cat} style={{marginBottom:'12px', alignSelf:'flex-start'}}/>
+          <h2 style={{fontSize:'clamp(16px,2vw,22px)', fontWeight:'700', color:'#3d2e1e', lineHeight:1.4, marginBottom:'10px'}}>
+            {video.title}
+          </h2>
+          <p style={{fontSize:'13px', color:'#6a5a4a', lineHeight:1.8, marginBottom:'14px',
+            display:'-webkit-box', WebkitLineClamp:3, WebkitBoxOrient:'vertical', overflow:'hidden'}}>
+            {video.desc}
+          </p>
+          <span style={{fontSize:'11px', color:'#a09080', marginBottom:'14px'}}>{video.year}</span>
+          <span style={{
+            display:'inline-flex', alignItems:'center', gap:'6px',
+            background: primary, color:'white', fontSize:'13px', fontWeight:'700',
+            padding:'9px 18px', borderRadius:'10px', alignSelf:'flex-start', cursor:'pointer'
+          }}>▶ 動画を見る</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`inview card-hover ${delayClass}`}
+      onMouseEnter={()=>setHovered(true)}
+      onMouseLeave={()=>setHovered(false)}
+      onClick={()=>onPlay(video)}
+      style={{
+        display:'flex', gap:'14px', background:'white', borderRadius:'14px',
+        overflow:'hidden', cursor:'pointer', padding:'0',
+        boxShadow:'0 2px 8px rgba(60,40,10,0.08)'
+      }}
+    >
+      <div style={{width:'140px', flexShrink:0, position:'relative', background:'#e8ddd0', overflow:'hidden'}}>
+        <img src={thumb} alt={video.title} style={{
+          width:'100%', height:'100%', objectFit:'cover', display:'block',
+          transform: hovered ? 'scale(1.05)' : 'scale(1)', transition:'transform 0.35s ease'
+        }}/>
+        {hovered && (
+          <div style={{
+            position:'absolute', inset:0, background:'rgba(10,20,4,0.28)',
+            display:'flex', alignItems:'center', justifyContent:'center'
+          }}>
+            <div style={{
+              width:'36px', height:'36px', borderRadius:'50%',
+              background:'rgba(255,250,240,0.93)', display:'flex',
+              alignItems:'center', justifyContent:'center', fontSize:'14px', paddingLeft:'3px'
+            }}>▶</div>
+          </div>
+        )}
+      </div>
+      <div style={{padding:'14px 14px 14px 0', flex:1, display:'flex', flexDirection:'column', justifyContent:'center'}}>
+        <div style={{display:'flex', alignItems:'center', gap:'6px', marginBottom:'6px'}}>
+          <CatBadge cat={video.cat}/>
+          <span style={{fontSize:'10px', color:'#b0a090'}}>{video.year}</span>
+        </div>
+        <h3 style={{
+          fontSize:'13px', fontWeight:'700', color:'#3d2e1e', lineHeight:1.4, marginBottom:'4px',
+          display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden'
+        }}>{video.title}</h3>
+        <p style={{
+          fontSize:'11px', color:'#8a7a6a', lineHeight:1.6,
+          display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden'
+        }}>{video.desc}</p>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// VIDEO CARD C — 絵本風 (ポラロイド)
+// ─────────────────────────────────────────────
+function CardC({ video, onPlay, primary, idx }) {
+  const [hovered, setHovered] = useState(false);
+  const thumb = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
+  const tilts = ['-1.8deg','1.2deg','-0.6deg','1.6deg','-1.0deg','0.9deg'];
+  const tilt = tilts[idx % 6];
+  const delayClass = `delay-${Math.min(idx % 8, 7)}`;
+
+  return (
+    <div
+      className={`inview ${delayClass}`}
+      onMouseEnter={()=>setHovered(true)}
+      onMouseLeave={()=>setHovered(false)}
+      onClick={()=>onPlay(video)}
+      style={{
+        background:'white', borderRadius:'4px', cursor:'pointer',
+        padding:'10px 10px 42px',
+        boxShadow: hovered ? '0 16px 48px rgba(60,40,10,0.28)' : '0 4px 16px rgba(60,40,10,0.14)',
+        transform: hovered ? 'rotate(0deg) translateY(-6px) scale(1.03)' : `rotate(${tilt})`,
+        transition:'all 0.3s cubic-bezier(.34,1.4,.64,1)',
+        position:'relative'
+      }}
+    >
+      <div style={{position:'relative', aspectRatio:'4/3', background:'#e8ddd0', overflow:'hidden', borderRadius:'2px'}}>
+        <img src={thumb} alt={video.title} style={{
+          width:'100%', height:'100%', objectFit:'cover', display:'block',
+          transform: hovered ? 'scale(1.06)' : 'scale(1)', transition:'transform 0.4s ease'
+        }}/>
+        {hovered && (
+          <div style={{
+            position:'absolute', inset:0, background:'rgba(10,20,4,0.28)',
+            display:'flex', alignItems:'center', justifyContent:'center'
+          }}>
+            <div style={{
+              width:'48px', height:'48px', borderRadius:'50%',
+              background:'rgba(255,250,240,0.95)', display:'flex',
+              alignItems:'center', justifyContent:'center', fontSize:'18px', paddingLeft:'4px',
+              boxShadow:'0 4px 14px rgba(40,20,4,0.25)'
+            }}>▶</div>
+          </div>
+        )}
+      </div>
+      <div style={{position:'absolute', bottom:'8px', left:'10px', right:'10px', textAlign:'center'}}>
+        <CatBadge cat={video.cat} style={{fontSize:'10px', marginBottom:'3px'}}/>
+        <p style={{
+          fontSize:'12px', fontWeight:'700', color:'#3d2e1e', lineHeight:1.3,
+          display:'-webkit-box', WebkitLineClamp:2, WebkitBoxOrient:'vertical', overflow:'hidden',
+          textAlign:'center'
+        }}>{video.title}</p>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// HEADER VARIANTS
+// ─────────────────────────────────────────────
+function HeaderA({ siteName, siteSubtitle, onAi }) {
+  return (
+    <header style={{
+      position:'relative', overflow:'hidden', height:'420px',
+      display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'
+    }}>
+      {/* Ghibli watercolor photo background */}
+      <img src="uploads/jiburi.png" alt="" style={{
+        position:'absolute', inset:0, width:'100%', height:'100%',
+        objectFit:'cover', objectPosition:'center 40%',
+        display:'block'
+      }}/>
+      {/* Soft overlay to ensure text readability */}
+      <div style={{
+        position:'absolute', inset:0,
+        background:'linear-gradient(to bottom, rgba(20,40,8,0.08) 0%, rgba(20,40,8,0.28) 60%, rgba(10,30,4,0.55) 100%)'
+      }}/>
+
+      {/* Content overlay */}
+      <div style={{
+        position:'relative', zIndex:2, textAlign:'center', padding:'0 20px',
+        display:'flex', flexDirection:'column', alignItems:'center'
+      }}>
+        <SvgBear w={86} style={{marginBottom:'16px', filter:'drop-shadow(0 4px 12px rgba(20,40,4,0.4))'}} className="bear-wobble"/>
+        <h1 className="inview visible" style={{
+          fontFamily:"'Zen Maru Gothic',sans-serif",
+          fontSize:'clamp(28px,5.5vw,52px)', fontWeight:'700',
+          color:'#fffaf0', marginBottom:'8px',
+          textShadow:'1px 2px 0 rgba(30,50,4,0.5), 0 4px 16px rgba(20,40,4,0.4)',
+          letterSpacing:'0.02em'
+        }}>{siteName}</h1>
+        <p className="inview visible delay-1" style={{
+          color:'#e8f8d0', fontSize:'15px', fontWeight:'500', marginBottom:'24px',
+          textShadow:'0 2px 8px rgba(20,40,4,0.45)'
+        }}>{siteSubtitle}</p>
+        <button onClick={onAi} className="btn-hover" style={{
+          background:'rgba(255,255,255,0.22)',
+          border:'2px solid rgba(255,255,255,0.6)',
+          color:'#fffaf0', padding:'10px 26px', borderRadius:'50px',
+          fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'14px', fontWeight:'700',
+          cursor:'pointer', backdropFilter:'blur(8px)',
+          transition:'all 0.2s',
+          display:'inline-flex', alignItems:'center', gap:'6px',
+          boxShadow:'0 4px 16px rgba(20,40,4,0.25)'
+        }}>✨ 次のおでかけをAIに相談</button>
+      </div>
+
+      {/* Watercolor edge bleed into content area */}
+      <div style={{
+        position:'absolute', bottom:0, left:0, right:0, height:'80px', zIndex:3
+      }}>
+        <WatercolorStrip/>
+      </div>
+    </header>
+  );
+}
+
+function HeaderB({ siteName, siteSubtitle, onAi, search, onSearch, activeCat, onCat, activeYear, onYear, primary }) {
+  return (
+    <header style={{background:'#2a1e0e', position:'sticky', top:0, zIndex:100}}>
+      {/* 薄く画像を背景に */}
+      <div style={{
+        position:'absolute', inset:0, overflow:'hidden', pointerEvents:'none'
+      }}>
+        <img src="uploads/jiburi.png" alt="" style={{
+          width:'100%', height:'100%', objectFit:'cover',
+          objectPosition:'center 20%', opacity:0.18
+        }}/>
+        <div style={{position:'absolute', inset:0, background:'rgba(20,14,4,0.6)'}}/>
+      </div>
+      <div style={{
+        maxWidth:'1100px', margin:'0 auto', padding:'0 20px',
+        display:'flex', alignItems:'center', justifyContent:'space-between', height:'60px', gap:'16px'
+      }}>
+        <div style={{display:'flex', alignItems:'center', gap:'10px', flexShrink:0}}>
+          <SvgRabbit w={36}/>
+          <span style={{
+            color:'#fffaf0', fontFamily:"'Quicksand',sans-serif",
+            fontWeight:'700', fontSize:'20px', whiteSpace:'nowrap'
+          }}>🌿 {siteName}</span>
+        </div>
+        <div style={{
+          background:'rgba(255,255,255,0.1)', borderRadius:'8px', padding:'5px 12px',
+          display:'flex', alignItems:'center', gap:'8px', flex:1, maxWidth:'280px'
+        }}>
+          <span style={{color:'#c4973a', fontSize:'13px'}}>🔍</span>
+          <input type="text" value={search} onChange={e=>onSearch(e.target.value)}
+            placeholder="検索…" style={{
+              background:'transparent', border:'none', outline:'none',
+              color:'#fffaf0', fontFamily:"'Zen Maru Gothic',sans-serif",
+              fontSize:'13px', width:'100%'
+            }}/>
+        </div>
+        <button onClick={onAi} style={{
+          background:'linear-gradient(135deg, #5a8a2a, #8ab040)',
+          border:'none', color:'white', padding:'8px 16px', borderRadius:'8px',
+          fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'12px', fontWeight:'700',
+          cursor:'pointer', whiteSpace:'nowrap', flexShrink:0
+        }}>✨ AI相談</button>
+      </div>
+      <div style={{background:'rgba(255,255,255,0.05)', borderTop:'1px solid rgba(255,255,255,0.07)', overflowX:'auto'}}>
+        <div style={{
+          maxWidth:'1100px', margin:'0 auto', padding:'0 20px',
+          display:'flex', gap:'0'
+        }}>
+          {CATS.map(cat=>(
+            <button key={cat} onClick={()=>onCat(cat)} style={{
+              padding:'9px 16px', background:'none', border:'none',
+              color: cat===activeCat ? '#c4973a' : 'rgba(255,250,240,0.55)',
+              fontSize:'12px', fontWeight:'700', cursor:'pointer', whiteSpace:'nowrap',
+              fontFamily:"'Zen Maru Gothic',sans-serif",
+              borderBottom: cat===activeCat ? '2px solid #c4973a' : '2px solid transparent',
+              transition:'all 0.18s'
+            }}>{cat}</button>
+          ))}
+          <div style={{marginLeft:'auto', display:'flex', alignItems:'center', gap:'4px', padding:'0 0 0 8px'}}>
+            {YEARS.map(y=>(
+              <button key={y} onClick={()=>onYear(y)} style={{
+                padding:'5px 10px', background: y===activeYear ? 'rgba(255,255,255,0.15)' : 'none',
+                border:'1px solid', borderColor: y===activeYear ? 'rgba(255,255,255,0.3)' : 'transparent',
+                color: y===activeYear ? 'white' : 'rgba(255,250,240,0.45)',
+                borderRadius:'6px', fontSize:'11px', fontWeight:'700', cursor:'pointer',
+                fontFamily:"'Zen Maru Gothic',sans-serif", whiteSpace:'nowrap'
+              }}>{y}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function HeaderC({ siteName, siteSubtitle, onAi }) {
+  return (
+    <div style={{position:'relative', overflow:'hidden', height:'380px',
+      display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+      {/* Ghibli watercolor photo background */}
+      <img src="uploads/jiburi.png" alt="" style={{
+        position:'absolute', inset:0, width:'100%', height:'100%',
+        objectFit:'cover', objectPosition:'center 35%',
+        display:'block'
+      }}/>
+      <div style={{
+        position:'absolute', inset:0,
+        background:'linear-gradient(to bottom, rgba(20,40,8,0.08) 0%, rgba(20,40,8,0.28) 60%, rgba(10,30,4,0.55) 100%)'
+      }}/>
+      <div style={{position:'relative', zIndex:2, textAlign:'center', padding:'0 20px',
+        display:'flex', flexDirection:'column', alignItems:'center'}}>
+        <div style={{display:'flex', justifyContent:'center', gap:'0px', marginBottom:'14px'}}>
+          <SvgBear w={68} style={{filter:'drop-shadow(0 4px 12px rgba(20,40,4,0.4))'}}/>
+          <SvgRabbit w={52} style={{marginTop:'12px', filter:'drop-shadow(0 4px 10px rgba(20,40,4,0.35))'}}/>
+        </div>
+        <h1 style={{
+          fontFamily:"'Zen Maru Gothic',sans-serif",
+          fontSize:'clamp(26px,5vw,44px)', fontWeight:'700', color:'#fffaf0',
+          marginBottom:'8px', textShadow:'1px 2px 0 rgba(30,50,4,0.5), 0 4px 16px rgba(20,40,4,0.4)'
+        }}>{siteName}</h1>
+        <p style={{color:'#e8f8d0', fontSize:'14px', marginBottom:'20px',
+          textShadow:'0 2px 8px rgba(20,40,4,0.4)'}}>{siteSubtitle} 🌿</p>
+        <button onClick={onAi} style={{
+          background:'rgba(255,255,255,0.22)', border:'2px solid rgba(255,255,255,0.6)',
+          color:'#fffaf0', padding:'9px 22px', borderRadius:'50px',
+          fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'13px', fontWeight:'700',
+          cursor:'pointer', backdropFilter:'blur(8px)',
+          display:'inline-flex', alignItems:'center', gap:'6px',
+          boxShadow:'0 4px 16px rgba(20,40,4,0.25)'
+        }}>✨ AIに次のおでかけを相談する</button>
+      </div>
+      <div style={{position:'absolute', bottom:0, left:0, right:0, height:'80px', zIndex:3}}>
+        <WatercolorStrip/>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
+// FOOTER
+// ─────────────────────────────────────────────
+function Footer({ siteName }) {
+  return (
+    <footer style={{background:'#2a1e0e', color:'#c4973a', textAlign:'center', padding:'30px 20px'}}>
+      <div style={{display:'flex', justifyContent:'center', gap:'6px', marginBottom:'10px', opacity:0.7}}>
+        <SvgBear w={38}/>
+        <SvgRabbit w={30} style={{marginTop:'6px'}}/>
+      </div>
+      <div style={{
+        fontFamily:"'Quicksand',sans-serif", fontWeight:'700',
+        fontSize:'17px', marginBottom:'5px', color:'#fffaf0'
+      }}>🌿 {siteName}</div>
+      <div style={{fontSize:'12px', opacity:0.55}}>大切な思い出を、いつでも見返せるように。</div>
+    </footer>
+  );
+}
+
+// ─────────────────────────────────────────────
+// MAIN APP
+// ─────────────────────────────────────────────
+function App() {
+  const [tweaks, setTweak] = window.useTweaks(TWEAK_DEFAULTS);
+  const [activeCat, setActiveCat] = useState('すべて');
+  const [activeYear, setActiveYear] = useState('すべて');
+  const [search, setSearch] = useState('');
+  const [modalVideo, setModalVideo] = useState(null);
+  const [showAi, setShowAi] = useState(false);
+
+  const filtered = useMemo(() => VIDEOS.filter(v => {
+    const matchCat  = activeCat  === 'すべて' || v.cat  === activeCat;
+    const matchYear = activeYear === 'すべて' || String(v.year) === activeYear;
+    const q = search.trim().toLowerCase();
+    const matchQ = !q || v.title.toLowerCase().includes(q) || (v.desc||'').toLowerCase().includes(q) || v.cat.includes(q);
+    return matchCat && matchYear && matchQ;
+  }), [activeCat, activeYear, search]);
+
+  const primary = tweaks.primaryColor;
+  const v = tweaks.variant;
+
+  // 水彩風コンテンツ背景 - 羊皮紙×薄い草原テクスチャ
+  const contentBg = `
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3Cfilter id='wc'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='8'/%3E%3CfeColorMatrix type='saturate' values='0.3'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='400' height='400' fill='%23f5ede0'/%3E%3Crect width='400' height='400' filter='url(%23wc)' opacity='0.06'/%3E%3Cellipse cx='80' cy='380' rx='120' ry='40' fill='%238ab050' opacity='0.07'/%3E%3Cellipse cx='320' cy='390' rx='100' ry='35' fill='%237aa040' opacity='0.07'/%3E%3C/svg%3E")
+  `;
+
+  return (
+    <div style={{position:'relative', minHeight:'100vh', background:'#f5ede0', backgroundImage: contentBg}}>
+
+      {/* ── VARIANT A ─────────────────── */}
+      {v==='A' && (<>
+        <HeaderA siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}/>
+
+        {/* Search + Filter */}
+        <div style={{background:'rgba(255,252,245,0.96)', margin:'-10px 16px 0', borderRadius:'18px', padding:'20px 20px 16px', maxWidth:'700px', marginLeft:'auto', marginRight:'auto', boxShadow:'0 4px 24px rgba(60,40,10,0.14)', position:'relative', zIndex:2, backdropFilter:'blur(8px)'}}>
+          <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
+            search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A"/>
+        </div>
+
+        <main style={{maxWidth:'1100px', margin:'28px auto', padding:'0 16px 60px'}}>
+          <div ref={useInViewGrid([filtered])} style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 290px), 1fr))',
+            gap:'20px'
+          }}>
+            {filtered.map((v,i)=>(
+              <CardA key={v.id} video={v} onPlay={setModalVideo} primary={primary} delayIdx={i}/>
+            ))}
+          </div>
+          {filtered.length===0 && (
+            <div style={{textAlign:'center', padding:'60px 20px', color:'#a09080', fontSize:'16px'}}>
+              <div style={{fontSize:'48px', marginBottom:'16px'}}>🌿</div>
+              動画が見つかりませんでした
+            </div>
+          )}
+        </main>
+        <Footer siteName={tweaks.siteName}/>
+      </>)}
+
+      {/* ── VARIANT B ─────────────────── */}
+      {v==='B' && (<>
+        <HeaderB
+          siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}
+          search={search} onSearch={setSearch}
+          activeCat={activeCat} onCat={setActiveCat}
+          activeYear={activeYear} onYear={setActiveYear}
+          primary={primary}
+        />
+        <main style={{maxWidth:'900px', margin:'0 auto', padding:'28px 20px 60px'}}>
+          <div style={{
+            display:'flex', justifyContent:'space-between', alignItems:'center',
+            marginBottom:'20px', padding:'0 2px'
+          }}>
+            <span style={{fontSize:'13px', color:'#8a7a6a', fontWeight:'700'}}>
+              {filtered.length}本の思い出動画
+            </span>
+          </div>
+          {filtered.length > 0 && (
+            <CardB video={filtered[0]} onPlay={setModalVideo} primary={primary} featured={true}/>
+          )}
+          <div ref={useInViewGrid([filtered])} style={{display:'flex', flexDirection:'column', gap:'14px'}}>
+            {filtered.slice(1).map((v,i)=>(
+              <CardB key={v.id} video={v} onPlay={setModalVideo} primary={primary} delayIdx={i}/>
+            ))}
+          </div>
+          {filtered.length===0 && (
+            <div style={{textAlign:'center', padding:'60px 20px', color:'#a09080', fontSize:'16px'}}>
+              <div style={{fontSize:'48px', marginBottom:'16px'}}>🌿</div>
+              動画が見つかりませんでした
+            </div>
+          )}
+        </main>
+        <Footer siteName={tweaks.siteName}/>
+      </>)}
+
+      {/* ── VARIANT C ─────────────────── */}
+      {v==='C' && (<>
+        <HeaderC siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}/>
+        <div style={{maxWidth:'860px', margin:'-8px auto 0', padding:'0 20px 16px'}}>
+          <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
+            search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="C"/>
+        </div>
+        <main style={{maxWidth:'860px', margin:'0 auto', padding:'0 20px 80px'}}>
+          <div ref={useInViewGrid([filtered])} style={{
+            display:'grid',
+            gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 230px), 1fr))',
+            gap:'28px'
+          }}>
+            {filtered.map((v,i)=>(
+              <CardC key={v.id} video={v} onPlay={setModalVideo} primary={primary} idx={i} delayIdx={i}/>
+            ))}
+          </div>
+          {filtered.length===0 && (
+            <div style={{textAlign:'center', padding:'60px 20px', color:'#a09080', fontSize:'16px'}}>
+              <div style={{fontSize:'48px', marginBottom:'16px'}}>🌿</div>
+              動画が見つかりませんでした
+            </div>
+          )}
+        </main>
+        <Footer siteName={tweaks.siteName}/>
+      </>)}
+
+      {/* MODALS */}
+      {modalVideo && <VideoModal video={modalVideo} onClose={()=>setModalVideo(null)}/>}
+      {showAi && <AiModal onClose={()=>setShowAi(false)}/>}
+
+      {/* TWEAKS PANEL */}
+      <window.TweaksPanel title="Tweaks">
+        <window.TweakSection label="バリエーション">
+          <window.TweakRadio label="デザイン" value={tweaks.variant} options={[
+            {label:'A カード', value:'A'},
+            {label:'B リスト', value:'B'},
+            {label:'C ポラロイド', value:'C'}
+          ]} onChange={v=>setTweak('variant',v)}/>
+        </window.TweakSection>
+        <window.TweakSection label="テキスト">
+          <window.TweakText label="サイト名" value={tweaks.siteName} onChange={v=>setTweak('siteName',v)}/>
+          <window.TweakText label="サブタイトル" value={tweaks.siteSubtitle} onChange={v=>setTweak('siteSubtitle',v)}/>
+        </window.TweakSection>
+        <window.TweakSection label="カラー">
+          <window.TweakColor label="メインカラー" value={tweaks.primaryColor} onChange={v=>setTweak('primaryColor',v)}/>
+          <window.TweakColor label="アクセント" value={tweaks.accentColor} onChange={v=>setTweak('accentColor',v)}/>
+          <window.TweakColor label="背景色(A)" value={tweaks.bgColor} onChange={v=>setTweak('bgColor',v)}/>
+        </window.TweakSection>
+      </window.TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
