@@ -117,6 +117,54 @@
   .float-leaf { animation: floatLeaf 5s ease-in-out infinite; }
   .float-leaf-slow { animation: floatLeaf 7s ease-in-out infinite 1s; }
 
+  /* ── Character floating + sway ────────────── */
+  @keyframes charBob {
+    0%,100% { transform: translateY(0) rotate(var(--char-rot, 0deg)); }
+    50%     { transform: translateY(-9px) rotate(calc(var(--char-rot, 0deg) + 2deg)); }
+  }
+  @keyframes charBobAlt {
+    0%,100% { transform: translateY(0) rotate(var(--char-rot, 0deg)); }
+    50%     { transform: translateY(-7px) rotate(calc(var(--char-rot, 0deg) - 2deg)); }
+  }
+  .char-float {
+    animation: charBob 5.5s ease-in-out infinite;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    will-change: transform;
+  }
+  .char-float-alt { animation: charBobAlt 6.5s ease-in-out infinite; }
+  .char-float:hover, .char-float-alt:hover {
+    animation-play-state: paused;
+    filter: brightness(1.05) drop-shadow(0 6px 14px rgba(40,20,4,0.35));
+  }
+
+  /* ── Speech bubble ────────────────────────── */
+  .bubble {
+    position: absolute;
+    background: #fffaf0;
+    color: #3d2e1e;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgba(40,20,4,0.18);
+    white-space: nowrap;
+    border: 1.5px solid #e8ddc8;
+  }
+  .bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    width: 12px; height: 12px;
+    background: #fffaf0;
+    border-right: 1.5px solid #e8ddc8;
+    border-bottom: 1.5px solid #e8ddc8;
+    transform: rotate(45deg);
+  }
+  .bubble.left::after  { left: 22px; }
+  .bubble.right::after { right: 22px; }
+  .bubble.center::after{ left: 50%; margin-left: -6px; }
+
   /* ── Bear wobble on load ──────────────────── */
   @keyframes bearWobble {
     0%,100% { transform: rotate(0deg); }
@@ -200,7 +248,7 @@ function useInViewGrid(deps = []) {
 // TWEAK DEFAULTS
 // ─────────────────────────────────────────────
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "variant": "A",
+  "variant": "C",
   "siteName": "こどもとおでかけ",
   "siteSubtitle": "双子との大切な思い出",
   "primaryColor": "#5a7a3a",
@@ -1026,6 +1074,47 @@ function CardC({ video, onPlay, primary, idx }) {
 }
 
 // ─────────────────────────────────────────────
+// CHARACTERS — 森のなかまたち
+// ─────────────────────────────────────────────
+const CHAR_SRC = {
+  kinoko:   'uploads/kinokoojisan.png',
+  happa:    'uploads/happachan.png',
+  kitsune:  'uploads/kitsune.png',
+  tanuki:   'uploads/tanuki.png',
+  donguri:  'uploads/donguriboya.png',
+  ouchi:    'uploads/dongurinoouchi.png',
+  wreath:   'uploads/kinomirisu.png',
+  table:    'uploads/kinokotable.png',
+  kasa:     'uploads/happanokasa.png',
+  kago:     'uploads/dongurinokago.png',
+};
+function Character({ kind, size=110, top, left, right, bottom, rotate=0, alt=false, flip=false, bubble=null, bubblePos='center', z=1 }) {
+  return (
+    <div style={{
+      position:'absolute', top, left, right, bottom, zIndex:z,
+      pointerEvents:'none', width:size
+    }}>
+      {bubble && (
+        <div className={`bubble ${bubblePos}`} style={{
+          left: bubblePos==='left' ? '-6px' : bubblePos==='right' ? 'auto' : '50%',
+          right: bubblePos==='right' ? '-6px' : 'auto',
+          transform: bubblePos==='center' ? 'translateX(-50%)' : 'none',
+          bottom: `${size + 14}px`
+        }}>{bubble}</div>
+      )}
+      <img src={CHAR_SRC[kind]} alt=""
+        className={alt ? 'char-float-alt' : 'char-float'}
+        style={{
+          width:'100%', height:'auto', display:'block',
+          ['--char-rot']: `${rotate}deg`,
+          transform: `${flip?'scaleX(-1) ':''}rotate(${rotate}deg)`,
+          filter:'drop-shadow(0 4px 10px rgba(40,20,4,0.25))'
+        }}/>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
 // HEADER VARIANTS
 // ─────────────────────────────────────────────
 function HeaderA({ siteName, siteSubtitle, onAi }) {
@@ -1051,7 +1140,6 @@ function HeaderA({ siteName, siteSubtitle, onAi }) {
         position:'relative', zIndex:2, textAlign:'center', padding:'0 20px',
         display:'flex', flexDirection:'column', alignItems:'center'
       }}>
-        <SvgBear w={86} style={{marginBottom:'16px', filter:'drop-shadow(0 4px 12px rgba(20,40,4,0.4))'}} className="bear-wobble"/>
         <h1 className="inview visible" style={{
           fontFamily:"'Zen Maru Gothic',sans-serif",
           fontSize:'clamp(28px,5.5vw,52px)', fontWeight:'700',
@@ -1176,10 +1264,6 @@ function HeaderC({ siteName, siteSubtitle, onAi }) {
       }}/>
       <div style={{position:'relative', zIndex:2, textAlign:'center', padding:'0 20px',
         display:'flex', flexDirection:'column', alignItems:'center'}}>
-        <div style={{display:'flex', justifyContent:'center', gap:'0px', marginBottom:'14px'}}>
-          <SvgBear w={68} style={{filter:'drop-shadow(0 4px 12px rgba(20,40,4,0.4))'}}/>
-          <SvgRabbit w={52} style={{marginTop:'12px', filter:'drop-shadow(0 4px 10px rgba(20,40,4,0.35))'}}/>
-        </div>
         <h1 style={{
           fontFamily:"'Zen Maru Gothic',sans-serif",
           fontSize:'clamp(26px,5vw,44px)', fontWeight:'700', color:'#fffaf0',
@@ -1254,19 +1338,42 @@ function App() {
 
       {/* ── VARIANT A ─────────────────── */}
       {v==='A' && (<>
-        <HeaderA siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}/>
-
-        {/* Search + Filter */}
-        <div style={{background:'rgba(255,252,245,0.96)', margin:'-10px 16px 0', borderRadius:'18px', padding:'20px 20px 16px', maxWidth:'700px', marginLeft:'auto', marginRight:'auto', boxShadow:'0 4px 24px rgba(60,40,10,0.14)', position:'relative', zIndex:2, backdropFilter:'blur(8px)'}}>
-          <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
-            search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A"/>
+        <div style={{position:'relative'}}>
+          <HeaderA siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}/>
+          <Character kind="kinoko" size={130} bottom={-20} left={'3%'} rotate={-6} z={5}
+            bubble="ようこそ、森の動画へ" bubblePos="left"/>
+          <Character kind="kitsune" size={120} bottom={-10} right={'4%'} rotate={4} alt z={5}/>
         </div>
 
-        <main style={{maxWidth:'1100px', margin:'28px auto', padding:'0 16px 60px'}}>
+        {/* Search + Filter */}
+        <div style={{position:'relative', maxWidth:'820px', margin:'0 auto'}}>
+          <div style={{background:'rgba(255,252,245,0.96)', margin:'10px 16px 0', borderRadius:'18px', padding:'20px 20px 16px', maxWidth:'700px', marginLeft:'auto', marginRight:'auto', boxShadow:'0 4px 24px rgba(60,40,10,0.14)', position:'relative', zIndex:2, backdropFilter:'blur(8px)'}}>
+            <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
+              search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A"/>
+          </div>
+          <Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/>
+        </div>
+
+        <main style={{maxWidth:'1100px', margin:'28px auto', padding:'0 16px 60px', position:'relative'}}>
+          {/* 散らばるキャラクター */}
+          <Character kind="donguri" size={78} top={'8%'} left={-30} rotate={-8} z={5}/>
+          <Character kind="tanuki" size={110} top={'38%'} right={-40} rotate={6} alt z={5}
+            bubble="お気に入りはどれ？" bubblePos="right"/>
+          <Character kind="happa" size={68} top={'68%'} left={-26} rotate={10} z={5}/>
+          <Character kind="kinoko" size={88} bottom={'4%'} right={-20} rotate={-5} alt z={5}/>
+          <Character kind="kitsune" size={92} bottom={'34%'} left={-34} rotate={-4} z={5}/>
+
+          {/* 散らばるアイテム */}
+          <Character kind="kago" size={72} top={'2%'} right={-26} rotate={-6} alt z={5}/>
+          <Character kind="kasa" size={84} top={'22%'} left={-44} rotate={-12} z={5}/>
+          <Character kind="table" size={96} top={'52%'} left={-44} rotate={3} alt z={5}/>
+          <Character kind="wreath" size={70} top={'82%'} right={-30} rotate={-4} z={5}/>
+          <Character kind="ouchi" size={110} bottom={'68%'} right={-46} rotate={2} alt z={5}/>
+
           <div ref={useInViewGrid([filtered])} style={{
             display:'grid',
             gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 290px), 1fr))',
-            gap:'20px'
+            gap:'20px', position:'relative', zIndex:2
           }}>
             {filtered.map((v,i)=>(
               <CardA key={v.id} video={v} onPlay={setModalVideo} primary={primary} delayIdx={i}/>
@@ -1320,16 +1427,37 @@ function App() {
 
       {/* ── VARIANT C ─────────────────── */}
       {v==='C' && (<>
-        <HeaderC siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}/>
-        <div style={{maxWidth:'860px', margin:'-8px auto 0', padding:'0 20px 16px'}}>
+        <div style={{position:'relative'}}>
+          <HeaderC siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}/>
+          <Character kind="kinoko" size={130} bottom={-20} left={'3%'} rotate={-6} z={5}
+            bubble="ようこそ、森の動画へ" bubblePos="left"/>
+          <Character kind="kitsune" size={120} bottom={-10} right={'4%'} rotate={4} alt z={5}/>
+        </div>
+        <div style={{position:'relative', maxWidth:'860px', margin:'-8px auto 0', padding:'0 20px 16px'}}>
           <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
             search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="C"/>
+          <Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/>
         </div>
-        <main style={{maxWidth:'860px', margin:'0 auto', padding:'0 20px 80px'}}>
+        <main style={{maxWidth:'860px', margin:'0 auto', padding:'0 20px 80px', position:'relative'}}>
+          {/* 散らばるキャラクター */}
+          <Character kind="donguri" size={78} top={'8%'} left={-30} rotate={-8} z={5}/>
+          <Character kind="tanuki" size={110} top={'38%'} right={-40} rotate={6} alt z={5}
+            bubble="お気に入りはどれ？" bubblePos="right"/>
+          <Character kind="happa" size={68} top={'68%'} left={-26} rotate={10} z={5}/>
+          <Character kind="kinoko" size={88} bottom={'4%'} right={-20} rotate={-5} alt z={5}/>
+          <Character kind="kitsune" size={92} bottom={'34%'} left={-34} rotate={-4} z={5}/>
+
+          {/* 散らばるアイテム */}
+          <Character kind="kago" size={72} top={'2%'} right={-26} rotate={-6} alt z={5}/>
+          <Character kind="kasa" size={84} top={'22%'} left={-44} rotate={-12} z={5}/>
+          <Character kind="table" size={96} top={'52%'} left={-44} rotate={3} alt z={5}/>
+          <Character kind="wreath" size={70} top={'82%'} right={-30} rotate={-4} z={5}/>
+          <Character kind="ouchi" size={110} bottom={'68%'} right={-46} rotate={2} alt z={5}/>
+
           <div ref={useInViewGrid([filtered])} style={{
             display:'grid',
             gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 230px), 1fr))',
-            gap:'28px'
+            gap:'28px', position:'relative', zIndex:2
           }}>
             {filtered.map((v,i)=>(
               <CardC key={v.id} video={v} onPlay={setModalVideo} primary={primary} idx={i} delayIdx={i}/>
