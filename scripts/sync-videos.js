@@ -51,9 +51,9 @@ async function apiGet(endpoint, params) {
   return res.json();
 }
 
-async function getUploadsPlaylistId(apiKey, channelId) {
+async function verifyChannel(apiKey, channelId) {
   const data = await apiGet('channels', {
-    part: 'snippet,contentDetails',
+    part: 'snippet',
     id: channelId,
     key: apiKey,
   });
@@ -65,26 +65,25 @@ async function getUploadsPlaylistId(apiKey, channelId) {
     );
   }
   console.log(`チャンネル: ${channel.snippet.title} (${channelId})`);
-  const uploadsPlaylistId = channel.contentDetails.relatedPlaylists && channel.contentDetails.relatedPlaylists.uploads;
-  if (!uploadsPlaylistId) {
-    throw new Error(`このチャンネルにはアップロード用プレイリストが見つかりませんでした: ${channelId}`);
-  }
-  console.log(`アップロード用プレイリストID: ${uploadsPlaylistId}`);
-  return uploadsPlaylistId;
 }
 
-async function getAllVideoIds(apiKey, playlistId) {
+// playlistItems（アップロード用プレイリスト経由）は一部のチャンネルで
+// 404 (playlistNotFound) になるため、search.list で直接チャンネルの
+// 動画を新しい順に取得する方式を使う。
+async function getAllVideoIds(apiKey, channelId) {
   const ids = [];
   let pageToken = '';
   do {
-    const data = await apiGet('playlistItems', {
-      part: 'contentDetails',
-      playlistId,
+    const data = await apiGet('search', {
+      part: 'id',
+      channelId,
+      type: 'video',
+      order: 'date',
       maxResults: 50,
       pageToken,
       key: apiKey,
     });
-    for (const item of data.items) ids.push(item.contentDetails.videoId);
+    for (const item of data.items) ids.push(item.id.videoId);
     pageToken = data.nextPageToken || '';
   } while (pageToken);
   return ids;
@@ -161,8 +160,8 @@ function updateIndexHtml(videos) {
 async function main() {
   const { apiKey, channelId } = loadEnv();
   console.log('YouTube Data API から動画一覧を取得中...');
-  const playlistId = await getUploadsPlaylistId(apiKey, channelId);
-  const ids = await getAllVideoIds(apiKey, playlistId);
+  await verifyChannel(apiKey, channelId);
+  const ids = await getAllVideoIds(apiKey, channelId);
   console.log(`${ids.length}本の動画を検出`);
   const details = await getVideoDetails(apiKey, ids);
   const { videos, warnings } = buildVideos(details);
