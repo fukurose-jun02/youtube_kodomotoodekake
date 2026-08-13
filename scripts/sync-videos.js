@@ -103,6 +103,7 @@ function openBrowser(url) {
 // ブラウザでのOAuth認証（初回のみ）。ローカルに一時サーバーを立てて認可コードを受け取る。
 function runInteractiveAuth(clientId, clientSecret) {
   return new Promise((resolve, reject) => {
+    let redirectUri = '';
     const server = http.createServer(async (req, res) => {
       const url = new URL(req.url, 'http://127.0.0.1');
       const code = url.searchParams.get('code');
@@ -122,7 +123,6 @@ function runInteractiveAuth(clientId, clientSecret) {
         return;
       }
       try {
-        const redirectUri = `http://127.0.0.1:${server.address().port}`;
         const tokens = await postForm(TOKEN_ENDPOINT, {
           code,
           client_id: clientId,
@@ -138,7 +138,7 @@ function runInteractiveAuth(clientId, clientSecret) {
 
     server.listen(0, '127.0.0.1', () => {
       const port = server.address().port;
-      const redirectUri = `http://127.0.0.1:${port}`;
+      redirectUri = `http://127.0.0.1:${port}`;
       const authUrl = new URL(AUTH_ENDPOINT);
       authUrl.searchParams.set('client_id', clientId);
       authUrl.searchParams.set('redirect_uri', redirectUri);
