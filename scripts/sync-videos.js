@@ -53,13 +53,24 @@ async function apiGet(endpoint, params) {
 
 async function getUploadsPlaylistId(apiKey, channelId) {
   const data = await apiGet('channels', {
-    part: 'contentDetails',
+    part: 'snippet,contentDetails',
     id: channelId,
     key: apiKey,
   });
   const channel = data.items && data.items[0];
-  if (!channel) throw new Error(`チャンネルが見つかりません: ${channelId}`);
-  return channel.contentDetails.relatedPlaylists.uploads;
+  if (!channel) {
+    throw new Error(
+      `チャンネルが見つかりません: ${channelId}\n` +
+      'YOUTUBE_CHANNEL_ID には「UC」で始まるチャンネルID（ハンドル名 @xxx や カスタムURLではない）を設定してください。'
+    );
+  }
+  console.log(`チャンネル: ${channel.snippet.title} (${channelId})`);
+  const uploadsPlaylistId = channel.contentDetails.relatedPlaylists && channel.contentDetails.relatedPlaylists.uploads;
+  if (!uploadsPlaylistId) {
+    throw new Error(`このチャンネルにはアップロード用プレイリストが見つかりませんでした: ${channelId}`);
+  }
+  console.log(`アップロード用プレイリストID: ${uploadsPlaylistId}`);
+  return uploadsPlaylistId;
 }
 
 async function getAllVideoIds(apiKey, playlistId) {
