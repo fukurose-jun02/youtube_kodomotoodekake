@@ -207,6 +207,48 @@ async function getAllVideoIds(accessToken, playlistId) {
   return ids;
 }
 
+// YouTube Data APIには「動画」と「ショート」を区別する公式フィールドが無いため、
+// /shorts/{videoId} へのアクセス結果（ショートなら200のまま、通常動画なら
+// /watch?v=... へリダイレクトされる）で判定する非公式だが実用的な方法を使う。
+async function isShort(videoId) {
+  try {
+    const res = await fetch(`https://www.youtube.com/shorts/${videoId}`, {
+      redirect: 'manual',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      },
+    });
+    if (res.status === 200) return true; // ショートのURLのまま表示された
+    if (res.status >= 300 && res.status < 400) return false; // /watch?v=... へリダイレクトされた＝通常動画
+    return null; // 403等、想定外の応答は判定失敗として扱う
+  } catch (e) {
+    return null;
+  }
+}
+
+async function filterOutShorts(ids) {
+  const CONCURRENCY = 10;
+  const results = new Array(ids.length);
+  let next = 0;
+  async function worker() {
+    while (next < ids.length) {
+      const i = next++;
+      results[i] = await isShort(ids[i]);
+    }
+  }
+  await Promise.all(Array.from({ length: CONCURRENCY }, worker));
+
+  const regular = [];
+  const shorts = [];
+  const unknown = [];
+  ids.forEach((id, i) => {
+    if (results[i] === true) shorts.push(id);
+    else if (results[i] === false) regular.push(id);
+    else unknown.push(id);
+  });
+  return { regular, shorts, unknown };
+}
+
 async function getVideoDetails(accessToken, ids) {
   const details = [];
   for (let i = 0; i < ids.length; i += 50) {
@@ -277,8 +319,18 @@ async function main() {
   console.log('YouTube Data API から動画一覧を取得中...');
   const playlistId = await getMyUploadsPlaylistId(accessToken);
   const ids = await getAllVideoIds(accessToken, playlistId);
-  console.log(`${ids.length}本の動画を検出`);
-  const details = await getVideoDetails(accessToken, ids);
+  console.log(`${ids.length}本のアップロードを検出（動画+ショート合計）`);
+
+  console.log('ショート判定中...');
+  const { regular, shorts, unknown } = await filterOutShorts(ids);
+  console.log(`動画: ${regular.length}本 / ショート: ${shorts.length}本${unknown.length ? ` / 判定失敗: ${unknown.length}本` : ''}`);
+  const targetIds = regular.concat(unknown);
+  if (unknown.length) {
+    console.warn(`⚠ 判定に失敗した${unknown.length}本は念のため「動画」として扱います:`);
+    console.warn(unknown.map(id => `  - ${id}`).join('\n'));
+  }
+
+  const details = await getVideoDetails(accessToken, targetIds);
   const { videos, warnings } = buildVideos(details);
 
   writeDataFile(videos);
