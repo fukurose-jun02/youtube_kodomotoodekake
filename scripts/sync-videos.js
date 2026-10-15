@@ -268,6 +268,11 @@ function pickCategory(tags, videoId, title, warnings) {
   return UNCATEGORIZED;
 }
 
+// YouTubeのpublishedAt（UTC）を日本時間の日付（YYYY-MM-DD）にする
+function toJstDate(iso) {
+  return new Date(new Date(iso).getTime() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+}
+
 function buildVideos(details) {
   const warnings = [];
   const videos = details.map(item => {
@@ -282,7 +287,7 @@ function buildVideos(details) {
     };
   });
   videos.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
-  for (const v of videos) delete v.publishedAt;
+  for (const v of videos) v.publishedAt = toJstDate(v.publishedAt);
   return { videos, warnings };
 }
 
@@ -298,9 +303,9 @@ function csvCell(value) {
 
 // 先頭にBOMを付け、Excel等でも日本語が文字化けしないようにする
 function buildCsv(videos) {
-  const header = ['id', 'title', 'cat', 'year', 'url', 'desc'];
+  const header = ['id', 'title', 'cat', 'year', 'published', 'url', 'desc'];
   const rows = videos.map(v => [
-    v.id, v.title, v.cat, v.year, `https://www.youtube.com/watch?v=${v.id}`, v.desc,
+    v.id, v.title, v.cat, v.year, v.publishedAt, `https://www.youtube.com/watch?v=${v.id}`, v.desc,
   ].map(csvCell).join(','));
   return '\uFEFF' + [header.join(','), ...rows].join('\r\n') + '\r\n';
 }
@@ -374,4 +379,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };
+module.exports = { toJstDate, buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };
