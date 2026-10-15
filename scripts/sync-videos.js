@@ -308,7 +308,7 @@ function updateIndexHtml(videos) {
     '];',
     END_MARKER,
   ].join('\n');
-  const updated = html.slice(0, startIdx) + block + '\n' + html.slice(endIdx + END_MARKER.length);
+  const updated = html.slice(0, startIdx) + block + html.slice(endIdx + END_MARKER.length);
   fs.writeFileSync(INDEX_PATH, updated);
   console.log('index.html の VIDEOS 配列を更新しました');
 }
