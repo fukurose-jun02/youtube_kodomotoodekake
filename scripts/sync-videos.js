@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // YouTube Data API（OAuth認証）から動画一覧を取得し、data/videos.json と
+// data/videos.csv（Googleスプレッドシート等で開く用）と
 // index.html の VIDEOS 配列（AUTO-GENERATED:VIDEOS-START〜END の間）を更新する。
 // 実行方法: node scripts/sync-videos.js
 //
@@ -21,6 +22,7 @@ const { execFile } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 const ENV_PATH = path.join(ROOT, '.env');
 const DATA_PATH = path.join(ROOT, 'data', 'videos.json');
+const CSV_PATH = path.join(ROOT, 'data', 'videos.csv');
 const INDEX_PATH = path.join(ROOT, 'index.html');
 const START_MARKER = '// AUTO-GENERATED:VIDEOS-START';
 const END_MARKER = '// AUTO-GENERATED:VIDEOS-END';
@@ -289,6 +291,25 @@ function writeDataFile(videos) {
   console.log(`data/videos.json を更新しました（${videos.length}件）`);
 }
 
+function csvCell(value) {
+  const s = String(value);
+  return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+// 先頭にBOMを付け、Excel等でも日本語が文字化けしないようにする
+function buildCsv(videos) {
+  const header = ['id', 'title', 'cat', 'year', 'url', 'desc'];
+  const rows = videos.map(v => [
+    v.id, v.title, v.cat, v.year, `https://www.youtube.com/watch?v=${v.id}`, v.desc,
+  ].map(csvCell).join(','));
+  return '\uFEFF' + [header.join(','), ...rows].join('\r\n') + '\r\n';
+}
+
+function writeCsvFile(videos) {
+  fs.writeFileSync(CSV_PATH, buildCsv(videos));
+  console.log(`data/videos.csv を更新しました（${videos.length}件）`);
+}
+
 function formatEntry(v) {
   const esc = s => JSON.stringify(s);
   return `  { id:${esc(v.id)}, title:${esc(v.title)}, desc:${esc(v.desc)}, cat:${esc(v.cat)}, year:${v.year} },`;
@@ -334,6 +355,7 @@ async function main() {
   const { videos, warnings } = buildVideos(details);
 
   writeDataFile(videos);
+  writeCsvFile(videos);
   updateIndexHtml(videos);
 
   if (warnings.length) {
@@ -352,4 +374,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { formatEntry, updateIndexHtml, buildVideos, pickCategory };
+module.exports = { buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };
