@@ -26,3 +26,16 @@
 
 ###### 次回
 - PR #12 のマージ後、Cloudflare ダッシュボードで GitHub 連携（デプロイコマンド `npx wrangler deploy`）→ 公開URLでの表示確認 → Issue #11 のチェックリスト更新
+
+###### 追記：Cloudflareで公開、表示確認まで完了
+- PR #12 をマージし、Cloudflare ダッシュボードで GitHub 連携（Worker名 `kodomo-odekake`、ビルドコマンドなし、デプロイコマンド `npx wrangler deploy`、Access保護はオフ）→ ビルド成功（Build #8f027461、アップロード30件）
+- 公開URL：https://kodomo-odekake.fukuchan-app.workers.dev
+- 確認結果：`index.html` はGitHub Pages・リポジトリのものとバイト単位で同一。`.env`・`scripts/`・`data/`・`logs/`・`.git/` などは404。動画の埋め込み再生はユーザーが手元で確認済み（私のブラウザ画面は `*.workers.dev` へのアクセス許可が反映されず、画面での確認は未実施）
+- Issue #11 のチェックリストを更新し、進捗コメントを追加
+
+###### 残り・次回
+- 旧URL（github.io）の扱いを決める（そのまま残す／Pagesを無効化する／新URLへの案内）
+- URLを載せている箇所の更新（YouTube概要欄・SNSなど外部の告知）
+- 動画データ更新の流れ（`sync-videos.js` → commit → 自動デプロイ）が動くことを確認
+- GitHub Pages の無効化（新URLでの運用確認後）
+- チャット機能のIssue起票
