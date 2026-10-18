@@ -39,3 +39,13 @@
 - 動画データ更新の流れ（`sync-videos.js` → commit → 自動デプロイ）が動くことを確認
 - GitHub Pages の無効化（新URLでの運用確認後）
 - チャット機能のIssue起票
+
+###### 追記：GitHub Pages を無効化
+- ユーザーの判断で旧URLを即時無効化。`gh api -X DELETE repos/fukurose-jun02/youtube_kodomotoodekake/pages` を実行（ユーザーの許可後）
+- 確認：旧URL（github.io）は404、新URL（workers.dev）は200。Pages API も404（無効化済み）。再度有効化すれば元に戻せる
+- 判断：旧URLの扱いは「すぐ無効化」を選択（案：しばらく残す／すぐ無効化）。外部告知のURL差し替えより先に無効化したため、旧URLを載せた場所はリンク切れになる
+
+###### 残り・次回
+- URLを載せている箇所（YouTube概要欄・SNSなど）を新URLに差し替える
+- 動画データ更新の流れ（`sync-videos.js` → commit → 自動デプロイ）が動くことを確認（次回の動画更新時）
+- チャット機能のIssue起票
