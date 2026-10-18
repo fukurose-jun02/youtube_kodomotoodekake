@@ -1,0 +1,7 @@
+# Cloudflare Workers の静的アセット配信の対象を絞る（許可リスト方式）。
+# ルート直下を全部除外し、公開するものだけ再許可する。
+# .env・scripts/・logs/・data/ などが公開されないようにするため。
+/*
+!/index.html
+!/tweaks-panel.jsx
+!/uploads
