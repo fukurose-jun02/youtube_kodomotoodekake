@@ -17,3 +17,12 @@
 ###### 次回
 - 移設の実作業（`wrangler.jsonc` 作成・Cloudflare側のプロジェクト作成と GitHub 連携）
 - チャット機能のIssue起票
+
+###### 追記：移設用の設定ファイルを作成しPR化（PR #12）
+- ブランチ `feature/cloudflare-workers` で `wrangler.jsonc`（Worker名 `kodomo-odekake`）、`.assetsignore`、`.gitignore`（`.wrangler/`）を追加し、[PR #12](https://github.com/fukurose-jun02/youtube_kodomotoodekake/pull/12) を作成（未マージ）
+- 調査結果：配信に必要なのは `index.html`・`tweaks-panel.jsx`・`uploads/` のみ。動画データは `sync-videos.js` が `index.html` に埋め込むため、`data/videos.json` はブラウザから読まれない
+- `.assetsignore` は許可リスト方式（`.env` などの公開事故を防ぐため）。ローカルの `wrangler dev` で、`.env`・`scripts/`・`data/`・`logs/`・`.git/` が404、サイト本体・画像（166枚、読み込み失敗なし）は表示できることを確認
+- ローカルの作業ツリーに、移設と無関係な `uploads/` の整理途中の変更（リネーム・`重複/`）が未コミットで残っている。今回は触っていない
+
+###### 次回
+- PR #12 のマージ後、Cloudflare ダッシュボードで GitHub 連携（デプロイコマンド `npx wrangler deploy`）→ 公開URLでの表示確認 → Issue #11 のチェックリスト更新
