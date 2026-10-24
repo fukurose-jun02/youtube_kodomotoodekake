@@ -6,11 +6,13 @@
 <title>こどもとおでかけ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Quicksand:wght@500;700&family=Yusei+Magic&family=Klee+One:wght@600&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="backdrops.jsx"></script>
+<script type="text/babel" src="ux-parts.jsx"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; touch-action: pan-x pan-y; }
@@ -133,7 +135,7 @@
   }
   .char-float-alt { animation: charBobAlt 6.5s ease-in-out infinite; }
   .char-float:hover, .char-float-alt:hover {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
     filter: brightness(1.05) drop-shadow(0 6px 14px rgba(40,20,4,0.35));
   }
 
@@ -195,6 +197,152 @@
     .float-leaf, .float-leaf-slow, .bear-wobble { animation: none; }
   }
 </style>
+<style id="donguri-themes">
+:root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.18 0 0 0 0 0.08 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
+[data-theme] [data-ui=strip]{fill:var(--paper,#f7f0e3)}
+.app-root{isolation:isolate}
+.cnt{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 6px;margin-top:12px;color:var(--ink,#5a4a3a)!important;font-family:var(--tf,'Zen Maru Gothic'),sans-serif}
+.cnt-acorn{width:20px;height:30px;transform-origin:50% 90%;animation:cntWig 3.6s ease-in-out infinite}
+@keyframes cntWig{0%,70%,100%{transform:rotate(0)}76%{transform:rotate(-14deg)}84%{transform:rotate(10deg)}91%{transform:rotate(-4deg)}}
+.cnt-txt{font-size:14px}
+.cnt-num{font-size:26px;font-weight:400;line-height:1;color:var(--ink,#3d2e1e);background:#f6c560;padding:4px 12px 3px;border-radius:999px;border:2.5px solid var(--ink,#5a4a3a);transform:rotate(-3deg);display:inline-block;min-width:2.4em;text-align:center;animation:cntPop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes cntPop{0%{transform:rotate(-3deg) scale(.6)}100%{transform:rotate(-3deg) scale(1)}}
+@keyframes skShine{0%{background-position:-480px 0}100%{background-position:480px 0}}
+.sk{position:absolute;inset:0;background:linear-gradient(90deg,#eadfca 0,#f7efdf 45%,#eadfca 90%);background-size:960px 100%;animation:skShine 1.3s linear infinite}
+.sk-err{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#eadfca;color:var(--ink2,#6a5a4a);font-size:12px;font-weight:700}
+.sa-wrap{position:relative;max-width:480px;margin:0 auto 18px;z-index:20}
+.sa-list{position:absolute;left:0;right:0;top:calc(100% + 8px);list-style:none;background:#fffaf0;border:2px solid var(--ink,#d4c8b8);border-radius:16px;box-shadow:0 10px 28px rgba(60,40,10,.22);padding:6px;max-height:340px;overflow:auto;text-align:left}
+.sa-opt{display:grid;grid-template-columns:56px minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:6px 8px;border-radius:10px;cursor:pointer;min-height:44px}
+.sa-opt.is-hi{background:#f3e3c4}
+.sa-thumb{grid-row:1/3;width:56px;height:42px;object-fit:cover;border-radius:6px;border:1.5px solid var(--ink,#d4c8b8)}
+.sa-title{font-family:var(--tf,'Zen Maru Gothic'),sans-serif;font-size:14px;color:var(--ink,#3d2e1e);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sa-meta{font-size:11px;color:var(--ink2,#8a7a6a)}
+.sa-mark{background:#f6c560;color:inherit;border-radius:3px;padding:0 1px}
+.sa-empty{padding:12px;font-size:13px;color:var(--ink2,#8a7a6a);text-align:center}
+.cr{max-width:1240px;margin:30px auto 0;padding:0 16px;position:relative;z-index:2}
+.cr-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.cr-title{font-family:var(--tf,'Zen Maru Gothic'),sans-serif;font-weight:400;font-size:clamp(20px,3vw,28px);color:var(--ink,#3d2e1e)}
+.cr-btns{display:flex;gap:8px}
+.cr-btn{width:44px;height:44px;border-radius:50%;border:2.5px solid var(--ink,#5a4a3a);background:#fffaf0;color:var(--ink,#3d2e1e);font-size:24px;line-height:1;cursor:pointer;box-shadow:2px 2px 0 var(--ink,#5a4a3a);transition:transform .15s}
+.cr-btn:hover:not(:disabled){transform:translateY(-2px)}
+.cr-btn:disabled{opacity:.35;cursor:default;box-shadow:none}
+.cr-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cr-track::-webkit-scrollbar{display:none}
+.cr-slide{flex:0 0 min(78vw,250px);scroll-snap-align:start}
+.cr-slide .inview{opacity:1;transform:none}
+.cr-dots{display:flex;justify-content:center;gap:6px;margin-top:2px}
+.cr-dot{width:9px;height:9px;border-radius:5px;border:none;background:var(--ink2,#b0a090);opacity:.35;cursor:pointer;padding:0;transition:width .25s,opacity .25s}
+.cr-dot.on{width:24px;opacity:1;background:var(--pop,#b5651d)}
+.fb-mobile{display:none}
+@media (max-width:640px){.fb-desktop{display:none}.fb-mobile{display:flex;justify-content:center}}
+.fb-open{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 20px;border-radius:999px;font-family:var(--tf,'Zen Maru Gothic'),sans-serif;font-size:14px;cursor:pointer;background:#fffaf0;color:var(--ink,#3d2e1e);border:2.5px solid var(--ink,#5a4a3a)}
+.fb-badge{background:var(--pop,#b5651d);color:var(--ink,#fff);border-radius:999px;font-size:12px;padding:1px 8px}
+.bs-root{position:fixed;inset:0;z-index:900}
+.bs-backdrop{position:absolute;inset:0;background:rgba(30,18,6,.45);animation:bsFade .2s ease}
+@keyframes bsFade{from{opacity:0}}
+@keyframes bsUp{from{transform:translateY(100%)}}
+.bs-sheet{position:absolute;left:0;right:0;bottom:0;background:#fffaf0;border-radius:24px 24px 0 0;border-top:3px solid var(--ink,#5a4a3a);box-shadow:0 -10px 30px rgba(40,20,4,.25);display:flex;flex-direction:column;animation:bsUp .28s cubic-bezier(.2,.8,.3,1)}
+.bs-handle{display:flex;justify-content:center;padding:10px 0 6px;cursor:grab;touch-action:none}
+.bs-handle span{width:48px;height:6px;border-radius:3px;background:var(--ink2,#b0a090);opacity:.6}
+.bs-head{display:flex;align-items:center;justify-content:space-between;padding:0 18px 8px}
+.bs-head h2{font-family:var(--tf,'Zen Maru Gothic'),sans-serif;font-weight:400;font-size:20px;color:var(--ink,#3d2e1e)}
+.bs-close{width:44px;height:44px;border:none;background:none;font-size:20px;color:var(--ink,#3d2e1e);cursor:pointer}
+.bs-body{flex:1;overflow:auto;padding:4px 18px 12px;display:flex;flex-direction:column;gap:8px}
+.bs-label{font-size:13px;font-weight:700;color:var(--ink2,#6a5a4a);margin-top:6px}
+.bs-select{min-height:46px;padding:0 14px;border-radius:12px;border:2px solid var(--ink,#5a4a3a);background:#fff;font-family:var(--tf,'Zen Maru Gothic'),sans-serif;font-size:15px;color:var(--ink,#3d2e1e)}
+.bs-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bs-chip{min-height:44px;padding:0 16px;border-radius:999px;cursor:pointer}
+.bs-foot{display:flex;gap:10px;padding:12px 18px calc(14px + env(safe-area-inset-bottom));border-top:1.5px dashed rgba(90,60,30,.3)}
+.bs-reset{flex:0 0 auto;min-height:48px;padding:0 18px;border-radius:14px;border:2px solid var(--ink,#5a4a3a);background:#fff;font-family:inherit;font-size:14px;color:var(--ink,#3d2e1e);cursor:pointer}
+.bs-go{flex:1;min-height:48px;border-radius:14px;border:2.5px solid var(--ink,#5a4a3a);background:var(--pop,#5a7a3a);color:var(--ink,#fff);font-family:var(--tf,'Zen Maru Gothic'),sans-serif;font-size:16px;cursor:pointer;box-shadow:3px 3px 0 var(--ink,#3d2e1e)}
+.bd-layer{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+@keyframes bdSway{0%,100%{transform:rotate(var(--r))}27%{transform:rotate(calc(var(--r) + var(--sw)))}52%{transform:rotate(calc(var(--r) - var(--sw)*.45))}71%{transform:rotate(calc(var(--r) + var(--sw)*.15))}}
+.bd-sway{animation:bdSway 8s ease-in-out infinite}
+@keyframes bdFlip{0%,100%{transform:rotateX(0) rotateY(0)}23%{transform:rotateX(58deg) rotateY(18deg)}49%{transform:rotateX(8deg) rotateY(72deg)}77%{transform:rotateX(-46deg) rotateY(12deg)}}
+.bd-flip{animation:bdFlip 2.4s ease-in-out infinite}
+@keyframes bdFall{0%{transform:translate(0,-12vh) rotate(0)}25%{transform:translate(30px,20vh) rotate(90deg)}50%{transform:translate(-20px,50vh) rotate(200deg)}75%{transform:translate(35px,80vh) rotate(290deg)}100%{transform:translate(0,112vh) rotate(380deg)}}
+@keyframes bdFall2{0%{transform:translate(0,-15vh) rotate(0)}21%{transform:translate(var(--x1),17vh) rotate(calc(var(--rt)*.2))}46%{transform:translate(var(--x2),44vh) rotate(calc(var(--rt)*.48))}74%{transform:translate(var(--x3),76vh) rotate(calc(var(--rt)*.77))}100%{transform:translate(var(--x4),116vh) rotate(var(--rt))}}
+.bd-fall{position:absolute;top:0;opacity:.8;animation:bdFall2 20s linear infinite}
+@keyframes chIdle{0%,100%{transform:translateY(0) rotate(var(--char-rot))}16%{transform:translateY(calc(-7px*var(--amp))) rotate(var(--char-rot))}31%{transform:translateY(0) rotate(var(--char-rot))}49%{transform:translateY(calc(-3px*var(--amp))) rotate(calc(var(--char-rot) + 1.5deg))}58%{transform:translateY(0) rotate(var(--char-rot))}}
+@keyframes chHop{0%,56%,100%{transform:translateY(0) rotate(var(--char-rot)) scale(1,1)}61%{transform:translateY(0) rotate(var(--char-rot)) scale(1.07,.92)}67%{transform:translateY(calc(-20px*var(--amp))) rotate(calc(var(--char-rot) - 3deg)) scale(.96,1.05)}73%{transform:translateY(0) rotate(var(--char-rot)) scale(1.05,.95)}77%{transform:translateY(calc(-8px*var(--amp))) rotate(calc(var(--char-rot) + 2deg)) scale(1,1)}82%{transform:translateY(0) rotate(var(--char-rot)) scale(1.02,.98)}86%{transform:translateY(0) rotate(var(--char-rot)) scale(1,1)}}
+@keyframes chSway{0%,100%{transform:rotate(var(--char-rot))}19%{transform:rotate(calc(var(--char-rot) + 5deg*var(--amp)))}43%{transform:rotate(calc(var(--char-rot) - 3.5deg*var(--amp)))}61%{transform:rotate(calc(var(--char-rot) + 1.5deg))}78%{transform:rotate(calc(var(--char-rot) - .6deg))}}
+@keyframes chLook{0%,28%,100%{transform:translateX(0) rotate(var(--char-rot))}35%,57%{transform:translateX(calc(-5px*var(--amp))) rotate(calc(var(--char-rot) - 7deg*var(--amp)))}63%{transform:translateX(0) rotate(var(--char-rot))}70%,80%{transform:translateX(calc(3px*var(--amp))) rotate(calc(var(--char-rot) + 4deg*var(--amp)))}86%{transform:translateX(0) rotate(var(--char-rot))}}
+@keyframes chBreath{0%,100%{transform:rotate(var(--char-rot)) scale(1,1)}38%{transform:rotate(var(--char-rot)) scale(1.025,.975)}52%{transform:rotate(var(--char-rot)) scale(.985,1.03)}64%{transform:rotate(var(--char-rot)) scale(1,1)}88%{transform:translateY(calc(-4px*var(--amp))) rotate(var(--char-rot)) scale(1,1)}}
+.char-anim{transform-origin:50% 100%}
+@media (prefers-reduced-motion:reduce){.bd-sway,.bd-fall,.bd-flip,.char-anim{animation:none!important}.bd-fall{display:none}}
+[data-theme="kraft"] [data-card=c],[data-theme="ehon"] [data-card=c],[data-theme="pop"] [data-card=c]{padding-bottom:82px!important}
+[data-theme="kraft"] [data-ui=card][data-card=c] p,[data-theme="ehon"] [data-ui=card][data-card=c] p,[data-theme="pop"] [data-ui=card][data-card=c] p{font-size:13px!important;line-height:1.35!important}
+[data-theme="kraft"]{--paper:#efe3cb;--ink:#4a2f1b;--ink2:#6e5034;--kraft:#e3cfa6;--tf:'Yusei Magic',sans-serif;background:var(--grain),radial-gradient(ellipse at 50% 0,#f6ecd8,transparent 70%),#efe3cb!important}
+[data-theme="kraft"] [data-ui=card]{background:var(--grain),var(--kraft)!important;border:2px solid var(--ink)!important;border-radius:10px!important;box-shadow:4px 4px 0 rgba(74,47,27,.28)!important}
+[data-theme="kraft"] [data-card=a]>div:first-child{margin:8px 8px 0;border-radius:6px;border:1.5px solid var(--ink)}
+[data-theme="kraft"] [data-ui=card] h2,[data-theme="kraft"] [data-ui=card] h3,[data-theme="kraft"] [data-card=c] p{font-family:var(--tf)!important;font-weight:400!important;color:var(--ink)!important;font-size:15px!important;letter-spacing:.02em}
+[data-theme="kraft"] [data-card=feat] h2{font-size:clamp(18px,2.2vw,26px)!important}
+[data-theme="kraft"] [data-card=a] p,[data-theme="kraft"] [data-card=b] p,[data-theme="kraft"] [data-card=feat] p{color:var(--ink2)!important}
+[data-theme="kraft"] [data-ui=badge]{background:#fffaf0!important;border:1.5px solid currentColor;border-radius:6px!important}
+[data-theme="kraft"] [data-ui=chip]{font-family:var(--tf)!important;font-weight:400!important;font-size:13px!important;background:#fffaf0!important;color:var(--ink)!important;border:2px solid var(--ink)!important}
+[data-theme="kraft"] [data-ui=chip][data-active="1"]{background:var(--ink)!important;color:#f6ecd8!important}
+[data-theme="kraft"] [data-ui=search]{background:#fffaf0!important;border:2px solid var(--ink);border-radius:999px!important;box-shadow:3px 3px 0 rgba(74,47,27,.25)!important}
+[data-theme="kraft"] [data-ui=panel]{background:var(--grain),var(--kraft)!important;border:2px solid var(--ink);border-radius:14px!important;box-shadow:5px 5px 0 rgba(74,47,27,.25)!important}
+[data-theme="kraft"] [data-ui=count]{font-family:var(--tf);color:var(--ink2)!important;font-size:13px!important}
+[data-theme="kraft"] [data-ui=title]{font-family:var(--tf)!important;font-weight:400!important;font-size:clamp(38px,7.5vw,76px)!important;color:#fff8e8!important;letter-spacing:.06em!important;text-shadow:3px 3px 0 #4a2f1b,0 0 22px rgba(30,20,8,.35)!important}
+[data-theme="kraft"] [data-ui=logo]{font-family:var(--tf)!important;font-weight:400!important}
+[data-theme="kraft"] [data-ui=footer],[data-theme="kraft"] [data-ui=hdr-b]{background:var(--grain),repeating-linear-gradient(0deg,#5a3a20 0 40px,#3e2614 40px 42px),#5a3a20!important}
+[data-theme="kraft"] .bubble{font-family:var(--tf);font-weight:400;font-size:14px;border:2px solid var(--ink);color:var(--ink)}
+[data-theme="ehon"]{--paper:#fbf3e2;--ink:#5a3d24;--ink2:#7d5f42;--moss:#4f6a2c;--tf:'Klee One',sans-serif;--wob:22px 14px 26px 12px/14px 24px 12px 22px;background:radial-gradient(circle at 8% 18%,rgba(150,185,100,.22),transparent 28%),radial-gradient(circle at 92% 38%,rgba(240,196,110,.22),transparent 26%),radial-gradient(circle at 22% 72%,rgba(130,175,200,.16),transparent 30%),radial-gradient(circle at 80% 88%,rgba(220,150,150,.14),transparent 26%),var(--grain),#fbf3e2!important;background-attachment:fixed!important}
+[data-theme="ehon"] [data-ui=card]{background:#fffdf6!important;border:2px solid var(--ink)!important;border-radius:var(--wob)!important;box-shadow:0 8px 22px rgba(90,61,36,.14)!important}
+[data-theme="ehon"] [data-card=a]>div:first-child{margin:8px 8px 0;border-radius:16px 10px 18px 8px/10px 16px 8px 18px;border:1.5px solid var(--ink)}
+[data-theme="ehon"] [data-ui=card] h2,[data-theme="ehon"] [data-ui=card] h3,[data-theme="ehon"] [data-card=c] p{font-family:var(--tf)!important;font-weight:600!important;color:var(--ink)!important;font-size:15px!important}
+[data-theme="ehon"] [data-card=feat] h2{font-size:clamp(18px,2.2vw,26px)!important}
+[data-theme="ehon"] [data-card=a] p,[data-theme="ehon"] [data-card=b] p,[data-theme="ehon"] [data-card=feat] p{font-family:var(--tf);color:var(--ink2)!important}
+[data-theme="ehon"] [data-ui=badge]{font-family:var(--tf);border-radius:12px 8px 12px 8px!important}
+[data-theme="ehon"] [data-ui=chip]{font-family:var(--tf)!important;font-size:13px!important;background:#fffdf6!important;color:var(--ink)!important;border:1.5px solid var(--ink)!important;border-radius:14px 10px 16px 9px!important}
+[data-theme="ehon"] [data-ui=chip][data-active="1"]{background:var(--moss)!important;border-color:var(--moss)!important;color:#fffdf6!important}
+[data-theme="ehon"] [data-ui=search]{background:#fffdf6!important;border:1.5px solid var(--ink);border-radius:var(--wob)!important}
+[data-theme="ehon"] [data-ui=panel]{background:#fffdf6!important;border:2px solid var(--ink);border-radius:28px 18px 32px 16px/18px 30px 16px 28px!important}
+[data-theme="ehon"] [data-ui=count]{font-family:var(--tf);color:var(--ink2)!important;font-size:13px!important}
+[data-theme="ehon"] [data-ui=title]{font-family:var(--tf)!important;font-weight:600!important;font-size:clamp(36px,7vw,68px)!important;color:#fffaf0!important;letter-spacing:.08em!important;text-shadow:0 2px 0 rgba(60,40,10,.4),0 6px 26px rgba(20,40,4,.5)!important}
+[data-theme="ehon"] [data-ui=logo]{font-family:var(--tf)!important}
+[data-theme="ehon"] [data-ui=footer],[data-theme="ehon"] [data-ui=hdr-b]{background:var(--grain),#34502a!important}
+[data-theme="ehon"] .bubble{font-family:var(--tf);font-size:14px;border:1.5px solid var(--ink);color:var(--ink);border-radius:20px 14px 22px 12px}
+[data-theme="pop"]{--paper:#f6ecd6;--ink:#4a2f1b;--ink2:#6e5034;--pop:#f0a848;--tf:'Mochiy Pop One',sans-serif;background:var(--grain),#f3e6cb!important}
+[data-theme="pop"] [data-ui=card]{background:#fffaf0!important;border:3px solid var(--ink)!important;border-radius:18px!important;box-shadow:5px 5px 0 var(--ink)!important}
+[data-theme="pop"] .card-hover:hover,[data-theme="pop"] [data-card=c]:hover{box-shadow:7px 9px 0 var(--ink)!important}
+[data-theme="pop"] [data-card=a]>div:first-child{border-bottom:3px solid var(--ink)}
+[data-theme="pop"] [data-ui=card] h2,[data-theme="pop"] [data-ui=card] h3,[data-theme="pop"] [data-card=c] p{font-family:var(--tf)!important;font-weight:400!important;color:var(--ink)!important;font-size:14px!important}
+[data-theme="pop"] [data-card=feat] h2{font-size:clamp(18px,2.2vw,24px)!important}
+[data-theme="pop"] [data-card=a] p,[data-theme="pop"] [data-card=b] p,[data-theme="pop"] [data-card=feat] p{color:var(--ink2)!important}
+[data-theme="pop"] [data-ui=badge]{font-family:var(--tf);font-weight:400!important;border:2px solid var(--ink)}
+[data-theme="pop"] [data-ui=chip]{font-family:var(--tf)!important;font-weight:400!important;font-size:13px!important;background:#fffaf0!important;color:var(--ink)!important;border:2.5px solid var(--ink)!important;box-shadow:2px 2px 0 var(--ink)}
+[data-theme="pop"] [data-ui=chip][data-active="1"]{background:var(--pop)!important}
+[data-theme="pop"] [data-ui=search]{background:#fffaf0!important;border:3px solid var(--ink);border-radius:999px!important;box-shadow:3px 3px 0 var(--ink)!important}
+[data-theme="pop"] [data-ui=panel]{background:#fffaf0!important;border:3px solid var(--ink);border-radius:24px!important;box-shadow:6px 6px 0 var(--ink)!important}
+[data-theme="pop"] [data-ui=count]{font-family:var(--tf);color:var(--ink)!important;font-size:13px!important}
+[data-theme="pop"] [data-ui=title]{font-family:var(--tf)!important;font-weight:400!important;font-size:clamp(36px,7.5vw,72px)!important;color:#fff4d6!important;letter-spacing:.04em!important;text-shadow:3px 0 0 #4a2f1b,-3px 0 0 #4a2f1b,0 3px 0 #4a2f1b,0 -3px 0 #4a2f1b,2px 2px 0 #4a2f1b,-2px -2px 0 #4a2f1b,2px -2px 0 #4a2f1b,-2px 2px 0 #4a2f1b,6px 7px 0 #4a2f1b!important}
+[data-theme="pop"] [data-ui=logo]{font-family:var(--tf)!important;font-weight:400!important}
+[data-theme="pop"] [data-ui=footer],[data-theme="pop"] [data-ui=hdr-b]{background:radial-gradient(rgba(240,168,72,.18) 3px,transparent 3.5px) 0 0/30px 30px,#4a2f1b!important}
+[data-theme="pop"] .bubble{font-family:var(--tf);font-weight:400;font-size:13px;border:2.5px solid var(--ink);color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+/* pop：枠線なし・やわらかい影 */
+[data-theme="pop"]{--soft:0 6px 18px rgba(90,55,20,.14),0 1px 3px rgba(90,55,20,.08)}
+[data-theme="pop"] [data-ui=card]{border:none!important;box-shadow:var(--soft)!important}
+[data-theme="pop"] .card-hover:hover,[data-theme="pop"] [data-card=c]:hover{box-shadow:0 14px 30px rgba(90,55,20,.2)!important}
+[data-theme="pop"] [data-card=a]>div:first-child{border-bottom:none}
+[data-theme="pop"] [data-ui=badge]{border:none}
+[data-theme="pop"] [data-ui=chip]{border:none!important;background:#f5e7cc!important;box-shadow:none}
+[data-theme="pop"] [data-ui=chip]:hover{background:#efdbb6!important}
+[data-theme="pop"] [data-ui=chip][data-active="1"]{background:var(--pop)!important;box-shadow:0 3px 8px rgba(200,120,30,.3)}
+[data-theme="pop"] [data-ui=search]{border:none;background:#f8eedb!important;box-shadow:inset 0 2px 4px rgba(90,55,20,.1)!important}
+[data-theme="pop"] [data-ui=panel]{border:none;background:rgba(255,250,240,.94)!important;box-shadow:var(--soft)!important}
+[data-theme="pop"] .bubble{border:none;box-shadow:0 4px 12px rgba(90,55,20,.18)}
+[data-theme="pop"] .bubble::after{border:none}
+[data-theme="pop"] .cnt-num{border:none;box-shadow:0 3px 8px rgba(200,120,30,.3)}
+[data-theme="pop"] .cr-btn{border:none;box-shadow:var(--soft)}
+[data-theme="pop"] .sa-list{border:none;box-shadow:0 12px 30px rgba(90,55,20,.22)}
+[data-theme="pop"] .sa-thumb{border:none}
+[data-theme="pop"] .fb-open{border:none;background:#f5e7cc}
+[data-theme="pop"] .bs-sheet{border-top:none}
+[data-theme="pop"] .bs-select,[data-theme="pop"] .bs-reset{border:none;background:#f5e7cc}
+[data-theme="pop"] .bs-go{border:none;box-shadow:0 4px 10px rgba(200,120,30,.3)}
+</style>
 <script>
   document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
   document.addEventListener('touchmove', function(e){ if(e.touches.length > 1) e.preventDefault(); }, { passive: false });
@@ -252,7 +400,9 @@ function useInViewGrid(deps = []) {
 // TWEAK DEFAULTS
 // ─────────────────────────────────────────────
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "variant": "C",
+  "variant": "A",
+  "theme": "pop",
+  "bgImage": "",
   "siteName": "こどもとおでかけ",
   "siteSubtitle": "双子との大切な思い出",
   "primaryColor": "#5a7a3a",
@@ -625,7 +775,7 @@ const WatercolorStrip = () => (
       </filter>
     </defs>
     <path d="M0,20 Q180,0 360,18 Q540,36 720,16 Q900,0 1080,20 Q1260,40 1440,18 L1440,80 L0,80Z"
-      fill="#f7f0e3" filter="url(#wstrip)"/>
+      data-ui="strip" fill="#f7f0e3" filter="url(#wstrip)"/>
   </svg>
 );
 
@@ -699,6 +849,7 @@ const SvgRabbit = ({w=56,style={}}) => (
 // VIDEO MODAL (YouTube embed)
 // ─────────────────────────────────────────────
 function VideoModal({ video, onClose }) {
+  window.useScrollLock(true);
   useEffect(() => {
     const fn = e => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', fn);
@@ -763,6 +914,7 @@ function VideoModal({ video, onClose }) {
 // AI MODAL (Gemini suggestion)
 // ─────────────────────────────────────────────
 function AiModal({ onClose }) {
+  window.useScrollLock(true);
   const [theme, setTheme] = useState('');
   const [loading, setLoading] = useState(false);
   const [ideas, setIdeas] = useState(null);
@@ -896,7 +1048,7 @@ function AiModal({ onClose }) {
 function CatBadge({ cat, style={} }) {
   const cc = CAT_COLORS[cat] || { bg:'#e8f0e0', text:'#5a7a3a' };
   return (
-    <span style={{
+    <span data-ui="badge" style={{
       background:cc.bg, color:cc.text,
       fontSize:'11px', fontWeight:'700',
       padding:'3px 10px', borderRadius:'20px',
@@ -910,36 +1062,23 @@ function CatBadge({ cat, style={} }) {
 // ─────────────────────────────────────────────
 function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, primary, count, variant }) {
   const isTabStyle = variant === 'B';
+  const [sheet, setSheet] = useState(false);
+  const nActive = (activeCat!=='すべて'?1:0) + (activeYear!=='すべて'?1:0);
   return (
     <div>
-      {/* Search */}
-      <div className="inview visible" style={{
-        background:'white', borderRadius:'14px', padding:'8px 16px',
-        display:'flex', alignItems:'center', gap:'10px',
-        boxShadow:'0 2px 12px rgba(60,40,10,0.1)',
-        maxWidth:'480px', margin:'0 auto 18px'
-      }}>
-        <span style={{fontSize:'17px', opacity:0.45}}>🔍</span>
-        <input
-          type="text" value={search} onChange={e=>onSearch(e.target.value)}
-          placeholder="動画を検索…"
-          style={{
-            border:'none', outline:'none', width:'100%',
-            fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'14px',
-            color:'#3d2e1e', background:'transparent'
-          }}
-        />
-        {search && (
-          <button onClick={()=>onSearch('')} style={{
-            background:'none', border:'none', cursor:'pointer',
-            color:'#a09080', fontSize:'16px', lineHeight:1
-          }}>×</button>
-        )}
+      <window.SearchAuto value={search} onChange={onSearch} videos={VIDEOS}/>
+      <div className="fb-mobile">
+        <button className="fb-open" data-ui="chip" data-active="0" onClick={()=>setSheet(true)}>
+          しぼりこみ（年・カテゴリ）{nActive>0 && <span className="fb-badge">{nActive}</span>}
+        </button>
       </div>
+      <window.FilterSheet open={sheet} onClose={()=>setSheet(false)} years={YEARS} cats={CATS}
+        activeCat={activeCat} activeYear={activeYear} onCat={onCat} onYear={onYear} count={count}/>
+      <div className="fb-desktop">
       {/* Year filter */}
       <div style={{display:'flex', justifyContent:'center', gap:'6px', marginBottom:'12px', flexWrap:'wrap'}}>
         {YEARS.map(y=>(
-          <button key={y} onClick={()=>onYear(y)} style={{
+          <button key={y} onClick={()=>onYear(y)} data-ui="chip" data-active={y===activeYear?'1':'0'} style={{
             padding:'5px 16px', borderRadius:'20px',
             border: y===activeYear ? `2px solid ${primary}` : '2px solid #d4c8b8',
             background: y===activeYear ? primary : 'white',
@@ -955,7 +1094,7 @@ function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, pri
           const active = cat===activeCat;
           const cc = CAT_COLORS[cat] || { bg:'#e8f0e0', text:'#5a7a3a' };
           return (
-            <button key={cat} onClick={()=>onCat(cat)} className="filter-btn" style={{
+            <button key={cat} onClick={()=>onCat(cat)} className="filter-btn" data-ui="chip" data-active={active?'1':'0'} style={{
               padding:'5px 14px', borderRadius:'20px',
               border: active ? `2px solid ${cc.text}` : '2px solid #d4c8b8',
               background: active ? cc.bg : 'white',
@@ -966,9 +1105,8 @@ function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, pri
           );
         })}
       </div>
-      <p style={{textAlign:'center', fontSize:'12px', color:'#a09080', marginTop:'8px'}}>
-        {count}本の思い出動画
-      </p>
+      </div>
+      <window.CountLabel count={count} cat={activeCat} year={activeYear} search={search}/>
     </div>
   );
 }
@@ -976,8 +1114,9 @@ function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, pri
 // ─────────────────────────────────────────────
 // VIDEO CARD A — カード (YouTube thumbnail)
 // ─────────────────────────────────────────────
-function CardA({ video, onPlay, primary, delayIdx=0 }) {
+function CardA({ video, onPlay, primary, delayIdx=0, decoSide=null }) {
   const [hovered, setHovered] = useState(false);
+  const [thumbState, setThumbState] = useState(0);
   const thumb = `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`;
   const delayClass = `delay-${Math.min(delayIdx % 8, 7)}`;
   return (
@@ -986,17 +1125,23 @@ function CardA({ video, onPlay, primary, delayIdx=0 }) {
       onMouseEnter={()=>setHovered(true)}
       onMouseLeave={()=>setHovered(false)}
       onClick={()=>onPlay(video)}
+      data-ui="card" data-card="a"
       style={{
         background:'white', borderRadius:'16px', overflow:'hidden', cursor:'pointer',
         boxShadow:'0 3px 12px rgba(60,40,10,0.09)'
       }}
     >
       <div style={{position:'relative', aspectRatio:'16/9', background:'#e8ddd0', overflow:'hidden'}}>
-        <img src={thumb} alt={video.title} style={{
+        <img src={thumb} alt={video.title} loading="lazy"
+          onLoad={()=>setThumbState(1)} onError={()=>setThumbState(2)}
+          style={{
           width:'100%', height:'100%', objectFit:'cover', display:'block',
-          transition:'transform 0.45s cubic-bezier(.25,.8,.25,1)',
+          opacity: thumbState===1 ? 1 : 0,
+          transition:'transform 0.45s cubic-bezier(.25,.8,.25,1), opacity .35s ease',
           transform: hovered ? 'scale(1.06)' : 'scale(1)'
         }}/>
+        {thumbState===0 && <div className="sk" aria-hidden="true"></div>}
+        {thumbState===2 && <div className="sk-err"><span>🍂</span>サムネイルを読みこめませんでした</div>}
         <div style={{
           position:'absolute', inset:0,
           background: hovered ? 'rgba(10,30,5,0.32)' : 'rgba(10,30,5,0)',
@@ -1014,7 +1159,7 @@ function CardA({ video, onPlay, primary, delayIdx=0 }) {
           )}
         </div>
       </div>
-      <div style={{padding:'12px 14px 16px'}}>
+      <div style={{padding:`12px ${decoSide==='right'?44:14}px 16px ${decoSide==='left'?44:14}px`}}>
         <div style={{display:'flex', alignItems:'center', gap:'6px', marginBottom:'7px'}}>
           <CatBadge cat={video.cat}/>
           <span style={{fontSize:'11px', color:'#b0a090'}}>{video.year}</span>
@@ -1050,6 +1195,7 @@ function CardB({ video, onPlay, primary, featured=false, delayIdx=0 }) {
         onClick={()=>onPlay(video)}
         onMouseEnter={()=>setHovered(true)}
         onMouseLeave={()=>setHovered(false)}
+        data-ui="card" data-card="feat"
         style={{
           display:'grid', gridTemplateColumns:'1.2fr 1fr',
           borderRadius:'20px', overflow:'hidden', background:'white', cursor:'pointer',
@@ -1095,6 +1241,7 @@ function CardB({ video, onPlay, primary, featured=false, delayIdx=0 }) {
       onMouseEnter={()=>setHovered(true)}
       onMouseLeave={()=>setHovered(false)}
       onClick={()=>onPlay(video)}
+      data-ui="card" data-card="b"
       style={{
         display:'flex', gap:'14px', background:'white', borderRadius:'14px',
         overflow:'hidden', cursor:'pointer', padding:'0',
@@ -1153,6 +1300,7 @@ function CardC({ video, onPlay, primary, idx }) {
       onMouseEnter={()=>setHovered(true)}
       onMouseLeave={()=>setHovered(false)}
       onClick={()=>onPlay(video)}
+      data-ui="card" data-card="c"
       style={{
         background:'white', borderRadius:'4px', cursor:'pointer',
         padding:'10px 10px 42px',
@@ -1208,7 +1356,15 @@ const CHAR_SRC = {
   kasa:     'uploads/happanokasa.png',
   kago:     'uploads/dongurinokago.png',
 };
+const CHAR_MOTIONS=['chIdle','chHop','chSway','chLook','chBreath'];
+const CHAR_EASES=['ease-in-out','cubic-bezier(.45,.05,.35,1)','cubic-bezier(.3,.1,.5,1)'];
+function charSeed(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 function Character({ kind, size=110, top, left, right, bottom, rotate=0, alt=false, flip=false, bubble=null, bubblePos='center', z=1 }) {
+  const sd=charSeed(`${kind}|${top}|${left}|${right}|${bottom}|${size}`);
+  const rr=n=>((sd>>>(n*4))%997)/997;
+  const motion=CHAR_MOTIONS[sd%CHAR_MOTIONS.length];
+  const dur=(motion==='chHop'?6:4.2)+rr(1)*6.5;
+  const charAnim=`${motion} ${dur.toFixed(2)}s ${CHAR_EASES[(sd>>>3)%3]} ${(-rr(2)*12).toFixed(2)}s infinite`;
   return (
     <div style={{
       position:'absolute', top, left, right, bottom, zIndex:z,
@@ -1223,10 +1379,12 @@ function Character({ kind, size=110, top, left, right, bottom, rotate=0, alt=fal
         }}>{bubble}</div>
       )}
       <img src={CHAR_SRC[kind]} alt=""
-        className={alt ? 'char-float-alt' : 'char-float'}
+        className={`char-anim ${alt ? 'char-float-alt' : 'char-float'}`}
         style={{
           width:'100%', height:'auto', display:'block',
           ['--char-rot']: `${rotate}deg`,
+          ['--amp']: (0.6+rr(3)*0.9).toFixed(2),
+          animation: charAnim,
           transform: `${flip?'scaleX(-1) ':''}rotate(${rotate}deg)`,
           filter:'drop-shadow(0 4px 10px rgba(40,20,4,0.25))'
         }}/>
@@ -1237,6 +1395,15 @@ function Character({ kind, size=110, top, left, right, bottom, rotate=0, alt=fal
 // ─────────────────────────────────────────────
 // HEADER VARIANTS
 // ─────────────────────────────────────────────
+const DECO_CHARS=['kinoko','happa','kitsune','tanuki','donguri'];
+const DECO_ITEMS=['kago','table','ouchi','kasa','wreath'];
+function cardDeco(id){
+  const h=charSeed('deco'+id), r=n=>((h>>>(n*3))%1000)/1000;
+  if(r(0)>0.2) return null;
+  const side=r(2)<.62?'right':'left', s=48+Math.round(r(4)*12);
+  const pool=r(1)<.5?DECO_CHARS:DECO_ITEMS;
+  return {side, props:{kind:pool[(h>>>7)%5],size:s,bottom:-12,[side]:-12,rotate:Math.round((r(5)-.5)*12)}};
+}
 function HeaderA({ siteName, siteSubtitle, onAi }) {
   return (
     <header style={{
@@ -1260,17 +1427,13 @@ function HeaderA({ siteName, siteSubtitle, onAi }) {
         position:'relative', zIndex:2, textAlign:'center', padding:'0 20px',
         display:'flex', flexDirection:'column', alignItems:'center'
       }}>
-        <h1 className="inview visible" style={{
+        <h1 className="inview visible" data-ui="title" style={{
           fontFamily:"'Zen Maru Gothic',sans-serif",
           fontSize:'clamp(28px,5.5vw,52px)', fontWeight:'700',
           color:'#fffaf0', marginBottom:'8px',
           textShadow:'1px 2px 0 rgba(30,50,4,0.5), 0 4px 16px rgba(20,40,4,0.4)',
           letterSpacing:'0.02em'
         }}>{siteName}</h1>
-        <p className="inview visible delay-1" style={{
-          color:'#e8f8d0', fontSize:'15px', fontWeight:'500', marginBottom:'24px',
-          textShadow:'0 2px 8px rgba(20,40,4,0.45)'
-        }}>{siteSubtitle}</p>
       </div>
 
       {/* Watercolor edge bleed into content area */}
@@ -1285,7 +1448,7 @@ function HeaderA({ siteName, siteSubtitle, onAi }) {
 
 function HeaderB({ siteName, siteSubtitle, onAi, search, onSearch, activeCat, onCat, activeYear, onYear, primary }) {
   return (
-    <header style={{background:'#2a1e0e', position:'sticky', top:0, zIndex:100}}>
+    <header data-ui="hdr-b" style={{background:'#2a1e0e', position:'sticky', top:0, zIndex:100}}>
       {/* 薄く画像を背景に */}
       <div style={{
         position:'absolute', inset:0, overflow:'hidden', pointerEvents:'none'
@@ -1302,7 +1465,7 @@ function HeaderB({ siteName, siteSubtitle, onAi, search, onSearch, activeCat, on
       }}>
         <div style={{display:'flex', alignItems:'center', gap:'10px', flexShrink:0}}>
           <SvgRabbit w={36}/>
-          <span style={{
+          <span data-ui="logo" style={{
             color:'#fffaf0', fontFamily:"'Quicksand',sans-serif",
             fontWeight:'700', fontSize:'20px', whiteSpace:'nowrap'
           }}>🌿 {siteName}</span>
@@ -1368,13 +1531,11 @@ function HeaderC({ siteName, siteSubtitle, onAi }) {
       }}/>
       <div style={{position:'relative', zIndex:2, textAlign:'center', padding:'0 20px',
         display:'flex', flexDirection:'column', alignItems:'center'}}>
-        <h1 style={{
+        <h1 data-ui="title" style={{
           fontFamily:"'Zen Maru Gothic',sans-serif",
           fontSize:'clamp(26px,5vw,44px)', fontWeight:'700', color:'#fffaf0',
           marginBottom:'8px', textShadow:'1px 2px 0 rgba(30,50,4,0.5), 0 4px 16px rgba(20,40,4,0.4)'
         }}>{siteName}</h1>
-        <p style={{color:'#e8f8d0', fontSize:'14px', marginBottom:'20px',
-          textShadow:'0 2px 8px rgba(20,40,4,0.4)'}}>{siteSubtitle} 🌿</p>
       </div>
       <div style={{position:'absolute', bottom:0, left:0, right:0, height:'80px', zIndex:3}}>
         <WatercolorStrip/>
@@ -1388,12 +1549,12 @@ function HeaderC({ siteName, siteSubtitle, onAi }) {
 // ─────────────────────────────────────────────
 function Footer({ siteName }) {
   return (
-    <footer style={{background:'#2a1e0e', color:'#c4973a', textAlign:'center', padding:'30px 20px'}}>
+    <footer data-ui="footer" style={{background:'#2a1e0e', color:'#c4973a', textAlign:'center', padding:'30px 20px'}}>
       <div style={{display:'flex', justifyContent:'center', gap:'6px', marginBottom:'10px', opacity:0.7}}>
         <SvgBear w={38}/>
         <SvgRabbit w={30} style={{marginTop:'6px'}}/>
       </div>
-      <div style={{
+      <div data-ui="logo" style={{
         fontFamily:"'Quicksand',sans-serif", fontWeight:'700',
         fontSize:'17px', marginBottom:'5px', color:'#fffaf0'
       }}>🌿 {siteName}</div>
@@ -1430,27 +1591,31 @@ function App() {
   `;
 
   return (
-    <div style={{position:'relative', minHeight:'100vh', background:'#f5ede0', backgroundImage: contentBg}}>
+    <div className="app-root" data-theme={tweaks.theme||'original'} style={{position:'relative', minHeight:'100vh', background:'#f5ede0', backgroundImage: contentBg}}>
+      <window.ThemeBackdrop theme={tweaks.theme} image={tweaks.bgImage}/>
 
       {/* ── VARIANT A ─────────────────── */}
       {v==='A' && (<>
         <div style={{position:'relative'}}>
           <HeaderA siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}/>
           <Character kind="kinoko" size={130} bottom={-20} left={'3%'} rotate={-6} z={5}
-            bubble="ようこそ、森の動画へ" bubblePos="left"/>
+            bubble="ようこそ" bubblePos="left"/>
           <Character kind="kitsune" size={120} bottom={-10} right={'4%'} rotate={4} alt z={5}/>
         </div>
 
         {/* Search + Filter */}
         <div style={{position:'relative', maxWidth:'820px', margin:'0 auto'}}>
-          <div style={{background:'rgba(255,252,245,0.96)', margin:'10px 16px 0', borderRadius:'18px', padding:'20px 20px 16px', maxWidth:'700px', marginLeft:'auto', marginRight:'auto', boxShadow:'0 4px 24px rgba(60,40,10,0.14)', position:'relative', zIndex:2, backdropFilter:'blur(8px)'}}>
+          <div data-ui="panel" style={{background:'rgba(255,252,245,0.96)', margin:'10px 16px 0', borderRadius:'18px', padding:'20px 20px 16px', maxWidth:'700px', marginLeft:'auto', marginRight:'auto', boxShadow:'0 4px 24px rgba(60,40,10,0.14)', position:'relative', zIndex:2, backdropFilter:'blur(8px)'}}>
             <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
               search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A"/>
           </div>
           <Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/>
         </div>
 
-        <main style={{maxWidth:'1100px', margin:'28px auto', padding:'0 16px 60px', position:'relative'}}>
+        {activeCat==='すべて' && activeYear==='すべて' && !search.trim() && (
+          <window.Carousel title="さいきんの おでかけ" videos={VIDEOS.slice(0,10)} onPlay={setModalVideo} Card={CardA} primary={primary}/>
+        )}
+        <main style={{maxWidth:'1240px', margin:'28px auto', padding:'0 16px 60px', position:'relative'}}>
           {/* 散らばるキャラクター */}
           <Character kind="donguri" size={78} top={'8%'} left={-30} rotate={-8} z={5}/>
           <Character kind="tanuki" size={110} top={'38%'} right={-40} rotate={6} alt z={5}
@@ -1468,12 +1633,18 @@ function App() {
 
           <div ref={useInViewGrid([filtered])} style={{
             display:'grid',
-            gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 290px), 1fr))',
-            gap:'20px', position:'relative', zIndex:2
+            gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 210px), 1fr))',
+            gap:'22px 20px', position:'relative', zIndex:2
           }}>
-            {filtered.map((v,i)=>(
-              <CardA key={v.id} video={v} onPlay={setModalVideo} primary={primary} delayIdx={i}/>
-            ))}
+            {filtered.map((v,i)=>{
+              const d=cardDeco(v.id);
+              return (
+                <div key={v.id} style={{position:'relative'}}>
+                  <CardA video={v} onPlay={setModalVideo} primary={primary} delayIdx={i} decoSide={d&&d.side}/>
+                  {d && <Character {...d.props} z={4}/>}
+                </div>
+              );
+            })}
           </div>
           {filtered.length===0 && (
             <div style={{textAlign:'center', padding:'60px 20px', color:'#a09080', fontSize:'16px'}}>
@@ -1494,7 +1665,7 @@ function App() {
           activeYear={activeYear} onYear={setActiveYear}
           primary={primary}
         />
-        <main style={{maxWidth:'900px', margin:'0 auto', padding:'28px 20px 60px'}}>
+        <main style={{maxWidth:'1240px', margin:'0 auto', padding:'28px 20px 60px'}}>
           <div style={{
             display:'flex', justifyContent:'space-between', alignItems:'center',
             marginBottom:'20px', padding:'0 2px'
@@ -1506,7 +1677,7 @@ function App() {
           {filtered.length > 0 && (
             <CardB video={filtered[0]} onPlay={setModalVideo} primary={primary} featured={true}/>
           )}
-          <div ref={useInViewGrid([filtered])} style={{display:'flex', flexDirection:'column', gap:'14px'}}>
+          <div ref={useInViewGrid([filtered])} style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 380px), 1fr))', gap:'14px'}}>
             {filtered.slice(1).map((v,i)=>(
               <CardB key={v.id} video={v} onPlay={setModalVideo} primary={primary} delayIdx={i}/>
             ))}
@@ -1526,7 +1697,7 @@ function App() {
         <div style={{position:'relative'}}>
           <HeaderC siteName={tweaks.siteName} siteSubtitle={tweaks.siteSubtitle} onAi={()=>setShowAi(true)}/>
           <Character kind="kinoko" size={130} bottom={-20} left={'3%'} rotate={-6} z={5}
-            bubble="ようこそ、森の動画へ" bubblePos="left"/>
+            bubble="ようこそ" bubblePos="left"/>
           <Character kind="kitsune" size={120} bottom={-10} right={'4%'} rotate={4} alt z={5}/>
         </div>
         <div style={{position:'relative', maxWidth:'860px', margin:'-8px auto 0', padding:'0 20px 16px'}}>
@@ -1534,7 +1705,7 @@ function App() {
             search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="C"/>
           <Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/>
         </div>
-        <main style={{maxWidth:'860px', margin:'0 auto', padding:'0 20px 80px', position:'relative'}}>
+        <main style={{maxWidth:'1240px', margin:'0 auto', padding:'0 20px 80px', position:'relative'}}>
           {/* 散らばるキャラクター */}
           <Character kind="donguri" size={78} top={'8%'} left={-30} rotate={-8} z={5}/>
           <Character kind="tanuki" size={110} top={'38%'} right={-40} rotate={6} alt z={5}
@@ -1552,8 +1723,8 @@ function App() {
 
           <div ref={useInViewGrid([filtered])} style={{
             display:'grid',
-            gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 230px), 1fr))',
-            gap:'28px', position:'relative', zIndex:2
+            gridTemplateColumns:'repeat(auto-fill, minmax(min(100%, 200px), 1fr))',
+            gap:'26px', position:'relative', zIndex:2
           }}>
             {filtered.map((v,i)=>(
               <CardC key={v.id} video={v} onPlay={setModalVideo} primary={primary} idx={i} delayIdx={i}/>
@@ -1581,6 +1752,15 @@ function App() {
             {label:'B リスト', value:'B'},
             {label:'C ポラロイド', value:'C'}
           ]} onChange={v=>setTweak('variant',v)}/>
+        </window.TweakSection>
+        <window.TweakSection label="テーマ">
+          <window.TweakSelect label="どんぐり風テーマ" value={tweaks.theme||'original'} options={[
+            {label:'案1 クラフト工房', value:'kraft'},
+            {label:'案2 絵本のページ', value:'ehon'},
+            {label:'案3 どんぐり広場', value:'pop'},
+            {label:'元のデザイン', value:'original'}
+          ]} onChange={v=>setTweak('theme',v)}/>
+          <window.TweakText label="背景画像（パス/URL・空欄でイラスト）" value={tweaks.bgImage||''} onChange={v=>setTweak('bgImage',v)}/>
         </window.TweakSection>
         <window.TweakSection label="テキスト">
           <window.TweakText label="サイト名" value={tweaks.siteName} onChange={v=>setTweak('siteName',v)}/>
