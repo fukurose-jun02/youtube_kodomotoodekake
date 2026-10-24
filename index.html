@@ -1546,25 +1546,6 @@ function HeaderC({ siteName, siteSubtitle, onAi }) {
 }
 
 // ─────────────────────────────────────────────
-// FOOTER
-// ─────────────────────────────────────────────
-function Footer({ siteName }) {
-  return (
-    <footer data-ui="footer" style={{background:'#2a1e0e', color:'#c4973a', textAlign:'center', padding:'30px 20px'}}>
-      <div style={{display:'flex', justifyContent:'center', gap:'6px', marginBottom:'10px', opacity:0.7}}>
-        <SvgBear w={38}/>
-        <SvgRabbit w={30} style={{marginTop:'6px'}}/>
-      </div>
-      <div data-ui="logo" style={{
-        fontFamily:"'Quicksand',sans-serif", fontWeight:'700',
-        fontSize:'17px', marginBottom:'5px', color:'#fffaf0'
-      }}>🌿 {siteName}</div>
-      <div style={{fontSize:'12px', opacity:0.55}}>大切な思い出を、いつでも見返せるように。</div>
-    </footer>
-  );
-}
-
-// ─────────────────────────────────────────────
 // MAIN APP
 // ─────────────────────────────────────────────
 function App() {
@@ -1654,7 +1635,6 @@ function App() {
             </div>
           )}
         </main>
-        <Footer siteName={tweaks.siteName}/>
       </>)}
 
       {/* ── VARIANT B ─────────────────── */}
@@ -1690,7 +1670,6 @@ function App() {
             </div>
           )}
         </main>
-        <Footer siteName={tweaks.siteName}/>
       </>)}
 
       {/* ── VARIANT C ─────────────────── */}
@@ -1738,7 +1717,6 @@ function App() {
             </div>
           )}
         </main>
-        <Footer siteName={tweaks.siteName}/>
       </>)}
 
       {/* MODALS */}
