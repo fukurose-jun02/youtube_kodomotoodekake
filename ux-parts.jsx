@@ -139,7 +139,9 @@ function FilterSheet({ open, onClose, years, cats, activeCat, activeYear, onCat,
     else if(dy>80){ if(full) setFull(false); else onClose(); }
     setDy(0);
   };
-  return (
+  // 親パネル（z-index・backdrop-filter）の重なり順に閉じ込められないよう、テーマ属性を持つ .app-root 直下に出す
+  const host=document.querySelector('.app-root')||document.body;
+  return ReactDOM.createPortal(
     <div className="bs-root">
       <div className="bs-backdrop" onClick={onClose}></div>
       <div className="bs-sheet" data-ui="sheet" role="dialog" aria-modal="true" aria-label="しぼりこみ"
@@ -170,7 +172,8 @@ function FilterSheet({ open, onClose, years, cats, activeCat, activeYear, onCat,
           <button className="bs-go" onClick={onClose}>{count}本を見る</button>
         </div>
       </div>
-    </div>
+    </div>,
+    host
   );
 }
 
