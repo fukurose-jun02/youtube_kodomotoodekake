@@ -200,7 +200,8 @@
 <style id="donguri-themes">
 :root{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.18 0 0 0 0 0.08 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
 [data-theme] [data-ui=strip]{fill:var(--paper,#f7f0e3)}
-.app-root{isolation:isolate}
+.app-root{isolation:isolate;overflow-x:clip}
+html,body{overflow-x:hidden}
 .cnt{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 6px;margin-top:12px;color:var(--ink,#5a4a3a)!important;font-family:var(--tf,'Zen Maru Gothic'),sans-serif}
 .cnt-acorn{width:20px;height:30px;transform-origin:50% 90%;animation:cntWig 3.6s ease-in-out infinite}
 @keyframes cntWig{0%,70%,100%{transform:rotate(0)}76%{transform:rotate(-14deg)}84%{transform:rotate(10deg)}91%{transform:rotate(-4deg)}}
