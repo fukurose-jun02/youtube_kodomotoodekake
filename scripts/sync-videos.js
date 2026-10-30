@@ -339,6 +339,12 @@ function updateIndexHtml(videos) {
   console.log('index.html の VIDEOS 配列を更新しました');
 }
 
+// 0本のまま書き込むと既存データが消えるため、何も書き込まずに終了する。
+function failEmpty(reason) {
+  throw new Error(`${reason}。data/ と index.html は更新していません。\n`
+    + '  対処: .env の YOUTUBE_OAUTH_REFRESH_TOKEN を空にして再実行し、認証画面で正しいチャンネル（.env の YOUTUBE_CHANNEL_ID）を選んでください');
+}
+
 async function main() {
   const env = loadEnv();
   const accessToken = await getAccessToken(env);
@@ -346,6 +352,8 @@ async function main() {
   const playlistId = await getMyUploadsPlaylistId(accessToken);
   const ids = await getAllVideoIds(accessToken, playlistId);
   console.log(`${ids.length}本のアップロードを検出（動画+ショート合計）`);
+  // 認証時に別のチャンネルを選ぶと0本になり、data/ と index.html を空で上書きしてしまうため、ここで止める
+  if (ids.length === 0) failEmpty('アップロードが0本でした。認証時に選んだチャンネルが違う可能性があります');
 
   console.log('ショート判定中...');
   const { regular, shorts, unknown } = await filterOutShorts(ids);
@@ -358,6 +366,7 @@ async function main() {
 
   const details = await getVideoDetails(accessToken, targetIds);
   const { videos, warnings } = buildVideos(details);
+  if (videos.length === 0) failEmpty('掲載対象の動画が0本でした');
 
   writeDataFile(videos);
   writeCsvFile(videos);
