@@ -66,10 +66,21 @@ export function validateRequest(body) {
     if (!m || (m.role !== 'user' && m.role !== 'assistant')) return { ok: false };
     if (m.role !== expected) return { ok: false }; // user と assistant が交互であること
     if (typeof m.text !== 'string' || !m.text.trim() || m.text.length > MAX_HISTORY_TEXT) return { ok: false };
+    if (m.ids !== undefined && (m.role !== 'assistant' || !Array.isArray(m.ids) || m.ids.length > MAX_RESULTS || m.ids.some(id => typeof id !== 'string' || id.length > 20))) return { ok: false };
     expected = expected === 'user' ? 'assistant' : 'user';
   }
   if (history.length && expected !== 'user') return { ok: false }; // 履歴は assistant で終わる
-  return { ok: true, message, history: history.map(m => ({ role: m.role, text: m.text.trim() })) };
+  return { ok: true, message, history: history.map(m => ({ role: m.role, text: m.text.trim(), ids: m.ids || [] })) };
+}
+
+// 「もっと小さいころのは？」のような絞り込みのため、直前に紹介した動画の題名と年齢を、履歴の返事に足す
+export function withShownVideos(history, catalog) {
+  const byId = new Map(catalog.map(v => [v.id, v]));
+  return history.map(m => {
+    const shown = (m.ids || []).map(id => byId.get(id)).filter(Boolean);
+    if (m.role !== 'assistant' || !shown.length) return { role: m.role, text: m.text };
+    return { role: m.role, text: `${m.text}\n（紹介した動画：${shown.map(v => `${v.title}・${v.age || '年齢なし'}`).join('、')}）` };
+  });
 }
 
 // 日本時間の日付（YYYY-MM-DD）
@@ -188,7 +199,7 @@ export async function handleChat(request, env, { catalog, fetchImpl = fetch, now
       apiKey: env.GEMINI_API_KEY,
       model: env.GEMINI_MODEL || DEFAULT_MODEL,
       systemInstruction: buildSystemInstruction(catalog),
-      history: checked.history,
+      history: withShownVideos(checked.history, catalog),
       message: checked.message,
       fetchImpl,
       apiBase: env.GEMINI_API_BASE || API_BASE, // 開発で、ローカルの代役に向けるときだけ設定する

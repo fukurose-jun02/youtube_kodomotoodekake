@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  buildCatalogText, buildSystemInstruction, validateRequest, sanitizeResult, jstDay, handleChat,
+  buildCatalogText, buildSystemInstruction, validateRequest, withShownVideos, sanitizeResult, jstDay, handleChat,
   MAX_MESSAGE_CHARS, MAX_HISTORY,
 } from './chat.mjs';
 
@@ -183,4 +183,33 @@ test('命令めいた質問でも、Geminiが返した動画以外の内容（�
   const body = await res.json();
   assert.deepEqual(body.videoIds, [GOOD_ID]);
   assert.ok(body.reply.length <= 400);
+});
+
+test('履歴：紹介した動画のIDは、assistantの返事にだけ付けられる（形の誤りは断る）', () => {
+  const h = (extra) => [{ role: 'user', text: 'q' }, { role: 'assistant', text: 'r', ...extra }];
+  assert.equal(validateRequest({ message: 'a', history: h({ ids: [GOOD_ID] }) }).ok, true);
+  assert.equal(validateRequest({ message: 'a', history: h({ ids: 'x' }) }).ok, false);
+  assert.equal(validateRequest({ message: 'a', history: h({ ids: Array(6).fill(GOOD_ID) }) }).ok, false);
+  assert.equal(validateRequest({ message: 'a', history: h({ ids: [123] }) }).ok, false);
+  assert.equal(validateRequest({ message: 'a', history: [{ role: 'user', text: 'q', ids: [GOOD_ID] }, { role: 'assistant', text: 'r' }] }).ok, false);
+});
+
+test('履歴：紹介した動画の題名と年齢をGeminiへ渡す（一覧にないIDは無視）', () => {
+  const out = withShownVideos([
+    { role: 'user', text: 'q', ids: [] },
+    { role: 'assistant', text: 'これです', ids: [GOOD_ID, 'bogus'] },
+  ], catalog);
+  assert.equal(out[0].text, 'q');
+  assert.ok(out[1].text.startsWith('これです\n（紹介した動画：'));
+  assert.ok(out[1].text.includes(catalog[1].title));
+  assert.ok(out[1].text.includes(catalog[1].age));
+  assert.ok(!out[1].text.includes('bogus'));
+  assert.equal(withShownVideos([{ role: 'assistant', text: 'x', ids: [] }], catalog)[0].text, 'x');
+});
+
+test('正常：履歴に紹介した動画があると、Geminiへの履歴に題名と年齢が入る', async () => {
+  const { fetchImpl, calls } = geminiOk({ reply: 'ok', videoIds: [] });
+  await run(req({ message: 'もっと小さいころは？', history: [{ role: 'user', text: 'q' }, { role: 'assistant', text: 'r', ids: [GOOD_ID] }] }), baseEnv(), fetchImpl);
+  const sent = JSON.parse(calls[0].init.body);
+  assert.ok(sent.contents[1].parts[0].text.includes(catalog[1].title));
 });
