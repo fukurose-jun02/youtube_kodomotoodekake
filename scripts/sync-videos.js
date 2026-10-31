@@ -24,6 +24,9 @@ const ENV_PATH = path.join(ROOT, '.env');
 const DATA_PATH = path.join(ROOT, 'data', 'videos.json');
 const CSV_PATH = path.join(ROOT, 'data', 'videos.csv');
 const CLAIMS_PATH = path.join(ROOT, 'data', 'claims.json');
+const SPOTS_PATH = path.join(ROOT, 'data', 'spots.json');
+// 子どもの当時の年齢を出すための基準日（誕生日）
+const CHILD_BIRTHDAY = '2021-06-22';
 const INDEX_PATH = path.join(ROOT, 'index.html');
 const START_MARKER = '// AUTO-GENERATED:VIDEOS-START';
 const END_MARKER = '// AUTO-GENERATED:VIDEOS-END';
@@ -311,15 +314,38 @@ function loadClaims() {
 // 申立が複数ある動画は、曲名・歌手名とも同じ順番で ' ; ' でつなぐ（歌手名が無い申立は空欄）
 const CLAIM_SEPARATOR = ' ; ';
 
+// 「〇〇行ってきた」などのスポット名と住所（data/spots.json）。無ければ空にする
+function loadSpots() {
+  if (!fs.existsSync(SPOTS_PATH)) return {};
+  return JSON.parse(fs.readFileSync(SPOTS_PATH, 'utf8')).videos || {};
+}
+
+// 公開日（YYYY-MM-DD）時点の年齢を「〇歳〇ヶ月」で返す。誕生日より前の公開日は空文字
+function calcAge(dateStr, birthday = CHILD_BIRTHDAY) {
+  const [by, bm, bd] = birthday.split('-').map(Number);
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const months = (y - by) * 12 + (m - bm) - (d < bd ? 1 : 0);
+  if (months < 0) return '';
+  return `${Math.floor(months / 12)}歳${months % 12}ヶ月`;
+}
+
+function placeOf(spot) {
+  return spot ? `${spot.pref}${spot.city}` : '';
+}
+
 // 先頭にBOMを付け、Excel等でも日本語が文字化けしないようにする
-function buildCsv(videos, claims = loadClaims()) {
-  const header = ['id', 'title', 'cat', 'year', 'published', 'url', 'desc', '申立_曲名', '申立_歌手名'];
+function buildCsv(videos, claims = loadClaims(), spots = loadSpots()) {
+  const header = ['id', 'title', 'cat', 'year', 'published', 'url', 'desc', '申立_曲名', '申立_歌手名', '年齢', 'スポット名', '住所'];
   const rows = videos.map(v => {
     const list = claims[v.id] || [];
+    const spot = spots[v.id];
     return [
       v.id, v.title, v.cat, v.year, v.publishedAt, `https://www.youtube.com/watch?v=${v.id}`, v.desc,
       list.map(c => c.title).join(CLAIM_SEPARATOR),
       list.map(c => c.artist || '').join(CLAIM_SEPARATOR),
+      calcAge(v.publishedAt),
+      spot ? spot.spot : '',
+      placeOf(spot),
     ].map(csvCell).join(',');
   });
   return '\uFEFF' + [header.join(','), ...rows].join('\r\n') + '\r\n';
@@ -330,22 +356,29 @@ function writeCsvFile(videos) {
   console.log(`data/videos.csv を更新しました（${videos.length}件）`);
 }
 
-function formatEntry(v) {
+// 年齢・スポット名・住所は、あるものだけ末尾に足す（画面側は無ければ表示しない）
+function formatEntry(v, spots = loadSpots()) {
   const esc = s => JSON.stringify(s);
-  return `  { id:${esc(v.id)}, title:${esc(v.title)}, desc:${esc(v.desc)}, cat:${esc(v.cat)}, year:${v.year} },`;
+  const extra = [];
+  const age = calcAge(v.publishedAt);
+  if (age) extra.push(`age:${esc(age)}`);
+  const spot = spots[v.id];
+  if (spot) extra.push(`spot:${esc(spot.spot)}`, `place:${esc(placeOf(spot))}`);
+  return `  { id:${esc(v.id)}, title:${esc(v.title)}, desc:${esc(v.desc)}, cat:${esc(v.cat)}, year:${v.year}${extra.length ? ', ' + extra.join(', ') : ''} },`;
 }
 
 function updateIndexHtml(videos) {
   const html = fs.readFileSync(INDEX_PATH, 'utf8');
   const startIdx = html.indexOf(START_MARKER);
   const endIdx = html.indexOf(END_MARKER);
+  const spots = loadSpots();
   if (startIdx === -1 || endIdx === -1) {
     throw new Error(`index.html に ${START_MARKER} / ${END_MARKER} マーカーが見つかりません`);
   }
   const block = [
     START_MARKER,
     'const VIDEOS = [',
-    ...videos.map(formatEntry),
+    ...videos.map(v => formatEntry(v, spots)),
     '];',
     END_MARKER,
   ].join('\n');
@@ -403,4 +436,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { toJstDate, buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };
+module.exports = { toJstDate, calcAge, buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };

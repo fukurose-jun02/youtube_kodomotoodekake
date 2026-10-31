@@ -21,7 +21,9 @@ function SearchAuto({ value, onChange, videos }){
     if(!q) return [];
     const seen=new Set(),out=[];
     for(const v of videos){
-      if(v.title.toLowerCase().includes(q)&&!seen.has(v.title)){seen.add(v.title);out.push(v);}
+      // 題名に一致しなければ、スポット名・住所に一致したものを候補にする
+      const label=[v.title,v.spot,v.place].find(t=>t&&t.toLowerCase().includes(q));
+      if(label&&!seen.has(label)){seen.add(label);out.push({...v,label});}
       if(out.length>=6) break;
     }
     return out;
@@ -31,7 +33,7 @@ function SearchAuto({ value, onChange, videos }){
     if(e.nativeEvent.isComposing||e.keyCode===229) return;
     if(e.key==='ArrowDown'){e.preventDefault();setOpen(true);setHi(h=>Math.min(h+1,sugg.length-1));}
     else if(e.key==='ArrowUp'){e.preventDefault();setHi(h=>Math.max(h-1,-1));}
-    else if(e.key==='Enter'){ if(open&&hi>=0&&sugg[hi]){e.preventDefault();commit(sugg[hi].title);} else setOpen(false); }
+    else if(e.key==='Enter'){ if(open&&hi>=0&&sugg[hi]){e.preventDefault();commit(sugg[hi].label);} else setOpen(false); }
     else if(e.key==='Escape'){setOpen(false);setHi(-1);}
   };
   const mark=t=>{
@@ -68,9 +70,9 @@ function SearchAuto({ value, onChange, videos }){
           {sugg.map((v,i)=>(
             <li key={v.id} id={`sa-opt-${i}`} role="option" aria-selected={i===hi}
               className={`sa-opt${i===hi?' is-hi':''}`}
-              onMouseDown={e=>e.preventDefault()} onMouseEnter={()=>setHi(i)} onClick={()=>commit(v.title)}>
+              onMouseDown={e=>e.preventDefault()} onMouseEnter={()=>setHi(i)} onClick={()=>commit(v.label)}>
               <img src={`https://img.youtube.com/vi/${v.id}/default.jpg`} alt="" className="sa-thumb"/>
-              <span className="sa-title">{mark(v.title)}</span>
+              <span className="sa-title">{mark(v.label)}</span>
               <span className="sa-meta">{v.cat}・{v.year}</span>
             </li>
           ))}
