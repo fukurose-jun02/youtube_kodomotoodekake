@@ -22,5 +22,21 @@
     // チャットの1日の上限（1人あたり／サイト全体）。変えるときは、ここを直して再デプロイする
     "LIMIT_PER_IP": "15",
     "LIMIT_ALL": "50"
+  },
+  // PRのプレビュー用ビルド（npx wrangler preview）に必要な設定。
+  // プレビューのURLは、誰にも案内せず、秘密情報（GEMINI_API_KEY）も設定しないため、チャットは動かない（確認用の土台のみ）。
+  // 本番と同じD1を指しているが、プレビューからは回数の記録以外に使わない。
+  "previews": {
+    "vars": {
+      "GEMINI_MODEL": "gemini-3.1-flash-lite",
+      "LIMIT_PER_IP": "15",
+      "LIMIT_ALL": "50"
+    },
+    "d1_databases": [
+      {
+        "binding": "DB",
+        "database_id": "7ee81f5a-986e-4b7f-a2b4-564470e8df31"
+      }
+    ]
   }
 }
