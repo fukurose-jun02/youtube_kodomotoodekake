@@ -1,0 +1,901 @@
+{
+  "checkedAt": "2026-10-31",
+  "source": "YouTube Studio「申し立ての概要」（/video/{id}/claims）の画面から読み取り",
+  "note": "videos[id] が空配列＝申立なし。キーが無い動画は未確認。type: audio=音声 / melody=メロディーまたは歌詞。blocked=その申立で一部の地域でブロックされている",
+  "videos": {
+    "uWCytBpfemo": [
+      {
+        "title": "ユメクイ",
+        "artist": "大塚 愛",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "NYsoDZKk7jQ": [
+      {
+        "title": "The best boy (Remastered)",
+        "artist": "SUKIMASWITCH",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "pLxGgzyVVCc": [],
+    "7zuM1AqtA4o": [
+      {
+        "title": "Lilac",
+        "artist": "Mrs. GREEN APPLE",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "ABHEEq42nDo": [
+      {
+        "title": "夜の踊り子",
+        "artist": "サカナクション",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "mbD5CdEJs2Y": [
+      {
+        "title": "Kissshite",
+        "artist": "KOH+",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "MGVpFKMmqDY": [
+      {
+        "title": "Hot Limit",
+        "artist": "T.M.Revolution",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "KDX8SUUUr80": [
+      {
+        "title": "Me Gumino Hito",
+        "artist": "Rats & Star",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "N-Evs-rUe-o": [
+      {
+        "title": "Yattemiyou",
+        "artist": "WANIMA",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "E3J9DiUrQfQ": [
+      {
+        "title": "SIGNAL",
+        "artist": "WANIMA",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "BX19SBcbrCA": [
+      {
+        "title": "Anna and Elsa's Frozen Journey (Ride-Through Mix)",
+        "artist": "Tokyo DisneySea",
+        "type": "audio",
+        "blocked": true
+      },
+      {
+        "title": "Country Soul Train",
+        "artist": "The Texas Cowboy",
+        "type": "audio",
+        "blocked": false
+      },
+      {
+        "title": "Every Wish Deserves a Dream",
+        "artist": "MISIA",
+        "type": "audio",
+        "blocked": true
+      },
+      {
+        "title": "Rapunzel's Lantern Festival (Ride-Through Mix)",
+        "artist": null,
+        "type": "melody",
+        "blocked": false
+      },
+      {
+        "title": "Tokyo DisneySea Believe! Sea Of Dreams (Medley)",
+        "artist": "Tokyo DisneySea",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "9HNtjbE2Ss8": [
+      {
+        "title": "Pooh's Hunny Hunt *Ride-Through Mix (Tokyo Disneyland)",
+        "artist": "Tokyo Disneyland",
+        "type": "audio",
+        "blocked": false
+      },
+      {
+        "title": "B-A-Y-M-A-X",
+        "artist": "Tokyo Disneyland",
+        "type": "audio",
+        "blocked": false
+      },
+      {
+        "title": "KF013011_The_Royal_Castle-Dynamedion Music",
+        "artist": "Klangfreiheit / Sonic Liberty",
+        "type": "audio",
+        "blocked": false
+      },
+      {
+        "title": "Tokyo Disneyland Electrical Parade Dreamlights ~2017 Renewal Version~ (Edited Version)",
+        "artist": "Tokyo Disneyland",
+        "type": "audio",
+        "blocked": false
+      },
+      {
+        "title": "Jamboree Mickey!",
+        "artist": "Tokyo Disneyland",
+        "type": "audio",
+        "blocked": false
+      },
+      {
+        "title": "It's A Small World (Instrumental)",
+        "artist": null,
+        "type": "melody",
+        "blocked": false
+      },
+      {
+        "title": "Enchanted Tale of Beauty and the Beast (Ride-Through Mix)",
+        "artist": "Tokyo Disneyland",
+        "type": "audio",
+        "blocked": false
+      },
+      {
+        "title": "Tokyo Disneyland Electrical Parade DreamLights ~2011 Renewal Version~",
+        "artist": "Tokyo Disneyland",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "0Cn9h7P4xqc": [],
+    "b8AprslJKt8": [
+      {
+        "title": "ロケットペンギン",
+        "artist": null,
+        "type": "melody",
+        "blocked": false
+      },
+      {
+        "title": "火炎太鼓 〜The・祭り〜",
+        "artist": "山寺宏一",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "Sq25cNbPb_Q": [
+      {
+        "title": "Mela!",
+        "artist": "Ryokuoushoku Shakai",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "vOOYdMcfBXo": [
+      {
+        "title": "Happiness",
+        "artist": "嵐",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "M_xojYV87xg": [
+      {
+        "title": "Blue Bird",
+        "artist": "Ikimonogakari",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "i27Z_G6UcDE": [
+      {
+        "title": "悲しみなんて笑い飛ばせ",
+        "artist": "FUNKY MONKEY BABYS",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "MytyV9W7X_g": [
+      {
+        "title": "familie",
+        "artist": "Mrs. GREEN APPLE",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "MvGb9Opdh5U": [
+      {
+        "title": "アドベンチャー",
+        "artist": "YOASOBI",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "DZcKol6op80": [
+      {
+        "title": "拝啓、少年よ（2020.11.23 Live at 大阪城ホール）",
+        "artist": "Hump Back",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "vpi8q5zjA6I": [
+      {
+        "title": "Kono Hoshi no Tsuduki wo",
+        "artist": "KOBUKURO",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "ZcqUjiy82PE": [],
+    "mAS7SAnGu_k": [
+      {
+        "title": "Niji",
+        "artist": "Aqua Timez",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "nbJ5unhtvss": [],
+    "wyeDG4dDnqM": [
+      {
+        "title": "笑顔のおまじない",
+        "artist": "岡本真夜",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "jFuITu9glfY": [
+      {
+        "title": "Omaeno Kotosa (New Recording)",
+        "artist": "Ulfuls",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "1AncYm8MaE8": [],
+    "qPoDpqxY5gk": [
+      {
+        "title": "スイミー",
+        "artist": "Every Little Thing",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "FqtdxRH5rVg": [
+      {
+        "title": "気まぐれロマンティック",
+        "artist": "Ikimonogakari",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "cMK8fuAJNTg": [
+      {
+        "title": "はいよろこんで",
+        "artist": "Kocchi no Kento",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "h0_848YlNwk": [
+      {
+        "title": "ひとりじゃない",
+        "artist": "堂本剛",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "UUmYqewz86k": [],
+    "ox0t2PiO9ns": [
+      {
+        "title": "バナナくんたいそう (ニューバージョン)",
+        "artist": "Toshihiko Shinzawa",
+        "type": "audio",
+        "blocked": false
+      },
+      {
+        "title": "イカイカイルカ",
+        "artist": null,
+        "type": "melody",
+        "blocked": false
+      }
+    ],
+    "TMeI60c10Fk": [
+      {
+        "title": "Dance Hall",
+        "artist": "Mrs. GREEN APPLE",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "LwqfmfsPo8A": [
+      {
+        "title": "Minnagaminna Au (Full Version)",
+        "artist": "AI",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "GJFYVp9R7FE": [],
+    "J4q2SZ29600": [
+      {
+        "title": "Beautiful Fin",
+        "artist": "Spitz",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "lLPHj_QPZ5Y": [
+      {
+        "title": "rakuen babe",
+        "artist": "RIP SLYME",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "kuAfARRClkY": [
+      {
+        "title": "Harunohi",
+        "artist": "aimyon",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "p_SwyiSqo_s": [
+      {
+        "title": "波乗りジョニー [2022 Remaster]",
+        "artist": "桑田 佳祐",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "Wpds4mdrP7g": [
+      {
+        "title": "Ao To Natsu (Instrumental)",
+        "artist": "Mrs. GREEN APPLE",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "PMQQIThAEJQ": [],
+    "e53OgeuTk2c": [
+      {
+        "title": "三線の花 (カラオケ) (カラオケ)",
+        "artist": "BEGIN",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "7MIPROpqfBI": [],
+    "A2Du4bLR9c8": [
+      {
+        "title": "三線の花 (カラオケ) (カラオケ)",
+        "artist": "BEGIN",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "m5L6LvTuXXg": [
+      {
+        "title": "さくらんぼ",
+        "artist": "大塚 愛",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "-4cr0NCSCzM": [
+      {
+        "title": "Upside Down",
+        "artist": "Jack Johnson",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "LnMsZGVSqmY": [
+      {
+        "title": "虹",
+        "artist": "Masaki Suda",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "8iipQanlXnY": [],
+    "PNomK_iVBl0": [
+      {
+        "title": "Over Drive",
+        "artist": "Judy & Mary",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "kavQEhdpwv4": [
+      {
+        "title": "Sunny Day Sunday",
+        "artist": "Sentimental Bus",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "8eWp7QaLxf0": [],
+    "xY9-jK1q6ss": [],
+    "hEhw5jgmKzg": [
+      {
+        "title": "風になる",
+        "artist": "つじあやの",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "GyFUeR_07OM": [
+      {
+        "title": "トライ・エヴリシング (Dream Ami version)",
+        "artist": "Dream Ami",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "8qED0ONC1s0": [],
+    "0xpFFWRRPOA": [
+      {
+        "title": "Freedom",
+        "artist": "LOVE PSYCHEDELICO",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "1EM_AiFL_mQ": [
+      {
+        "title": "マーメイドラプソディー",
+        "artist": "SEKAI NO OWARI",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "xADSRCG8auI": [
+      {
+        "title": "Peaceful Piano",
+        "artist": "Ihor Vitsinskyy",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "6WIhPUPh6Aw": [],
+    "M1oPQJc4ZOg": [
+      {
+        "title": "Perfect Night",
+        "artist": "LE SSERAFIM",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "xhsvv2clFCk": [
+      {
+        "title": "All I Want For Christmas Is You (SuperFestive!)",
+        "artist": "Justin Bieber, Mariah Carey",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "BiceEPBppc0": [],
+    "5AuNHfpQA94": [
+      {
+        "title": "Jingle Bell Rock",
+        "artist": "Bobby Helms",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "xbXbV7rmDMs": [
+      {
+        "title": "Osaka Lover",
+        "artist": "DREAMS COME TRUE",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "rs-luj8TtXs": [],
+    "IdxdCtY2Kt0": [
+      {
+        "title": "Zoo (Single Version)",
+        "artist": "Echoes",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "bxZPollkhcs": [
+      {
+        "title": "RPG",
+        "artist": "SEKAI NO OWARI",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "Nq7VOD7cPaU": [
+      {
+        "title": "だんごむしたいそう",
+        "artist": "くまいもとこ",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "Gg1OGZfTwPY": [
+      {
+        "title": "金魚花火",
+        "artist": "大塚 愛",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "JgnA72OioPI": [
+      {
+        "title": "Yasashii Anoko",
+        "artist": "Spitz",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "a0prZN0vADw": [
+      {
+        "title": "Star Love Ration",
+        "artist": "Kerakera",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "WHNc-GPukdQ": [],
+    "UxIIkrqiWF8": [
+      {
+        "title": "Shake It Off (Taylor's Version)",
+        "artist": "Taylor Swift",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "IecUcbUXWak": [],
+    "KHCesxsEWwg": [
+      {
+        "title": "Ikenai Taiyou",
+        "artist": "ORANGE RANGE",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "Z5i6-Kjd3TQ": [
+      {
+        "title": "島人ぬ宝 (オリジナル・カラオケ) (オリジナル・カラオケ)",
+        "artist": "BEGIN",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "kAvbkuxH1EM": [
+      {
+        "title": "島人ぬ宝 (オリジナル・カラオケ) (オリジナル・カラオケ)",
+        "artist": "BEGIN",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "3sIsUZ-hwjM": [],
+    "j9JO95pAkO8": [],
+    "TB3jD75FBss": [
+      {
+        "title": "I'm a mess",
+        "artist": "MY FIRST STORY",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "DjTwTOux0zk": [
+      {
+        "title": "忘れないよ",
+        "artist": "D-51",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "qqTv2wkMlvg": [
+      {
+        "title": "いちご",
+        "artist": "ゆず",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "OtTn7lddDNM": [
+      {
+        "title": "SUN",
+        "artist": "星野 源",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "j669e5XfClA": [],
+    "jpG_Zcwk_tI": [
+      {
+        "title": "Slow & Easy [LP23]",
+        "artist": "平井 大",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "VS4g1aoZ-mQ": [],
+    "12GcfWttqDU": [
+      {
+        "title": "Whatever (Remastered)",
+        "artist": "Oasis",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "6HG9Gf8vBDY": [],
+    "pHUdcTF_23Q": [
+      {
+        "title": "I Want You Back (DJ LEAD Non Stop Version)",
+        "artist": "Jackson 5",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "RRZfdw27Vds": [],
+    "eGtTajQE-_4": [
+      {
+        "title": "Sakura",
+        "artist": "Ikimonogakari",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "AsncTRjb3ho": [
+      {
+        "title": "Beautiful (2017 Remaster)",
+        "artist": "Superfly",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "DbsBF49vxyU": [
+      {
+        "title": "jump",
+        "artist": "Every Little Thing",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "2J2ruYQARAU": [
+      {
+        "title": "三原色",
+        "artist": "YOASOBI",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "XlTaoaBk6zU": [],
+    "DZrudxcnOR0": [
+      {
+        "title": "Roar",
+        "artist": "Katy Perry",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "QNUHug7TtU8": [
+      {
+        "title": "Suiheisen (Live at NISSAN STADIUM, 2026)",
+        "artist": "back number",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "x61q6hl7xb8": [
+      {
+        "title": "Egao",
+        "artist": "Ikimonogakari",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "0HYu3ZRt4R8": [],
+    "j9QAuw0LP60": [],
+    "cqIlCdhwmpg": [
+      {
+        "title": "Yattemiyou",
+        "artist": "WANIMA",
+        "type": "audio",
+        "blocked": true
+      }
+    ],
+    "cJstEfdNlIk": [
+      {
+        "title": "夏の思い出",
+        "artist": "ケツメイシ",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "8F6h0cfGGIY": [
+      {
+        "title": "100万回の「I love you」 -Re-edit Ver.-",
+        "artist": "FUKI",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "2S3BSH-qw4g": [
+      {
+        "title": "大好き",
+        "artist": "大原 櫻子",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "r4ZC4sF5ZVw": [],
+    "Cbp02qBpqTk": [],
+    "sXHUBFroiSs": [],
+    "QQvgNEsJnz8": [
+      {
+        "title": "誕生日",
+        "artist": "Anri Kumaki",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "5jvmO1Y6_GA": [
+      {
+        "title": "Alcon Sleeping Giant - One Second",
+        "artist": "Nicholas George (BMI) (MR)",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "x7sXCSjag4Q": [],
+    "ctLQCTnebMM": [],
+    "oOlVkJ1fDH0": [],
+    "taEKZVy-FRQ": [],
+    "dVNbXDEe3nw": [],
+    "TsJU5CJh5ao": [],
+    "F7NBY2WIQOU": [],
+    "WDeGWOQmnM0": [],
+    "q9oJ-45ulAc": [
+      {
+        "title": "Happiness",
+        "artist": "AI",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "IS2N7ofCjeo": [
+      {
+        "title": "オワリはじまり",
+        "artist": "かりゆし58",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "2G78EEZILYs": [
+      {
+        "title": "115万キロのフィルム",
+        "artist": "Official髭男dism",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "awFJ3lpV3LI": [],
+    "VLeVnq2skfU": [],
+    "e5MzX9oVvqU": [
+      {
+        "title": "アンマー",
+        "artist": "かりゆし58",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "V2UzOPOZd4A": [],
+    "CpAvGcuNJH8": [
+      {
+        "title": "たしかなこと",
+        "artist": "J-JUN",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "bHHkilE3cuI": [],
+    "xwqGieYEgdQ": [],
+    "P6x_dBdYG1c": [],
+    "fd0t7wsQEbg": [],
+    "E_Y4N0OKkwk": [],
+    "Gb-mqfSYPjk": [
+      {
+        "title": "終わりなき旅",
+        "artist": "Mr.Children",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "MpDOC1tSwwY": [],
+    "zlcI0iAuvBw": [
+      {
+        "title": "家族になろうよ",
+        "artist": "広橋真紀子",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "lTuwiYgiRkw": [
+      {
+        "title": "ありがとう(オルゴール)",
+        "artist": null,
+        "type": "melody",
+        "blocked": false
+      },
+      {
+        "title": "Arigatou",
+        "artist": null,
+        "type": "melody",
+        "blocked": false
+      }
+    ],
+    "FD0t4sj7mf8": [],
+    "EG8kj67IjyU": [
+      {
+        "title": "SMILE〜晴れ渡る空のように〜",
+        "artist": "桑田佳祐",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "YeRjzPpk0js": [],
+    "WrKBJQkPu0Q": [],
+    "_ixtealK7p0": [],
+    "ggfqfl_YQHc": [
+      {
+        "title": "Kiseki",
+        "artist": "MINMI",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "L3M_Zpqqgqc": [
+      {
+        "title": "GIFT",
+        "artist": "Mr.Children",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "x5WAZFj01yo": [],
+    "dp3eFRUL3eE": [],
+    "2xhiQUMI5lk": [],
+    "TET2xoQAaRI": [],
+    "LhCIxg4sy68": [],
+    "bHHimTw-z0o": [
+      {
+        "title": "アンマー",
+        "artist": "かりゆし58",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "t8eygMA2oeU": [
+      {
+        "title": "Superbloom",
+        "artist": "Ralph",
+        "type": "audio",
+        "blocked": false
+      }
+    ],
+    "C-f-3ni7yj8": [],
+    "PR5AQcCkY-A": []
+  }
+}
