@@ -1,0 +1,282 @@
+{
+  "checkedAt": "2026-10-31",
+  "source": "題名・説明文と施設の公式／旅行情報サイトから調べて手で整理",
+  "note": "videos[id] にスポット名・県・市区町村。キーが無い動画は対象外または確認待ち",
+  "videos": {
+    "NYsoDZKk7jQ": {
+      "spot": "関西サイクルスポーツセンター",
+      "pref": "大阪府",
+      "city": "河内長野市"
+    },
+    "7zuM1AqtA4o": {
+      "spot": "ブルーメの丘",
+      "pref": "滋賀県",
+      "city": "日野町"
+    },
+    "ABHEEq42nDo": {
+      "spot": "東条湖おもちゃ王国",
+      "pref": "兵庫県",
+      "city": "加東市"
+    },
+    "mbD5CdEJs2Y": {
+      "spot": "バンドー神戸青少年科学館",
+      "pref": "兵庫県",
+      "city": "神戸市中央区"
+    },
+    "MGVpFKMmqDY": {
+      "spot": "太陽が丘プール（山城総合運動公園）",
+      "pref": "京都府",
+      "city": "宇治市"
+    },
+    "KDX8SUUUr80": {
+      "spot": "南郷水産センター",
+      "pref": "滋賀県",
+      "city": "大津市"
+    },
+    "N-Evs-rUe-o": {
+      "spot": "おやつタウン",
+      "pref": "三重県",
+      "city": "津市"
+    },
+    "E3J9DiUrQfQ": {
+      "spot": "鈴鹿サーキット",
+      "pref": "三重県",
+      "city": "鈴鹿市"
+    },
+    "Sq25cNbPb_Q": {
+      "spot": "山田池公園",
+      "pref": "大阪府",
+      "city": "枚方市"
+    },
+    "vOOYdMcfBXo": {
+      "spot": "KIRI no KO",
+      "pref": "京都府",
+      "city": "亀岡市"
+    },
+    "M_xojYV87xg": {
+      "spot": "萩谷総合公園",
+      "pref": "大阪府",
+      "city": "高槻市"
+    },
+    "i27Z_G6UcDE": {
+      "spot": "ひまわりの丘公園",
+      "pref": "兵庫県",
+      "city": "小野市"
+    },
+    "MytyV9W7X_g": {
+      "spot": "丹波自然運動公園",
+      "pref": "京都府",
+      "city": "京丹波町"
+    },
+    "MvGb9Opdh5U": {
+      "spot": "萩谷総合公園",
+      "pref": "大阪府",
+      "city": "高槻市"
+    },
+    "vpi8q5zjA6I": {
+      "spot": "大阪・関西万博",
+      "pref": "大阪府",
+      "city": "大阪市此花区"
+    },
+    "ZcqUjiy82PE": {
+      "spot": "服部緑地ウォーターランド",
+      "pref": "大阪府",
+      "city": "豊中市"
+    },
+    "mAS7SAnGu_k": {
+      "spot": "アマラーゴ（尼崎スポーツの森）",
+      "pref": "兵庫県",
+      "city": "尼崎市"
+    },
+    "wyeDG4dDnqM": {
+      "spot": "おやつタウン",
+      "pref": "三重県",
+      "city": "津市"
+    },
+    "jFuITu9glfY": {
+      "spot": "鈴鹿サーキット",
+      "pref": "三重県",
+      "city": "鈴鹿市"
+    },
+    "FqtdxRH5rVg": {
+      "spot": "キッズプラザ大阪",
+      "pref": "大阪府",
+      "city": "大阪市北区"
+    },
+    "cMK8fuAJNTg": {
+      "spot": "福知山児童館",
+      "pref": "京都府",
+      "city": "福知山市"
+    },
+    "h0_848YlNwk": {
+      "spot": "関西サイクルスポーツセンター",
+      "pref": "大阪府",
+      "city": "河内長野市"
+    },
+    "TMeI60c10Fk": {
+      "spot": "神戸フルーツ・フラワーパーク",
+      "pref": "兵庫県",
+      "city": "神戸市北区"
+    },
+    "LwqfmfsPo8A": {
+      "spot": "けいはんな記念公園",
+      "pref": "京都府",
+      "city": "精華町"
+    },
+    "J4q2SZ29600": {
+      "spot": "八幡市スポーツ公園",
+      "pref": "京都府",
+      "city": "八幡市"
+    },
+    "p_SwyiSqo_s": {
+      "spot": "かめプー（亀岡運動公園プール）",
+      "pref": "京都府",
+      "city": "亀岡市"
+    },
+    "Wpds4mdrP7g": {
+      "spot": "デカパトス",
+      "pref": "兵庫県",
+      "city": "神戸市東灘区"
+    },
+    "-4cr0NCSCzM": {
+      "spot": "ユニバーサル・スタジオ・ジャパン",
+      "pref": "大阪府",
+      "city": "大阪市此花区"
+    },
+    "PNomK_iVBl0": {
+      "spot": "二色の浜",
+      "pref": "大阪府",
+      "city": "貝塚市"
+    },
+    "xY9-jK1q6ss": {
+      "spot": "アドベンチャーワールド",
+      "pref": "和歌山県",
+      "city": "白浜町"
+    },
+    "hEhw5jgmKzg": {
+      "spot": "大宮交通公園",
+      "pref": "京都府",
+      "city": "京都市北区"
+    },
+    "GyFUeR_07OM": {
+      "spot": "神戸どうぶつ王国",
+      "pref": "兵庫県",
+      "city": "神戸市中央区"
+    },
+    "0xpFFWRRPOA": {
+      "spot": "鳥取砂丘",
+      "pref": "鳥取県",
+      "city": "鳥取市"
+    },
+    "1EM_AiFL_mQ": {
+      "spot": "城崎温泉",
+      "pref": "兵庫県",
+      "city": "豊岡市"
+    },
+    "xbXbV7rmDMs": {
+      "spot": "天王寺動物園",
+      "pref": "大阪府",
+      "city": "大阪市天王寺区"
+    },
+    "IdxdCtY2Kt0": {
+      "spot": "王子動物園",
+      "pref": "兵庫県",
+      "city": "神戸市灘区"
+    },
+    "bxZPollkhcs": {
+      "spot": "東条湖おもちゃ王国",
+      "pref": "兵庫県",
+      "city": "加東市"
+    },
+    "Gg1OGZfTwPY": {
+      "spot": "金魚ミュージアム",
+      "pref": "奈良県",
+      "city": "奈良市"
+    },
+    "a0prZN0vADw": {
+      "spot": "ブルーメの丘",
+      "pref": "滋賀県",
+      "city": "日野町"
+    },
+    "UxIIkrqiWF8": {
+      "spot": "服部緑地ウォーターランド",
+      "pref": "大阪府",
+      "city": "豊中市"
+    },
+    "KHCesxsEWwg": {
+      "spot": "太陽が丘プール（山城総合運動公園）",
+      "pref": "京都府",
+      "city": "宇治市"
+    },
+    "TB3jD75FBss": {
+      "spot": "神戸アンパンマンこどもミュージアム",
+      "pref": "兵庫県",
+      "city": "神戸市中央区"
+    },
+    "OtTn7lddDNM": {
+      "spot": "山城総合運動公園（太陽が丘）",
+      "pref": "京都府",
+      "city": "宇治市"
+    },
+    "12GcfWttqDU": {
+      "spot": "海遊館",
+      "pref": "大阪府",
+      "city": "大阪市港区"
+    },
+    "6HG9Gf8vBDY": {
+      "spot": "生駒山上遊園地",
+      "pref": "奈良県",
+      "city": "生駒市"
+    },
+    "pHUdcTF_23Q": {
+      "spot": "京都市動物園",
+      "pref": "京都府",
+      "city": "京都市左京区"
+    },
+    "AsncTRjb3ho": {
+      "spot": "伊丹スカイパーク",
+      "pref": "兵庫県",
+      "city": "伊丹市"
+    },
+    "DbsBF49vxyU": {
+      "spot": "宝ヶ池公園",
+      "pref": "京都府",
+      "city": "京都市左京区"
+    },
+    "DZrudxcnOR0": {
+      "spot": "神戸どうぶつ王国",
+      "pref": "兵庫県",
+      "city": "神戸市中央区"
+    },
+    "QNUHug7TtU8": {
+      "spot": "ニフレル",
+      "pref": "大阪府",
+      "city": "吹田市"
+    },
+    "cJstEfdNlIk": {
+      "spot": "宮津プール",
+      "pref": "京都府",
+      "city": "宮津市"
+    },
+    "taEKZVy-FRQ": {
+      "spot": "京都府立植物園",
+      "pref": "京都府",
+      "city": "京都市左京区"
+    },
+    "V2UzOPOZd4A": {
+      "spot": "宝ヶ池公園",
+      "pref": "京都府",
+      "city": "京都市左京区"
+    },
+    "bHHkilE3cuI": {
+      "spot": "安満遺跡公園",
+      "pref": "大阪府",
+      "city": "高槻市"
+    },
+    "P6x_dBdYG1c": {
+      "spot": "梅小路公園",
+      "pref": "京都府",
+      "city": "京都市下京区"
+    }
+  }
+}
