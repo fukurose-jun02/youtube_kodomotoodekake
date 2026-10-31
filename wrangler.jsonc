@@ -13,8 +13,7 @@
     {
       "binding": "DB",
       "database_name": "kodomo-odekake-chat",
-      // 手順: npx wrangler d1 create kodomo-odekake-chat で作成し、表示されたIDに置き換える（マージ前に必須）
-      "database_id": "REPLACE_WITH_REAL_DATABASE_ID",
+      "database_id": "7ee81f5a-986e-4b7f-a2b4-564470e8df31",
       "migrations_dir": "migrations"
     }
   ],
