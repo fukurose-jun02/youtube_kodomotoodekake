@@ -5,7 +5,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-10-12"
+    "publishedAt": "2026-10-12",
+    "duration": "PT5M11S"
   },
   {
     "id": "NYsoDZKk7jQ",
@@ -13,7 +14,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-10-04"
+    "publishedAt": "2026-10-04",
+    "duration": "PT4M18S"
   },
   {
     "id": "pLxGgzyVVCc",
@@ -21,7 +23,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2026,
-    "publishedAt": "2026-09-23"
+    "publishedAt": "2026-09-23",
+    "duration": "PT24M59S"
   },
   {
     "id": "7zuM1AqtA4o",
@@ -29,7 +32,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2026,
-    "publishedAt": "2026-09-23"
+    "publishedAt": "2026-09-23",
+    "duration": "PT4M49S"
   },
   {
     "id": "ABHEEq42nDo",
@@ -37,7 +41,8 @@
     "desc": "",
     "cat": "プール",
     "year": 2026,
-    "publishedAt": "2026-08-30"
+    "publishedAt": "2026-08-30",
+    "duration": "PT4M53S"
   },
   {
     "id": "mbD5CdEJs2Y",
@@ -45,7 +50,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-08-19"
+    "publishedAt": "2026-08-19",
+    "duration": "PT3M36S"
   },
   {
     "id": "MGVpFKMmqDY",
@@ -53,7 +59,8 @@
     "desc": "",
     "cat": "プール",
     "year": 2026,
-    "publishedAt": "2026-08-02"
+    "publishedAt": "2026-08-02",
+    "duration": "PT3M38S"
   },
   {
     "id": "KDX8SUUUr80",
@@ -61,7 +68,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-07-20"
+    "publishedAt": "2026-07-20",
+    "duration": "PT3M14S"
   },
   {
     "id": "N-Evs-rUe-o",
@@ -69,7 +77,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-07-20"
+    "publishedAt": "2026-07-20",
+    "duration": "PT2M40S"
   },
   {
     "id": "E3J9DiUrQfQ",
@@ -77,7 +86,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-07-18"
+    "publishedAt": "2026-07-18",
+    "duration": "PT3M38S"
   },
   {
     "id": "BX19SBcbrCA",
@@ -85,7 +95,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2026,
-    "publishedAt": "2026-07-18"
+    "publishedAt": "2026-07-18",
+    "duration": "PT58M12S"
   },
   {
     "id": "9HNtjbE2Ss8",
@@ -93,7 +104,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2026,
-    "publishedAt": "2026-07-06"
+    "publishedAt": "2026-07-06",
+    "duration": "PT1H8M59S"
   },
   {
     "id": "0Cn9h7P4xqc",
@@ -101,7 +113,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2026,
-    "publishedAt": "2026-06-01"
+    "publishedAt": "2026-06-01",
+    "duration": "PT9M10S"
   },
   {
     "id": "b8AprslJKt8",
@@ -109,7 +122,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2026,
-    "publishedAt": "2026-04-11"
+    "publishedAt": "2026-04-11",
+    "duration": "PT16M18S"
   },
   {
     "id": "Sq25cNbPb_Q",
@@ -117,7 +131,8 @@
     "desc": "大阪府枚方市にある約73.7ヘクタールの広大な府営の公園。野原でたくさん駆け回ったよ",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-04-11"
+    "publishedAt": "2026-04-11",
+    "duration": "PT3M21S"
   },
   {
     "id": "vOOYdMcfBXo",
@@ -125,7 +140,8 @@
     "desc": "京都府亀岡市の「サンガスタジアム by KYOCERA」内にある、木のぬくもりを活かした全天候型の屋内遊び場KIRI no KO（きりのこ）に行ってきたよ",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-03-01"
+    "publishedAt": "2026-03-01",
+    "duration": "PT4M14S"
   },
   {
     "id": "M_xojYV87xg",
@@ -133,7 +149,8 @@
     "desc": "高槻市になる通称（キツネ公園）に行ってきたよ",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-02-23"
+    "publishedAt": "2026-02-23",
+    "duration": "PT3M21S"
   },
   {
     "id": "i27Z_G6UcDE",
@@ -141,7 +158,8 @@
     "desc": "兵庫県小野市に広大な公園。関西最大級のひまわりタワーは4階建てで、めちゃ楽しかったよ",
     "cat": "おでかけ",
     "year": 2026,
-    "publishedAt": "2026-01-17"
+    "publishedAt": "2026-01-17",
+    "duration": "PT4M37S"
   },
   {
     "id": "MytyV9W7X_g",
@@ -149,7 +167,8 @@
     "desc": "京丹波町にある豊かな自然に囲まれた広大な公園。45mのジャイアントスライダーは何回も滑ったよ",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-12-21"
+    "publishedAt": "2025-12-21",
+    "duration": "PT3M43S"
   },
   {
     "id": "MvGb9Opdh5U",
@@ -157,7 +176,8 @@
     "desc": "紗良とお父さん二人で高槻市にある大きな公園へ行ってきたよ",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-12-08"
+    "publishedAt": "2025-12-08",
+    "duration": "PT3M21S"
   },
   {
     "id": "DZcKol6op80",
@@ -165,7 +185,8 @@
     "desc": "幹太、咲ちゃんといっしょにキッザニアデビューしたよ",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-10-16"
+    "publishedAt": "2025-10-16",
+    "duration": "PT3M9S"
   },
   {
     "id": "vpi8q5zjA6I",
@@ -173,7 +194,8 @@
     "desc": "何度もスケジュールを変更した万博！世界の”いま”を感じるチャンス。いくぞ、万博。",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-08-31"
+    "publishedAt": "2025-08-31",
+    "duration": "PT2M29S"
   },
   {
     "id": "ZcqUjiy82PE",
@@ -181,7 +203,8 @@
     "desc": "",
     "cat": "プール",
     "year": 2025,
-    "publishedAt": "2025-08-13"
+    "publishedAt": "2025-08-13",
+    "duration": "PT3M59S"
   },
   {
     "id": "mAS7SAnGu_k",
@@ -189,7 +212,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-07-31"
+    "publishedAt": "2025-07-31",
+    "duration": "PT4M56S"
   },
   {
     "id": "nbJ5unhtvss",
@@ -197,7 +221,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2025,
-    "publishedAt": "2025-07-13"
+    "publishedAt": "2025-07-13",
+    "duration": "PT4M46S"
   },
   {
     "id": "wyeDG4dDnqM",
@@ -205,7 +230,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-03-02"
+    "publishedAt": "2025-03-02",
+    "duration": "PT4M56S"
   },
   {
     "id": "jFuITu9glfY",
@@ -213,7 +239,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-03-02"
+    "publishedAt": "2025-03-02",
+    "duration": "PT3M28S"
   },
   {
     "id": "1AncYm8MaE8",
@@ -221,7 +248,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2025,
-    "publishedAt": "2025-03-02"
+    "publishedAt": "2025-03-02",
+    "duration": "PT16M34S"
   },
   {
     "id": "qPoDpqxY5gk",
@@ -229,7 +257,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2025,
-    "publishedAt": "2025-02-16"
+    "publishedAt": "2025-02-16",
+    "duration": "PT3M11S"
   },
   {
     "id": "FqtdxRH5rVg",
@@ -237,7 +266,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-02-15"
+    "publishedAt": "2025-02-15",
+    "duration": "PT3M45S"
   },
   {
     "id": "cMK8fuAJNTg",
@@ -245,7 +275,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2025,
-    "publishedAt": "2025-01-07"
+    "publishedAt": "2025-01-07",
+    "duration": "PT2M35S"
   },
   {
     "id": "h0_848YlNwk",
@@ -253,7 +284,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-11-05"
+    "publishedAt": "2024-11-05",
+    "duration": "PT3M46S"
   },
   {
     "id": "UUmYqewz86k",
@@ -261,7 +293,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2024,
-    "publishedAt": "2024-10-19"
+    "publishedAt": "2024-10-19",
+    "duration": "PT18M13S"
   },
   {
     "id": "ox0t2PiO9ns",
@@ -269,7 +302,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2024,
-    "publishedAt": "2024-10-19"
+    "publishedAt": "2024-10-19",
+    "duration": "PT12M44S"
   },
   {
     "id": "TMeI60c10Fk",
@@ -277,7 +311,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-10-14"
+    "publishedAt": "2024-10-14",
+    "duration": "PT3M14S"
   },
   {
     "id": "LwqfmfsPo8A",
@@ -285,7 +320,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-10-06"
+    "publishedAt": "2024-10-06",
+    "duration": "PT2M58S"
   },
   {
     "id": "GJFYVp9R7FE",
@@ -293,7 +329,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2024,
-    "publishedAt": "2024-10-01"
+    "publishedAt": "2024-10-01",
+    "duration": "PT15M59S"
   },
   {
     "id": "J4q2SZ29600",
@@ -301,7 +338,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-09-29"
+    "publishedAt": "2024-09-29",
+    "duration": "PT2M56S"
   },
   {
     "id": "lLPHj_QPZ5Y",
@@ -309,7 +347,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2024,
-    "publishedAt": "2024-09-18"
+    "publishedAt": "2024-09-18",
+    "duration": "PT4M32S"
   },
   {
     "id": "kuAfARRClkY",
@@ -317,7 +356,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2024,
-    "publishedAt": "2024-09-10"
+    "publishedAt": "2024-09-10",
+    "duration": "PT5M18S"
   },
   {
     "id": "p_SwyiSqo_s",
@@ -325,7 +365,8 @@
     "desc": "",
     "cat": "プール",
     "year": 2024,
-    "publishedAt": "2024-08-25"
+    "publishedAt": "2024-08-25",
+    "duration": "PT4M22S"
   },
   {
     "id": "Wpds4mdrP7g",
@@ -333,7 +374,8 @@
     "desc": "",
     "cat": "プール",
     "year": 2024,
-    "publishedAt": "2024-08-19"
+    "publishedAt": "2024-08-19",
+    "duration": "PT4M29S"
   },
   {
     "id": "PMQQIThAEJQ",
@@ -341,7 +383,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2024,
-    "publishedAt": "2024-08-13"
+    "publishedAt": "2024-08-13",
+    "duration": "PT37S"
   },
   {
     "id": "e53OgeuTk2c",
@@ -349,7 +392,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2024,
-    "publishedAt": "2024-07-30"
+    "publishedAt": "2024-07-30",
+    "duration": "PT4M19S"
   },
   {
     "id": "7MIPROpqfBI",
@@ -357,7 +401,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2024,
-    "publishedAt": "2024-07-22"
+    "publishedAt": "2024-07-22",
+    "duration": "PT17M13S"
   },
   {
     "id": "A2Du4bLR9c8",
@@ -365,7 +410,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2024,
-    "publishedAt": "2024-07-21"
+    "publishedAt": "2024-07-21",
+    "duration": "PT1H14M3S"
   },
   {
     "id": "m5L6LvTuXXg",
@@ -373,7 +419,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2024,
-    "publishedAt": "2024-06-26"
+    "publishedAt": "2024-06-26",
+    "duration": "PT3M17S"
   },
   {
     "id": "-4cr0NCSCzM",
@@ -381,7 +428,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-06-23"
+    "publishedAt": "2024-06-23",
+    "duration": "PT3M15S"
   },
   {
     "id": "LnMsZGVSqmY",
@@ -389,7 +437,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2024,
-    "publishedAt": "2024-06-14"
+    "publishedAt": "2024-06-14",
+    "duration": "PT4M15S"
   },
   {
     "id": "8iipQanlXnY",
@@ -397,7 +446,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2024,
-    "publishedAt": "2024-05-24"
+    "publishedAt": "2024-05-24",
+    "duration": "PT9M27S"
   },
   {
     "id": "PNomK_iVBl0",
@@ -405,7 +455,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-05-06"
+    "publishedAt": "2024-05-06",
+    "duration": "PT3M56S"
   },
   {
     "id": "kavQEhdpwv4",
@@ -413,7 +464,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-05-05"
+    "publishedAt": "2024-05-05",
+    "duration": "PT2M19S"
   },
   {
     "id": "8eWp7QaLxf0",
@@ -421,7 +473,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2024,
-    "publishedAt": "2024-05-01"
+    "publishedAt": "2024-05-01",
+    "duration": "PT37S"
   },
   {
     "id": "xY9-jK1q6ss",
@@ -429,7 +482,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-04-30"
+    "publishedAt": "2024-04-30",
+    "duration": "PT3M41S"
   },
   {
     "id": "hEhw5jgmKzg",
@@ -437,7 +491,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-04-21"
+    "publishedAt": "2024-04-21",
+    "duration": "PT3M6S"
   },
   {
     "id": "GyFUeR_07OM",
@@ -445,7 +500,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-03-03"
+    "publishedAt": "2024-03-03",
+    "duration": "PT3M16S"
   },
   {
     "id": "8qED0ONC1s0",
@@ -453,7 +509,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2024,
-    "publishedAt": "2024-02-23"
+    "publishedAt": "2024-02-23",
+    "duration": "PT8M57S"
   },
   {
     "id": "0xpFFWRRPOA",
@@ -461,7 +518,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2024,
-    "publishedAt": "2024-02-15"
+    "publishedAt": "2024-02-15",
+    "duration": "PT4M29S"
   },
   {
     "id": "1EM_AiFL_mQ",
@@ -469,7 +527,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2024,
-    "publishedAt": "2024-02-13"
+    "publishedAt": "2024-02-13",
+    "duration": "PT4M52S"
   },
   {
     "id": "xADSRCG8auI",
@@ -477,7 +536,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2024,
-    "publishedAt": "2024-02-06"
+    "publishedAt": "2024-02-06",
+    "duration": "PT37S"
   },
   {
     "id": "6WIhPUPh6Aw",
@@ -485,7 +545,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2024,
-    "publishedAt": "2024-02-06"
+    "publishedAt": "2024-02-06",
+    "duration": "PT11M57S"
   },
   {
     "id": "M1oPQJc4ZOg",
@@ -493,7 +554,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2024,
-    "publishedAt": "2024-01-21"
+    "publishedAt": "2024-01-21",
+    "duration": "PT2M40S"
   },
   {
     "id": "xhsvv2clFCk",
@@ -501,7 +563,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-12-24"
+    "publishedAt": "2023-12-24",
+    "duration": "PT3M48S"
   },
   {
     "id": "BiceEPBppc0",
@@ -509,7 +572,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-12-12"
+    "publishedAt": "2023-12-12",
+    "duration": "PT5M44S"
   },
   {
     "id": "5AuNHfpQA94",
@@ -517,7 +581,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-12-10"
+    "publishedAt": "2023-12-10",
+    "duration": "PT2M11S"
   },
   {
     "id": "xbXbV7rmDMs",
@@ -525,7 +590,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-11-23"
+    "publishedAt": "2023-11-23",
+    "duration": "PT4M15S"
   },
   {
     "id": "rs-luj8TtXs",
@@ -533,7 +599,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-11-13"
+    "publishedAt": "2023-11-13",
+    "duration": "PT37S"
   },
   {
     "id": "IdxdCtY2Kt0",
@@ -541,7 +608,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-11-13"
+    "publishedAt": "2023-11-13",
+    "duration": "PT4M54S"
   },
   {
     "id": "bxZPollkhcs",
@@ -549,7 +617,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-11-06"
+    "publishedAt": "2023-11-06",
+    "duration": "PT4M44S"
   },
   {
     "id": "Nq7VOD7cPaU",
@@ -557,7 +626,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2023,
-    "publishedAt": "2023-11-06"
+    "publishedAt": "2023-11-06",
+    "duration": "PT15M8S"
   },
   {
     "id": "Gg1OGZfTwPY",
@@ -565,7 +635,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-10-16"
+    "publishedAt": "2023-10-16",
+    "duration": "PT4M16S"
   },
   {
     "id": "JgnA72OioPI",
@@ -573,7 +644,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-09-24"
+    "publishedAt": "2023-09-24",
+    "duration": "PT3M12S"
   },
   {
     "id": "a0prZN0vADw",
@@ -581,7 +653,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-09-03"
+    "publishedAt": "2023-09-03",
+    "duration": "PT3M11S"
   },
   {
     "id": "WHNc-GPukdQ",
@@ -589,7 +662,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-08-29"
+    "publishedAt": "2023-08-29",
+    "duration": "PT53S"
   },
   {
     "id": "UxIIkrqiWF8",
@@ -597,7 +671,8 @@
     "desc": "",
     "cat": "プール",
     "year": 2023,
-    "publishedAt": "2023-08-26"
+    "publishedAt": "2023-08-26",
+    "duration": "PT3M12S"
   },
   {
     "id": "IecUcbUXWak",
@@ -605,7 +680,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-08-01"
+    "publishedAt": "2023-08-01",
+    "duration": "PT37S"
   },
   {
     "id": "KHCesxsEWwg",
@@ -613,7 +689,8 @@
     "desc": "",
     "cat": "プール",
     "year": 2023,
-    "publishedAt": "2023-07-28"
+    "publishedAt": "2023-07-28",
+    "duration": "PT3M58S"
   },
   {
     "id": "Z5i6-Kjd3TQ",
@@ -621,7 +698,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2023,
-    "publishedAt": "2023-07-24"
+    "publishedAt": "2023-07-24",
+    "duration": "PT5M18S"
   },
   {
     "id": "kAvbkuxH1EM",
@@ -629,7 +707,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2023,
-    "publishedAt": "2023-07-23"
+    "publishedAt": "2023-07-23",
+    "duration": "PT12M57S"
   },
   {
     "id": "3sIsUZ-hwjM",
@@ -637,7 +716,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2023,
-    "publishedAt": "2023-07-23"
+    "publishedAt": "2023-07-23",
+    "duration": "PT24M12S"
   },
   {
     "id": "j9JO95pAkO8",
@@ -645,7 +725,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2023,
-    "publishedAt": "2023-07-18"
+    "publishedAt": "2023-07-18",
+    "duration": "PT11M34S"
   },
   {
     "id": "TB3jD75FBss",
@@ -653,7 +734,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-06-29"
+    "publishedAt": "2023-06-29",
+    "duration": "PT4M19S"
   },
   {
     "id": "DjTwTOux0zk",
@@ -661,7 +743,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-06-29"
+    "publishedAt": "2023-06-29",
+    "duration": "PT3M39S"
   },
   {
     "id": "qqTv2wkMlvg",
@@ -669,7 +752,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2023,
-    "publishedAt": "2023-06-03"
+    "publishedAt": "2023-06-03",
+    "duration": "PT2M25S"
   },
   {
     "id": "OtTn7lddDNM",
@@ -677,7 +761,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-05-31"
+    "publishedAt": "2023-05-31",
+    "duration": "PT2M3S"
   },
   {
     "id": "j669e5XfClA",
@@ -685,7 +770,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2023,
-    "publishedAt": "2023-05-16"
+    "publishedAt": "2023-05-16",
+    "duration": "PT7M29S"
   },
   {
     "id": "jpG_Zcwk_tI",
@@ -693,7 +779,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-05-09"
+    "publishedAt": "2023-05-09",
+    "duration": "PT3M36S"
   },
   {
     "id": "VS4g1aoZ-mQ",
@@ -701,7 +788,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-05-08"
+    "publishedAt": "2023-05-08",
+    "duration": "PT37S"
   },
   {
     "id": "12GcfWttqDU",
@@ -709,7 +797,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-04-30"
+    "publishedAt": "2023-04-30",
+    "duration": "PT3M"
   },
   {
     "id": "6HG9Gf8vBDY",
@@ -717,7 +806,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-04-27"
+    "publishedAt": "2023-04-27",
+    "duration": "PT9M26S"
   },
   {
     "id": "pHUdcTF_23Q",
@@ -725,7 +815,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-04-10"
+    "publishedAt": "2023-04-10",
+    "duration": "PT2M13S"
   },
   {
     "id": "RRZfdw27Vds",
@@ -733,7 +824,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-04-04"
+    "publishedAt": "2023-04-04",
+    "duration": "PT5M23S"
   },
   {
     "id": "eGtTajQE-_4",
@@ -741,7 +833,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-03-26"
+    "publishedAt": "2023-03-26",
+    "duration": "PT2M32S"
   },
   {
     "id": "AsncTRjb3ho",
@@ -749,7 +842,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-03-20"
+    "publishedAt": "2023-03-20",
+    "duration": "PT2M45S"
   },
   {
     "id": "DbsBF49vxyU",
@@ -757,7 +851,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-03-12"
+    "publishedAt": "2023-03-12",
+    "duration": "PT2M45S"
   },
   {
     "id": "2J2ruYQARAU",
@@ -765,7 +860,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-02-26"
+    "publishedAt": "2023-02-26",
+    "duration": "PT2M40S"
   },
   {
     "id": "XlTaoaBk6zU",
@@ -773,7 +869,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-02-11"
+    "publishedAt": "2023-02-11",
+    "duration": "PT1M12S"
   },
   {
     "id": "DZrudxcnOR0",
@@ -781,7 +878,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-01-29"
+    "publishedAt": "2023-01-29",
+    "duration": "PT3M32S"
   },
   {
     "id": "QNUHug7TtU8",
@@ -789,7 +887,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2023,
-    "publishedAt": "2023-01-24"
+    "publishedAt": "2023-01-24",
+    "duration": "PT35S"
   },
   {
     "id": "x61q6hl7xb8",
@@ -797,7 +896,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2023,
-    "publishedAt": "2023-01-09"
+    "publishedAt": "2023-01-09",
+    "duration": "PT40S"
   },
   {
     "id": "0HYu3ZRt4R8",
@@ -805,7 +905,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-12-25"
+    "publishedAt": "2022-12-25",
+    "duration": "PT1M7S"
   },
   {
     "id": "j9QAuw0LP60",
@@ -813,7 +914,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-12-16"
+    "publishedAt": "2022-12-16",
+    "duration": "PT1M1S"
   },
   {
     "id": "cqIlCdhwmpg",
@@ -821,7 +923,8 @@
     "desc": "",
     "cat": "保育園",
     "year": 2022,
-    "publishedAt": "2022-10-13"
+    "publishedAt": "2022-10-13",
+    "duration": "PT1M30S"
   },
   {
     "id": "cJstEfdNlIk",
@@ -829,7 +932,8 @@
     "desc": "",
     "cat": "プール",
     "year": 2022,
-    "publishedAt": "2022-09-19"
+    "publishedAt": "2022-09-19",
+    "duration": "PT41S"
   },
   {
     "id": "8F6h0cfGGIY",
@@ -837,7 +941,8 @@
     "desc": "さらの成長記録0歳",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-09-10"
+    "publishedAt": "2022-09-10",
+    "duration": "PT1M1S"
   },
   {
     "id": "2S3BSH-qw4g",
@@ -845,7 +950,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-09-10"
+    "publishedAt": "2022-09-10",
+    "duration": "PT1M1S"
   },
   {
     "id": "r4ZC4sF5ZVw",
@@ -853,7 +959,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-08-21"
+    "publishedAt": "2022-08-21",
+    "duration": "PT24S"
   },
   {
     "id": "Cbp02qBpqTk",
@@ -861,7 +968,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-07-09"
+    "publishedAt": "2022-07-09",
+    "duration": "PT31S"
   },
   {
     "id": "sXHUBFroiSs",
@@ -869,7 +977,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-06-11"
+    "publishedAt": "2022-06-11",
+    "duration": "PT1M25S"
   },
   {
     "id": "QQvgNEsJnz8",
@@ -877,7 +986,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-06-11"
+    "publishedAt": "2022-06-11",
+    "duration": "PT3M33S"
   },
   {
     "id": "5jvmO1Y6_GA",
@@ -885,7 +995,8 @@
     "desc": "由陽の1人遊び",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-06-11"
+    "publishedAt": "2022-06-11",
+    "duration": "PT30S"
   },
   {
     "id": "x7sXCSjag4Q",
@@ -893,7 +1004,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-06-01"
+    "publishedAt": "2022-06-01",
+    "duration": "PT1M23S"
   },
   {
     "id": "ctLQCTnebMM",
@@ -901,7 +1013,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-05-01"
+    "publishedAt": "2022-05-01",
+    "duration": "PT37S"
   },
   {
     "id": "oOlVkJ1fDH0",
@@ -909,7 +1022,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-03-29"
+    "publishedAt": "2022-03-29",
+    "duration": "PT39S"
   },
   {
     "id": "taEKZVy-FRQ",
@@ -917,7 +1031,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2022,
-    "publishedAt": "2022-03-19"
+    "publishedAt": "2022-03-19",
+    "duration": "PT1M56S"
   },
   {
     "id": "dVNbXDEe3nw",
@@ -925,7 +1040,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2022,
-    "publishedAt": "2022-03-14"
+    "publishedAt": "2022-03-14",
+    "duration": "PT1M56S"
   },
   {
     "id": "TsJU5CJh5ao",
@@ -933,7 +1049,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-03-07"
+    "publishedAt": "2022-03-07",
+    "duration": "PT1M25S"
   },
   {
     "id": "F7NBY2WIQOU",
@@ -941,7 +1058,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-03-05"
+    "publishedAt": "2022-03-05",
+    "duration": "PT2M34S"
   },
   {
     "id": "WDeGWOQmnM0",
@@ -949,7 +1067,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2022,
-    "publishedAt": "2022-02-26"
+    "publishedAt": "2022-02-26",
+    "duration": "PT5S"
   },
   {
     "id": "q9oJ-45ulAc",
@@ -957,7 +1076,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-12-25"
+    "publishedAt": "2021-12-25",
+    "duration": "PT4M17S"
   },
   {
     "id": "IS2N7ofCjeo",
@@ -965,7 +1085,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-12-25"
+    "publishedAt": "2021-12-25",
+    "duration": "PT5M47S"
   },
   {
     "id": "2G78EEZILYs",
@@ -973,7 +1094,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-12-25"
+    "publishedAt": "2021-12-25",
+    "duration": "PT6M28S"
   },
   {
     "id": "awFJ3lpV3LI",
@@ -981,7 +1103,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-12-11"
+    "publishedAt": "2021-12-11",
+    "duration": "PT37S"
   },
   {
     "id": "VLeVnq2skfU",
@@ -989,7 +1112,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-12-11"
+    "publishedAt": "2021-12-11",
+    "duration": "PT37S"
   },
   {
     "id": "e5MzX9oVvqU",
@@ -997,7 +1121,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-11-23"
+    "publishedAt": "2021-11-23",
+    "duration": "PT4M50S"
   },
   {
     "id": "V2UzOPOZd4A",
@@ -1005,7 +1130,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2021,
-    "publishedAt": "2021-10-16"
+    "publishedAt": "2021-10-16",
+    "duration": "PT7M22S"
   },
   {
     "id": "CpAvGcuNJH8",
@@ -1013,7 +1139,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-10-02"
+    "publishedAt": "2021-10-02",
+    "duration": "PT5M21S"
   },
   {
     "id": "bHHkilE3cuI",
@@ -1021,7 +1148,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2021,
-    "publishedAt": "2021-09-30"
+    "publishedAt": "2021-09-30",
+    "duration": "PT15M38S"
   },
   {
     "id": "xwqGieYEgdQ",
@@ -1029,7 +1157,8 @@
     "desc": "",
     "cat": "旅行",
     "year": 2021,
-    "publishedAt": "2021-09-24"
+    "publishedAt": "2021-09-24",
+    "duration": "PT5M2S"
   },
   {
     "id": "P6x_dBdYG1c",
@@ -1037,7 +1166,8 @@
     "desc": "",
     "cat": "おでかけ",
     "year": 2021,
-    "publishedAt": "2021-09-18"
+    "publishedAt": "2021-09-18",
+    "duration": "PT8M39S"
   },
   {
     "id": "fd0t7wsQEbg",
@@ -1045,7 +1175,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-09-07"
+    "publishedAt": "2021-09-07",
+    "duration": "PT6M45S"
   },
   {
     "id": "E_Y4N0OKkwk",
@@ -1053,7 +1184,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-09-05"
+    "publishedAt": "2021-09-05",
+    "duration": "PT21S"
   },
   {
     "id": "Gb-mqfSYPjk",
@@ -1061,7 +1193,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-09-03"
+    "publishedAt": "2021-09-03",
+    "duration": "PT5M48S"
   },
   {
     "id": "MpDOC1tSwwY",
@@ -1069,7 +1202,8 @@
     "desc": "",
     "cat": "体験",
     "year": 2021,
-    "publishedAt": "2021-08-19"
+    "publishedAt": "2021-08-19",
+    "duration": "PT4M26S"
   },
   {
     "id": "zlcI0iAuvBw",
@@ -1077,7 +1211,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-08-12"
+    "publishedAt": "2021-08-12",
+    "duration": "PT3M42S"
   },
   {
     "id": "lTuwiYgiRkw",
@@ -1085,7 +1220,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-08-12"
+    "publishedAt": "2021-08-12",
+    "duration": "PT3M44S"
   },
   {
     "id": "FD0t4sj7mf8",
@@ -1093,7 +1229,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-08-08"
+    "publishedAt": "2021-08-08",
+    "duration": "PT15M25S"
   },
   {
     "id": "EG8kj67IjyU",
@@ -1101,7 +1238,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-08-02"
+    "publishedAt": "2021-08-02",
+    "duration": "PT3M47S"
   },
   {
     "id": "YeRjzPpk0js",
@@ -1109,7 +1247,8 @@
     "desc": "生後1ヶ月の深夜の授乳\nさやかは紗良に母乳\nじゅんは由陽にミルクを飲ませる\n由陽のいつもと違うように疑問を持つ2人の様子をご覧ください",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-29"
+    "publishedAt": "2021-07-29",
+    "duration": "PT7M31S"
   },
   {
     "id": "WrKBJQkPu0Q",
@@ -1117,7 +1256,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-26"
+    "publishedAt": "2021-07-26",
+    "duration": "PT56S"
   },
   {
     "id": "_ixtealK7p0",
@@ -1125,7 +1265,8 @@
     "desc": "妹さんと久々の再会\n出産の体験談を話して盛り上がるさやか\nすべらない話3本セットをどうぞ。",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-26"
+    "publishedAt": "2021-07-26",
+    "duration": "PT4M40S"
   },
   {
     "id": "ggfqfl_YQHc",
@@ -1133,7 +1274,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-23"
+    "publishedAt": "2021-07-23",
+    "duration": "PT3M16S"
   },
   {
     "id": "L3M_Zpqqgqc",
@@ -1141,7 +1283,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-14"
+    "publishedAt": "2021-07-14",
+    "duration": "PT4M59S"
   },
   {
     "id": "x5WAZFj01yo",
@@ -1149,7 +1292,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-14"
+    "publishedAt": "2021-07-14",
+    "duration": "PT7M"
   },
   {
     "id": "dp3eFRUL3eE",
@@ -1157,7 +1301,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-13"
+    "publishedAt": "2021-07-13",
+    "duration": "PT3M50S"
   },
   {
     "id": "2xhiQUMI5lk",
@@ -1165,7 +1310,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-12"
+    "publishedAt": "2021-07-12",
+    "duration": "PT3M23S"
   },
   {
     "id": "TET2xoQAaRI",
@@ -1173,7 +1319,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-08"
+    "publishedAt": "2021-07-08",
+    "duration": "PT1H21M52S"
   },
   {
     "id": "LhCIxg4sy68",
@@ -1181,7 +1328,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-05"
+    "publishedAt": "2021-07-05",
+    "duration": "PT1M40S"
   },
   {
     "id": "bHHimTw-z0o",
@@ -1189,7 +1337,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-05"
+    "publishedAt": "2021-07-05",
+    "duration": "PT1M41S"
   },
   {
     "id": "t8eygMA2oeU",
@@ -1197,7 +1346,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-07-04"
+    "publishedAt": "2021-07-04",
+    "duration": "PT1M3S"
   },
   {
     "id": "C-f-3ni7yj8",
@@ -1205,7 +1355,8 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-06-27"
+    "publishedAt": "2021-06-27",
+    "duration": "PT1M12S"
   },
   {
     "id": "PR5AQcCkY-A",
@@ -1213,6 +1364,7 @@
     "desc": "",
     "cat": "おもいで",
     "year": 2021,
-    "publishedAt": "2021-05-30"
+    "publishedAt": "2021-05-30",
+    "duration": "PT11M38S"
   }
 ]

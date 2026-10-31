@@ -10,11 +10,14 @@ function useScrollLock(active){
   },[active]);
 }
 
-function SearchAuto({ value, onChange, videos }){
+function SearchAuto({ value, onChange, videos, onSubmit }){
   const [text,setText]=uxS(value);
   const [open,setOpen]=uxS(false);
   const [hi,setHi]=uxS(-1);
   const composing=uxR(false);
+  // スマホ幅では、プレースホルダーを短い案内文にする
+  const [narrow,setNarrow]=uxS(()=>window.matchMedia('(max-width:640px)').matches);
+  uxE(()=>{const mq=window.matchMedia('(max-width:640px)');const f=e=>setNarrow(e.matches);mq.addEventListener('change',f);return ()=>mq.removeEventListener('change',f);},[]);
   uxE(()=>{ if(!composing.current) setText(value); },[value]);
   const q=text.trim().toLowerCase();
   const sugg=uxM(()=>{
@@ -33,7 +36,7 @@ function SearchAuto({ value, onChange, videos }){
     if(e.nativeEvent.isComposing||e.keyCode===229) return;
     if(e.key==='ArrowDown'){e.preventDefault();setOpen(true);setHi(h=>Math.min(h+1,sugg.length-1));}
     else if(e.key==='ArrowUp'){e.preventDefault();setHi(h=>Math.max(h-1,-1));}
-    else if(e.key==='Enter'){ if(open&&hi>=0&&sugg[hi]){e.preventDefault();commit(sugg[hi].label);} else setOpen(false); }
+    else if(e.key==='Enter'){ if(open&&hi>=0&&sugg[hi]){e.preventDefault();commit(sugg[hi].label);} else { setOpen(false); if(onSubmit&&text.trim()) onSubmit(); } }
     else if(e.key==='Escape'){setOpen(false);setHi(-1);}
   };
   const mark=t=>{
@@ -49,8 +52,8 @@ function SearchAuto({ value, onChange, videos }){
         display:'flex', alignItems:'center', gap:'10px',
         boxShadow:'0 2px 12px rgba(60,40,10,0.1)'
       }}>
-        <span style={{fontSize:'17px', opacity:0.45}}>🔍</span>
-        <input type="text" value={text} placeholder="動画を検索…（例：プール、万博）"
+        <img className="sa-icon" src="icons/ui-search.png" alt="" width="24" height="24" style={{flexShrink:0}}/>
+        <input type="text" value={text} placeholder={narrow?'場所・施設・キーワードで探す':'動画を検索…（例：プール、万博）'}
           role="combobox" aria-expanded={showList} aria-controls="sa-list" aria-autocomplete="list"
           aria-activedescendant={hi>=0?`sa-opt-${hi}`:undefined}
           onChange={e=>{setText(e.target.value);setOpen(true);setHi(-1);if(!composing.current&&!e.nativeEvent.isComposing) onChange(e.target.value);}}
@@ -60,6 +63,7 @@ function SearchAuto({ value, onChange, videos }){
           onFocus={()=>setOpen(true)}
           onBlur={()=>setTimeout(()=>setOpen(false),120)}
           style={{border:'none', outline:'none', width:'100%', fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'14px', color:'#3d2e1e', background:'transparent'}}/>
+        <button className="sa-go" onClick={()=>{commit(text);if(onSubmit) onSubmit();}}>検索する</button>
         {text && (
           <button aria-label="検索をクリア" onClick={()=>commit('')} style={{background:'none', border:'none', cursor:'pointer', color:'#a09080', fontSize:'18px', lineHeight:1, minWidth:'28px', minHeight:'28px'}}>×</button>
         )}
@@ -82,7 +86,7 @@ function SearchAuto({ value, onChange, videos }){
   );
 }
 
-function Carousel({ title, videos, onPlay, Card, primary }){
+function Carousel({ title, videos, onPlay, Card, primary, onMore }){
   const ref=uxR(null);
   const [idx,setIdx]=uxS(0);
   const [edge,setEdge]=uxS({start:true,end:false});
@@ -98,6 +102,7 @@ function Carousel({ title, videos, onPlay, Card, primary }){
     <section className="cr" aria-roledescription="carousel" aria-label={title}>
       <div className="cr-head">
         <h2 className="cr-title" data-ui="sec-title">{title}</h2>
+        {onMore && <button className="cr-more" onClick={onMore}>もっと見る ›</button>}
         <div className="cr-btns">
           <button className="cr-btn" aria-label="前へ" disabled={edge.start} onClick={()=>go(idx-1)}>‹</button>
           <button className="cr-btn" aria-label="次へ" disabled={edge.end} onClick={()=>go(idx+1)}>›</button>

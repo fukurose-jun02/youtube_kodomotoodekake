@@ -243,6 +243,33 @@ html,body{overflow-x:hidden}
 /* ヘッダー（森の絵）の高さ：スマホでは低くして、検索や動画が早く見えるようにする */
 .hero-a{height:420px}
 .hero-c{height:380px}
+
+/* ─── 新しいスマホの見た目（幅640px以下）。AIカードは全幅で共通 ─── */
+.ai-card{display:flex;align-items:center;gap:12px;width:100%;padding:12px 16px;border-radius:18px;border:none;background:#FCEBD3;cursor:pointer;text-align:left;font-family:'Zen Maru Gothic',sans-serif}
+.ai-card[data-active="1"]{background:#F8DDB4}
+.ai-card img{flex-shrink:0}
+.ai-card-title{display:block;font-size:17px;font-weight:700;color:#3d2e1e;line-height:1.3}
+.ai-card-sub{display:block;font-size:12px;color:#8a7a6a;margin-top:2px;line-height:1.4}
+.ai-card-arrow{margin-left:auto;font-size:28px;color:#e89a2c;line-height:1;flex-shrink:0}
+.ai-chips{display:flex;gap:5px;margin-top:10px;overflow-x:auto;scrollbar-width:none;padding:2px 1px}
+.ai-chips::-webkit-scrollbar{display:none}
+.ai-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;padding:5px 9px 5px 5px;border-radius:999px;border:none;background:#F2EDDF;color:#3d2e1e;font-family:'Zen Maru Gothic',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
+.ai-chip:disabled{opacity:.5;cursor:default}
+.sheet-title,.sa-go{display:none}
+.dur-badge{position:absolute;right:8px;bottom:8px;background:rgba(30,22,10,.72);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:8px;letter-spacing:.02em}
+.cr-more{display:none}
+@media (max-width:640px){
+  .hero-strip{display:none}
+  [data-ui="panel"]{margin:-28px 0 0 !important;border-radius:30px 30px 0 0 !important;padding:22px 16px 10px !important;max-width:none !important;box-shadow:0 -6px 18px rgba(60,40,10,.10) !important;background:#FFFBF2 !important;backdrop-filter:none !important}
+  .sheet-title{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:700;color:#3d2e1e;margin:0 0 14px 2px;font-family:'Zen Maru Gothic',sans-serif}
+  .sa-wrap{max-width:none;margin-bottom:12px}
+  [data-ui="search"]{padding:6px 6px 6px 16px !important;border-radius:999px !important;min-height:56px;box-shadow:0 3px 14px rgba(60,40,10,.10) !important}
+  .sa-go{display:block;flex-shrink:0;background:#E8A33D;color:#fff;border:none;border-radius:999px;padding:0 14px;min-height:44px;font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
+  [data-ui="search"] input{font-size:13px !important}
+  .mob-hide{display:none}
+  .cr-btns{display:none}
+  .cr-more{display:block;background:none;border:none;color:#8a7a6a;font-family:'Zen Maru Gothic',sans-serif;font-size:14px;cursor:pointer;white-space:nowrap}
+}
 @media (max-width:640px){.hero-a{height:280px}.hero-c{height:260px}.hero-title{transform:translateY(-44px)}}
 .fb-open{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 20px;border-radius:999px;font-family:var(--tf,'Zen Maru Gothic'),sans-serif;font-size:14px;cursor:pointer;background:#fffaf0;color:var(--ink,#3d2e1e);border:2.5px solid var(--ink,#5a4a3a)}
 .fb-badge{background:var(--pop,#b5651d);color:var(--ink,#fff);border-radius:999px;font-size:12px;padding:1px 8px}
@@ -426,158 +453,158 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 // ─────────────────────────────────────────────
 // AUTO-GENERATED:VIDEOS-START
 const VIDEOS = [
-  { id:"uWCytBpfemo", title:"花園中央公園行ってきた", desc:"", cat:"おでかけ", year:2026, age:"5歳3ヶ月", spot:"花園中央公園", place:"大阪府東大阪市" },
-  { id:"NYsoDZKk7jQ", title:"関西スポーツサイクルセンターに行ってきた", desc:"", cat:"おでかけ", year:2026, age:"5歳3ヶ月", spot:"関西サイクルスポーツセンター", place:"大阪府河内長野市" },
-  { id:"pLxGgzyVVCc", title:"さつまいも掘りしたよ", desc:"", cat:"体験", year:2026, age:"5歳3ヶ月" },
-  { id:"7zuM1AqtA4o", title:"ブルーメの丘&ボウケンノモリ行ってきた", desc:"", cat:"旅行", year:2026, age:"5歳3ヶ月", spot:"ブルーメの丘", place:"滋賀県日野町" },
-  { id:"ABHEEq42nDo", title:"東条湖おもちゃ王国プール「アカプルコ」に行ってきた", desc:"", cat:"プール", year:2026, age:"5歳2ヶ月", spot:"東条湖おもちゃ王国", place:"兵庫県加東市" },
-  { id:"mbD5CdEJs2Y", title:"バンドー神戸青少年科学館", desc:"", cat:"おでかけ", year:2026, age:"5歳1ヶ月", spot:"バンドー神戸青少年科学館", place:"兵庫県神戸市中央区" },
-  { id:"MGVpFKMmqDY", title:"太陽が丘プール2026", desc:"", cat:"プール", year:2026, age:"5歳1ヶ月", spot:"太陽が丘プール（山城総合運動公園）", place:"京都府宇治市" },
-  { id:"KDX8SUUUr80", title:"南郷水産センターに行ってきた", desc:"", cat:"おでかけ", year:2026, age:"5歳0ヶ月", spot:"南郷水産センター", place:"滋賀県大津市" },
-  { id:"N-Evs-rUe-o", title:"おやつタウン行ってきた2026", desc:"", cat:"おでかけ", year:2026, age:"5歳0ヶ月", spot:"おやつタウン", place:"三重県津市" },
-  { id:"E3J9DiUrQfQ", title:"鈴鹿サーキット行ってきた2026", desc:"", cat:"おでかけ", year:2026, age:"5歳0ヶ月", spot:"鈴鹿サーキット", place:"三重県鈴鹿市" },
-  { id:"BX19SBcbrCA", title:"Disney 旅行 2026 - 002", desc:"", cat:"旅行", year:2026, age:"5歳0ヶ月" },
-  { id:"9HNtjbE2Ss8", title:"Disney旅行 2026", desc:"", cat:"旅行", year:2026, age:"5歳0ヶ月" },
-  { id:"0Cn9h7P4xqc", title:"ラーメン作ってみた", desc:"", cat:"体験", year:2026, age:"4歳11ヶ月" },
-  { id:"b8AprslJKt8", title:"それいけ発表会@ぶどう組", desc:"", cat:"保育園", year:2026, age:"4歳9ヶ月" },
-  { id:"Sq25cNbPb_Q", title:"山田池公園行ってきた", desc:"大阪府枚方市にある約73.7ヘクタールの広大な府営の公園。野原でたくさん駆け回ったよ", cat:"おでかけ", year:2026, age:"4歳9ヶ月", spot:"山田池公園", place:"大阪府枚方市" },
-  { id:"vOOYdMcfBXo", title:"kirinoko行ってきた", desc:"京都府亀岡市の「サンガスタジアム by KYOCERA」内にある、木のぬくもりを活かした全天候型の屋内遊び場KIRI no KO（きりのこ）に行ってきたよ", cat:"おでかけ", year:2026, age:"4歳8ヶ月", spot:"KIRI no KO", place:"京都府亀岡市" },
-  { id:"M_xojYV87xg", title:"萩谷総合公園行ってきた", desc:"高槻市になる通称（キツネ公園）に行ってきたよ", cat:"おでかけ", year:2026, age:"4歳8ヶ月", spot:"萩谷総合公園", place:"大阪府高槻市" },
-  { id:"i27Z_G6UcDE", title:"ひまわりの丘公園", desc:"兵庫県小野市に広大な公園。関西最大級のひまわりタワーは4階建てで、めちゃ楽しかったよ", cat:"おでかけ", year:2026, age:"4歳6ヶ月", spot:"ひまわりの丘公園", place:"兵庫県小野市" },
-  { id:"MytyV9W7X_g", title:"丹波自然運動公園行ってきた", desc:"京丹波町にある豊かな自然に囲まれた広大な公園。45mのジャイアントスライダーは何回も滑ったよ", cat:"おでかけ", year:2025, age:"4歳5ヶ月", spot:"丹波自然運動公園", place:"京都府京丹波町" },
-  { id:"MvGb9Opdh5U", title:"萩谷総合公園に行ってきた", desc:"紗良とお父さん二人で高槻市にある大きな公園へ行ってきたよ", cat:"おでかけ", year:2025, age:"4歳5ヶ月", spot:"萩谷総合公園", place:"大阪府高槻市" },
-  { id:"DZcKol6op80", title:"キッザニアに行ってきた", desc:"幹太、咲ちゃんといっしょにキッザニアデビューしたよ", cat:"おでかけ", year:2025, age:"4歳3ヶ月", spot:"キッザニア甲子園", place:"兵庫県西宮市" },
-  { id:"vpi8q5zjA6I", title:"いくぞ、万博。", desc:"何度もスケジュールを変更した万博！世界の”いま”を感じるチャンス。いくぞ、万博。", cat:"おでかけ", year:2025, age:"4歳2ヶ月", spot:"大阪・関西万博", place:"大阪府大阪市此花区" },
-  { id:"ZcqUjiy82PE", title:"服部緑地ウォーターランドにまどともと行ってきた", desc:"", cat:"プール", year:2025, age:"4歳1ヶ月", spot:"服部緑地ウォーターランド", place:"大阪府豊中市" },
-  { id:"mAS7SAnGu_k", title:"アマラーゴ行ってきた", desc:"", cat:"おでかけ", year:2025, age:"4歳1ヶ月", spot:"アマラーゴ（尼崎スポーツの森）", place:"兵庫県尼崎市" },
-  { id:"nbJ5unhtvss", title:"アドベンチャーワールド　2025", desc:"", cat:"旅行", year:2025, age:"4歳0ヶ月" },
-  { id:"wyeDG4dDnqM", title:"おやつタウン行ってきた", desc:"", cat:"おでかけ", year:2025, age:"3歳8ヶ月", spot:"おやつタウン", place:"三重県津市" },
-  { id:"jFuITu9glfY", title:"鈴鹿サーキット行ってきた", desc:"", cat:"おでかけ", year:2025, age:"3歳8ヶ月", spot:"鈴鹿サーキット", place:"三重県鈴鹿市" },
-  { id:"1AncYm8MaE8", title:"レモン組発表会『大きなおいも』", desc:"", cat:"保育園", year:2025, age:"3歳8ヶ月" },
-  { id:"qPoDpqxY5gk", title:"イトマン体験会行ってきた", desc:"", cat:"体験", year:2025, age:"3歳7ヶ月", spot:"イトマンスイミングスクール京都校", place:"京都府京都市西京区" },
-  { id:"FqtdxRH5rVg", title:"キッズプラザ大阪に行ってきた", desc:"", cat:"おでかけ", year:2025, age:"3歳7ヶ月", spot:"キッズプラザ大阪", place:"大阪府大阪市北区" },
-  { id:"cMK8fuAJNTg", title:"福知山児童館行ってきた", desc:"", cat:"おでかけ", year:2025, age:"3歳6ヶ月", spot:"福知山児童館", place:"京都府福知山市" },
-  { id:"h0_848YlNwk", title:"関西スポーツサイクルセンター行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳4ヶ月", spot:"関西サイクルスポーツセンター", place:"大阪府河内長野市" },
-  { id:"UUmYqewz86k", title:"樫原保育園それいけ発表会", desc:"", cat:"保育園", year:2024, age:"3歳3ヶ月" },
-  { id:"ox0t2PiO9ns", title:"樫原保育園運動会　2024", desc:"", cat:"保育園", year:2024, age:"3歳3ヶ月" },
-  { id:"TMeI60c10Fk", title:"神戸フルーツ・フラワーパーク行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳3ヶ月", spot:"神戸フルーツ・フラワーパーク", place:"兵庫県神戸市北区" },
-  { id:"LwqfmfsPo8A", title:"けいはんな記念公園行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳3ヶ月", spot:"けいはんな記念公園", place:"京都府精華町" },
-  { id:"GJFYVp9R7FE", title:"ばぁばとカレーを作ろう", desc:"", cat:"体験", year:2024, age:"3歳3ヶ月" },
-  { id:"J4q2SZ29600", title:"八幡市スポーツ公園行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳3ヶ月", spot:"八幡市スポーツ公園", place:"京都府八幡市" },
-  { id:"lLPHj_QPZ5Y", title:"三世代旅行", desc:"", cat:"旅行", year:2024, age:"3歳2ヶ月" },
-  { id:"kuAfARRClkY", title:"七五三のスタジオ撮影してきた", desc:"", cat:"おもいで", year:2024, age:"3歳2ヶ月" },
-  { id:"p_SwyiSqo_s", title:"かめプー行ってきた", desc:"", cat:"プール", year:2024, age:"3歳2ヶ月", spot:"かめプー（亀岡運動公園プール）", place:"京都府亀岡市" },
-  { id:"Wpds4mdrP7g", title:"デカパトス行ってきた", desc:"", cat:"プール", year:2024, age:"3歳1ヶ月", spot:"デカパトス", place:"兵庫県神戸市東灘区" },
-  { id:"PMQQIThAEJQ", title:"1秒動画Apr-Jun 2024", desc:"", cat:"おもいで", year:2024, age:"3歳1ヶ月" },
-  { id:"e53OgeuTk2c", title:"石垣小浜島旅行　ダイジェストVer.", desc:"", cat:"旅行", year:2024, age:"3歳1ヶ月" },
-  { id:"7MIPROpqfBI", title:"父の日にピザ作ったよ", desc:"", cat:"体験", year:2024, age:"3歳1ヶ月" },
-  { id:"A2Du4bLR9c8", title:"沖縄石垣旅行", desc:"", cat:"旅行", year:2024, age:"3歳0ヶ月" },
-  { id:"m5L6LvTuXXg", title:"それいけ！さくらんぼ", desc:"", cat:"保育園", year:2024, age:"3歳0ヶ月" },
-  { id:"-4cr0NCSCzM", title:"ユニバ行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳0ヶ月", spot:"ユニバーサル・スタジオ・ジャパン", place:"大阪府大阪市此花区" },
-  { id:"LnMsZGVSqmY", title:"Happy 3rd Birthday", desc:"", cat:"おもいで", year:2024, age:"2歳11ヶ月" },
-  { id:"8iipQanlXnY", title:"母の日にケーキ作ったよ", desc:"", cat:"体験", year:2024, age:"2歳11ヶ月" },
-  { id:"PNomK_iVBl0", title:"二色浜に潮干狩りに行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳10ヶ月", spot:"二色の浜", place:"大阪府貝塚市" },
-  { id:"kavQEhdpwv4", title:"七谷川BBQ行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳10ヶ月", spot:"七谷川", place:"京都府亀岡市" },
-  { id:"8eWp7QaLxf0", title:"1秒動画Jan-Mar 2024", desc:"", cat:"おもいで", year:2024, age:"2歳10ヶ月" },
-  { id:"xY9-jK1q6ss", title:"諏訪ファミリーとアドベンチャーワールド行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳10ヶ月", spot:"アドベンチャーワールド", place:"和歌山県白浜町" },
-  { id:"hEhw5jgmKzg", title:"大宮交通公園行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳9ヶ月", spot:"大宮交通公園", place:"京都府京都市北区" },
-  { id:"GyFUeR_07OM", title:"神戸動物王国に行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳8ヶ月", spot:"神戸どうぶつ王国", place:"兵庫県神戸市中央区" },
-  { id:"8qED0ONC1s0", title:"バレンタインに手作りクッキーを作ったよ", desc:"", cat:"体験", year:2024, age:"2歳8ヶ月" },
-  { id:"0xpFFWRRPOA", title:"鳥取砂丘行ってきた", desc:"", cat:"旅行", year:2024, age:"2歳7ヶ月", spot:"鳥取砂丘", place:"鳥取県鳥取市" },
-  { id:"1EM_AiFL_mQ", title:"城崎温泉行ってきた", desc:"", cat:"旅行", year:2024, age:"2歳7ヶ月", spot:"城崎温泉", place:"兵庫県豊岡市" },
-  { id:"xADSRCG8auI", title:"1秒動画 Oct-Dec 2023", desc:"", cat:"おもいで", year:2024, age:"2歳7ヶ月" },
-  { id:"6WIhPUPh6Aw", title:"それいけ発表会", desc:"", cat:"保育園", year:2024, age:"2歳7ヶ月" },
-  { id:"M1oPQJc4ZOg", title:"リトルプラネットに行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳6ヶ月", spot:"リトルプラネット（ララポート和泉）", place:"大阪府和泉市" },
-  { id:"xhsvv2clFCk", title:"クリスマスパーティ行ってきた", desc:"", cat:"おもいで", year:2023, age:"2歳6ヶ月", spot:"ザ オーク ガーデン", place:"京都府京都市中京区" },
-  { id:"BiceEPBppc0", title:"クリスマスツリーを飾ったよ", desc:"", cat:"おもいで", year:2023, age:"2歳5ヶ月" },
-  { id:"5AuNHfpQA94", title:"夢ナリエに行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳5ヶ月", spot:"京都丹波KAMEOKA夢ナリエ", place:"京都府亀岡市" },
-  { id:"xbXbV7rmDMs", title:"天王寺動物園行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳5ヶ月", spot:"天王寺動物園", place:"大阪府大阪市天王寺区" },
-  { id:"rs-luj8TtXs", title:"1秒動画 Jul-Sep 2023", desc:"", cat:"おもいで", year:2023, age:"2歳4ヶ月" },
-  { id:"IdxdCtY2Kt0", title:"王子動物園行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳4ヶ月", spot:"王子動物園", place:"兵庫県神戸市灘区" },
-  { id:"bxZPollkhcs", title:"東条湖おもちゃ王国行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳4ヶ月", spot:"東条湖おもちゃ王国", place:"兵庫県加東市" },
-  { id:"Nq7VOD7cPaU", title:"樫原保育園運動会　2023", desc:"", cat:"保育園", year:2023, age:"2歳4ヶ月" },
-  { id:"Gg1OGZfTwPY", title:"金魚ミュージアム行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳3ヶ月", spot:"金魚ミュージアム", place:"奈良県奈良市" },
-  { id:"JgnA72OioPI", title:"こどもの国行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳3ヶ月", spot:"滋賀県立びわ湖こどもの国", place:"滋賀県高島市" },
-  { id:"a0prZN0vADw", title:"ブルーメの丘行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳2ヶ月", spot:"ブルーメの丘", place:"滋賀県日野町" },
-  { id:"WHNc-GPukdQ", title:"じぃじから梨が届いたよ", desc:"", cat:"おもいで", year:2023, age:"2歳2ヶ月" },
-  { id:"UxIIkrqiWF8", title:"服部緑地ウォーターランド行ってきた", desc:"", cat:"プール", year:2023, age:"2歳2ヶ月", spot:"服部緑地ウォーターランド", place:"大阪府豊中市" },
-  { id:"IecUcbUXWak", title:"1秒動画 Apl-Jun 2023", desc:"", cat:"おもいで", year:2023, age:"2歳1ヶ月" },
-  { id:"KHCesxsEWwg", title:"太陽が丘ファミリープール行ってきた", desc:"", cat:"プール", year:2023, age:"2歳1ヶ月", spot:"太陽が丘プール（山城総合運動公園）", place:"京都府宇治市" },
-  { id:"Z5i6-Kjd3TQ", title:"沖縄旅行 ダイジェストver", desc:"", cat:"旅行", year:2023, age:"2歳1ヶ月" },
-  { id:"kAvbkuxH1EM", title:"沖縄旅行 Day3", desc:"", cat:"旅行", year:2023, age:"2歳1ヶ月" },
-  { id:"3sIsUZ-hwjM", title:"沖縄旅行 Day2", desc:"", cat:"旅行", year:2023, age:"2歳1ヶ月" },
-  { id:"j9JO95pAkO8", title:"沖縄旅行Day1", desc:"", cat:"旅行", year:2023, age:"2歳0ヶ月" },
-  { id:"TB3jD75FBss", title:"アンパンマンミュージアム行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳0ヶ月", spot:"神戸アンパンマンこどもミュージアム", place:"兵庫県神戸市中央区" },
-  { id:"DjTwTOux0zk", title:"Happy 2nd Birthday", desc:"", cat:"おもいで", year:2023, age:"2歳0ヶ月" },
-  { id:"qqTv2wkMlvg", title:"どんどんでてこい　かわいい　いちご", desc:"", cat:"保育園", year:2023, age:"1歳11ヶ月" },
-  { id:"OtTn7lddDNM", title:"山城総合運動公園 (太陽が丘)行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳11ヶ月", spot:"山城総合運動公園（太陽が丘）", place:"京都府宇治市" },
-  { id:"j669e5XfClA", title:"母の日にフルーツケーキ作ったよ", desc:"", cat:"体験", year:2023, age:"1歳10ヶ月" },
-  { id:"jpG_Zcwk_tI", title:"2023GW ダイジェスト", desc:"", cat:"おもいで", year:2023, age:"1歳10ヶ月" },
-  { id:"VS4g1aoZ-mQ", title:"1秒動画Jan-Mar 2023", desc:"", cat:"おもいで", year:2023, age:"1歳10ヶ月" },
-  { id:"12GcfWttqDU", title:"海遊館に行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳10ヶ月", spot:"海遊館", place:"大阪府大阪市港区" },
-  { id:"6HG9Gf8vBDY", title:"生駒山上遊園地行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳10ヶ月", spot:"生駒山上遊園地", place:"奈良県生駒市" },
-  { id:"pHUdcTF_23Q", title:"京都市動物園行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳9ヶ月", spot:"京都市動物園", place:"京都府京都市左京区" },
-  { id:"RRZfdw27Vds", title:"はじめの遊園地", desc:"", cat:"おでかけ", year:2023, age:"1歳9ヶ月", spot:"ひらかたパーク", place:"大阪府枚方市" },
-  { id:"eGtTajQE-_4", title:"今年もさくら祭り行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳9ヶ月", spot:"京都やわた背割堤さくらまつり", place:"京都府八幡市" },
-  { id:"AsncTRjb3ho", title:"伊丹スカイパークに行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳8ヶ月", spot:"伊丹スカイパーク", place:"兵庫県伊丹市" },
-  { id:"DbsBF49vxyU", title:"宝ヶ池公園こどもの楽園に行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳8ヶ月", spot:"宝ヶ池公園", place:"京都府京都市左京区" },
-  { id:"2J2ruYQARAU", title:"春のいちご狩り行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳8ヶ月", spot:"道の駅 アグリパーク竜王", place:"滋賀県竜王町" },
-  { id:"XlTaoaBk6zU", title:"思い出スライドショー2022年", desc:"", cat:"おもいで", year:2023, age:"1歳7ヶ月" },
-  { id:"DZrudxcnOR0", title:"神戸どうぶつ王国行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳7ヶ月", spot:"神戸どうぶつ王国", place:"兵庫県神戸市中央区" },
-  { id:"QNUHug7TtU8", title:"ニフレル行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳7ヶ月", spot:"ニフレル", place:"大阪府吹田市" },
-  { id:"x61q6hl7xb8", title:"2023年元旦", desc:"", cat:"おもいで", year:2023, age:"1歳6ヶ月" },
-  { id:"0HYu3ZRt4R8", title:"CHRISTMAS PARTY @ザ オークガーデン", desc:"", cat:"おもいで", year:2022, age:"1歳6ヶ月" },
-  { id:"j9QAuw0LP60", title:"朝会してた", desc:"", cat:"おもいで", year:2022, age:"1歳5ヶ月" },
-  { id:"cqIlCdhwmpg", title:"秋の運動会", desc:"", cat:"保育園", year:2022, age:"1歳3ヶ月" },
-  { id:"cJstEfdNlIk", title:"夏の思い出@宮津プール編", desc:"", cat:"プール", year:2022, age:"1歳2ヶ月", spot:"宮津プール", place:"京都府宮津市" },
-  { id:"8F6h0cfGGIY", title:"さらの成長記録0歳", desc:"さらの成長記録0歳", cat:"おもいで", year:2022, age:"1歳2ヶ月" },
-  { id:"2S3BSH-qw4g", title:"ゆうひの成長記録0歳", desc:"", cat:"おもいで", year:2022, age:"1歳2ヶ月" },
-  { id:"r4ZC4sF5ZVw", title:"サンクスパーティー@オークガーデン", desc:"", cat:"おもいで", year:2022, age:"1歳1ヶ月" },
-  { id:"Cbp02qBpqTk", title:"つかみ食べ", desc:"", cat:"おもいで", year:2022, age:"1歳0ヶ月" },
-  { id:"sXHUBFroiSs", title:"ボール入れられるかな？", desc:"", cat:"おもいで", year:2022, age:"0歳11ヶ月" },
-  { id:"QQvgNEsJnz8", title:"お母さんいつもありがとう", desc:"", cat:"おもいで", year:2022, age:"0歳11ヶ月" },
-  { id:"5jvmO1Y6_GA", title:"2022年6月11日", desc:"由陽の1人遊び", cat:"おもいで", year:2022, age:"0歳11ヶ月" },
-  { id:"x7sXCSjag4Q", title:"思い出スライドショー 2021", desc:"", cat:"おもいで", year:2022, age:"0歳11ヶ月" },
-  { id:"ctLQCTnebMM", title:"1秒動画Jan-Mar 2022", desc:"", cat:"おもいで", year:2022, age:"0歳10ヶ月" },
-  { id:"oOlVkJ1fDH0", title:"ちょっと前に進んだ❣️", desc:"", cat:"おもいで", year:2022, age:"0歳9ヶ月" },
-  { id:"taEKZVy-FRQ", title:"京都府立植物園行ってきた", desc:"", cat:"おでかけ", year:2022, age:"0歳8ヶ月", spot:"京都府立植物園", place:"京都府京都市左京区" },
-  { id:"dVNbXDEe3nw", title:"NAGISA TERRACE行ってきた", desc:"", cat:"おでかけ", year:2022, age:"0歳8ヶ月", spot:"NAGISA TERRACE", place:"滋賀県大津市" },
-  { id:"TsJU5CJh5ao", title:"寝返りできたよ", desc:"", cat:"おもいで", year:2022, age:"0歳8ヶ月" },
-  { id:"F7NBY2WIQOU", title:"お父さんと遊ぶよ", desc:"", cat:"おもいで", year:2022, age:"0歳8ヶ月" },
-  { id:"WDeGWOQmnM0", title:"イタタタタタタ", desc:"", cat:"おもいで", year:2022, age:"0歳8ヶ月" },
-  { id:"q9oJ-45ulAc", title:"余興動画　あゆみ保育園", desc:"", cat:"おもいで", year:2021, age:"0歳6ヶ月" },
-  { id:"IS2N7ofCjeo", title:"エンドロール", desc:"", cat:"おもいで", year:2021, age:"0歳6ヶ月" },
-  { id:"2G78EEZILYs", title:"余興動画　鬼ご", desc:"", cat:"おもいで", year:2021, age:"0歳6ヶ月" },
-  { id:"awFJ3lpV3LI", title:"1秒動画 Jul-Sep 2021", desc:"", cat:"おもいで", year:2021, age:"0歳5ヶ月" },
-  { id:"VLeVnq2skfU", title:"1秒動画 Apl-Jun 2021", desc:"", cat:"おもいで", year:2021, age:"0歳5ヶ月" },
-  { id:"e5MzX9oVvqU", title:"プロフィールムービー", desc:"", cat:"おもいで", year:2021, age:"0歳5ヶ月" },
-  { id:"V2UzOPOZd4A", title:"宝ヶ池にお散歩", desc:"", cat:"おでかけ", year:2021, age:"0歳3ヶ月", spot:"宝ヶ池公園", place:"京都府京都市左京区" },
-  { id:"CpAvGcuNJH8", title:"100日記念　お宮参り&お食い初め", desc:"", cat:"おもいで", year:2021, age:"0歳3ヶ月" },
-  { id:"bHHkilE3cuI", title:"安満遺跡公園でピクニック", desc:"", cat:"おでかけ", year:2021, age:"0歳3ヶ月", spot:"安満遺跡公園", place:"大阪府高槻市" },
-  { id:"xwqGieYEgdQ", title:"嵐山旅行", desc:"", cat:"旅行", year:2021, age:"0歳3ヶ月" },
-  { id:"P6x_dBdYG1c", title:"そうだ、梅小路公園行こう", desc:"", cat:"おでかけ", year:2021, age:"0歳2ヶ月", spot:"梅小路公園", place:"京都府京都市下京区" },
-  { id:"fd0t7wsQEbg", title:"御礼参り", desc:"", cat:"おもいで", year:2021, age:"0歳2ヶ月" },
-  { id:"E_Y4N0OKkwk", title:"ワンオペってこんな感じ", desc:"", cat:"おもいで", year:2021, age:"0歳2ヶ月" },
-  { id:"Gb-mqfSYPjk", title:"里帰り育児物語", desc:"", cat:"おもいで", year:2021, age:"0歳2ヶ月" },
-  { id:"MpDOC1tSwwY", title:"ベビーマッサージ", desc:"", cat:"体験", year:2021, age:"0歳1ヶ月" },
-  { id:"zlcI0iAuvBw", title:"ゆうひのなつやすみ", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月" },
-  { id:"lTuwiYgiRkw", title:"さらのなつやすみ", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月" },
-  { id:"FD0t4sj7mf8", title:"イクメンの育児記録", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月" },
-  { id:"EG8kj67IjyU", title:"smile", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月" },
-  { id:"YeRjzPpk0js", title:"深夜の授乳", desc:"生後1ヶ月の深夜の授乳\nさやかは紗良に母乳\nじゅんは由陽にミルクを飲ませる\n由陽のいつもと違うように疑問を持つ2人の様子をご覧ください", cat:"おもいで", year:2021, age:"0歳1ヶ月" },
-  { id:"WrKBJQkPu0Q", title:"はじめての喧嘩", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月" },
-  { id:"_ixtealK7p0", title:"さやかのすべらない話", desc:"妹さんと久々の再会\n出産の体験談を話して盛り上がるさやか\nすべらない話3本セットをどうぞ。", cat:"おもいで", year:2021, age:"0歳1ヶ月" },
-  { id:"ggfqfl_YQHc", title:"あなたに出会えたキセキ", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月" },
-  { id:"L3M_Zpqqgqc", title:"最高のgift", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"x5WAZFj01yo", title:"沐浴の仕方", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"dp3eFRUL3eE", title:"紗良と由陽のお昼寝の時間", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"2xhiQUMI5lk", title:"由陽　はじめての浣腸", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"TET2xoQAaRI", title:"エコー検査記録", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"LhCIxg4sy68", title:"紗良vlog 2021/7/5", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"bHHimTw-z0o", title:"紗良と過ごす週末パート2", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"t8eygMA2oeU", title:"紗良と過ごす週末", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"C-f-3ni7yj8", title:"由陽初対面", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月" },
-  { id:"PR5AQcCkY-A", title:"じゅんちゃんのモーニングルーティン", desc:"", cat:"おもいで", year:2021 },
+  { id:"uWCytBpfemo", title:"花園中央公園行ってきた", desc:"", cat:"おでかけ", year:2026, age:"5歳3ヶ月", dur:"5:11", spot:"花園中央公園", place:"大阪府東大阪市" },
+  { id:"NYsoDZKk7jQ", title:"関西スポーツサイクルセンターに行ってきた", desc:"", cat:"おでかけ", year:2026, age:"5歳3ヶ月", dur:"4:18", spot:"関西サイクルスポーツセンター", place:"大阪府河内長野市" },
+  { id:"pLxGgzyVVCc", title:"さつまいも掘りしたよ", desc:"", cat:"体験", year:2026, age:"5歳3ヶ月", dur:"24:59" },
+  { id:"7zuM1AqtA4o", title:"ブルーメの丘&ボウケンノモリ行ってきた", desc:"", cat:"旅行", year:2026, age:"5歳3ヶ月", dur:"4:49", spot:"ブルーメの丘", place:"滋賀県日野町" },
+  { id:"ABHEEq42nDo", title:"東条湖おもちゃ王国プール「アカプルコ」に行ってきた", desc:"", cat:"プール", year:2026, age:"5歳2ヶ月", dur:"4:53", spot:"東条湖おもちゃ王国", place:"兵庫県加東市" },
+  { id:"mbD5CdEJs2Y", title:"バンドー神戸青少年科学館", desc:"", cat:"おでかけ", year:2026, age:"5歳1ヶ月", dur:"3:36", spot:"バンドー神戸青少年科学館", place:"兵庫県神戸市中央区" },
+  { id:"MGVpFKMmqDY", title:"太陽が丘プール2026", desc:"", cat:"プール", year:2026, age:"5歳1ヶ月", dur:"3:38", spot:"太陽が丘プール（山城総合運動公園）", place:"京都府宇治市" },
+  { id:"KDX8SUUUr80", title:"南郷水産センターに行ってきた", desc:"", cat:"おでかけ", year:2026, age:"5歳0ヶ月", dur:"3:14", spot:"南郷水産センター", place:"滋賀県大津市" },
+  { id:"N-Evs-rUe-o", title:"おやつタウン行ってきた2026", desc:"", cat:"おでかけ", year:2026, age:"5歳0ヶ月", dur:"2:40", spot:"おやつタウン", place:"三重県津市" },
+  { id:"E3J9DiUrQfQ", title:"鈴鹿サーキット行ってきた2026", desc:"", cat:"おでかけ", year:2026, age:"5歳0ヶ月", dur:"3:38", spot:"鈴鹿サーキット", place:"三重県鈴鹿市" },
+  { id:"BX19SBcbrCA", title:"Disney 旅行 2026 - 002", desc:"", cat:"旅行", year:2026, age:"5歳0ヶ月", dur:"58:12" },
+  { id:"9HNtjbE2Ss8", title:"Disney旅行 2026", desc:"", cat:"旅行", year:2026, age:"5歳0ヶ月", dur:"1:08:59" },
+  { id:"0Cn9h7P4xqc", title:"ラーメン作ってみた", desc:"", cat:"体験", year:2026, age:"4歳11ヶ月", dur:"9:10" },
+  { id:"b8AprslJKt8", title:"それいけ発表会@ぶどう組", desc:"", cat:"保育園", year:2026, age:"4歳9ヶ月", dur:"16:18" },
+  { id:"Sq25cNbPb_Q", title:"山田池公園行ってきた", desc:"大阪府枚方市にある約73.7ヘクタールの広大な府営の公園。野原でたくさん駆け回ったよ", cat:"おでかけ", year:2026, age:"4歳9ヶ月", dur:"3:21", spot:"山田池公園", place:"大阪府枚方市" },
+  { id:"vOOYdMcfBXo", title:"kirinoko行ってきた", desc:"京都府亀岡市の「サンガスタジアム by KYOCERA」内にある、木のぬくもりを活かした全天候型の屋内遊び場KIRI no KO（きりのこ）に行ってきたよ", cat:"おでかけ", year:2026, age:"4歳8ヶ月", dur:"4:14", spot:"KIRI no KO", place:"京都府亀岡市" },
+  { id:"M_xojYV87xg", title:"萩谷総合公園行ってきた", desc:"高槻市になる通称（キツネ公園）に行ってきたよ", cat:"おでかけ", year:2026, age:"4歳8ヶ月", dur:"3:21", spot:"萩谷総合公園", place:"大阪府高槻市" },
+  { id:"i27Z_G6UcDE", title:"ひまわりの丘公園", desc:"兵庫県小野市に広大な公園。関西最大級のひまわりタワーは4階建てで、めちゃ楽しかったよ", cat:"おでかけ", year:2026, age:"4歳6ヶ月", dur:"4:37", spot:"ひまわりの丘公園", place:"兵庫県小野市" },
+  { id:"MytyV9W7X_g", title:"丹波自然運動公園行ってきた", desc:"京丹波町にある豊かな自然に囲まれた広大な公園。45mのジャイアントスライダーは何回も滑ったよ", cat:"おでかけ", year:2025, age:"4歳5ヶ月", dur:"3:43", spot:"丹波自然運動公園", place:"京都府京丹波町" },
+  { id:"MvGb9Opdh5U", title:"萩谷総合公園に行ってきた", desc:"紗良とお父さん二人で高槻市にある大きな公園へ行ってきたよ", cat:"おでかけ", year:2025, age:"4歳5ヶ月", dur:"3:21", spot:"萩谷総合公園", place:"大阪府高槻市" },
+  { id:"DZcKol6op80", title:"キッザニアに行ってきた", desc:"幹太、咲ちゃんといっしょにキッザニアデビューしたよ", cat:"おでかけ", year:2025, age:"4歳3ヶ月", dur:"3:09", spot:"キッザニア甲子園", place:"兵庫県西宮市" },
+  { id:"vpi8q5zjA6I", title:"いくぞ、万博。", desc:"何度もスケジュールを変更した万博！世界の”いま”を感じるチャンス。いくぞ、万博。", cat:"おでかけ", year:2025, age:"4歳2ヶ月", dur:"2:29", spot:"大阪・関西万博", place:"大阪府大阪市此花区" },
+  { id:"ZcqUjiy82PE", title:"服部緑地ウォーターランドにまどともと行ってきた", desc:"", cat:"プール", year:2025, age:"4歳1ヶ月", dur:"3:59", spot:"服部緑地ウォーターランド", place:"大阪府豊中市" },
+  { id:"mAS7SAnGu_k", title:"アマラーゴ行ってきた", desc:"", cat:"おでかけ", year:2025, age:"4歳1ヶ月", dur:"4:56", spot:"アマラーゴ（尼崎スポーツの森）", place:"兵庫県尼崎市" },
+  { id:"nbJ5unhtvss", title:"アドベンチャーワールド　2025", desc:"", cat:"旅行", year:2025, age:"4歳0ヶ月", dur:"4:46" },
+  { id:"wyeDG4dDnqM", title:"おやつタウン行ってきた", desc:"", cat:"おでかけ", year:2025, age:"3歳8ヶ月", dur:"4:56", spot:"おやつタウン", place:"三重県津市" },
+  { id:"jFuITu9glfY", title:"鈴鹿サーキット行ってきた", desc:"", cat:"おでかけ", year:2025, age:"3歳8ヶ月", dur:"3:28", spot:"鈴鹿サーキット", place:"三重県鈴鹿市" },
+  { id:"1AncYm8MaE8", title:"レモン組発表会『大きなおいも』", desc:"", cat:"保育園", year:2025, age:"3歳8ヶ月", dur:"16:34" },
+  { id:"qPoDpqxY5gk", title:"イトマン体験会行ってきた", desc:"", cat:"体験", year:2025, age:"3歳7ヶ月", dur:"3:11", spot:"イトマンスイミングスクール京都校", place:"京都府京都市西京区" },
+  { id:"FqtdxRH5rVg", title:"キッズプラザ大阪に行ってきた", desc:"", cat:"おでかけ", year:2025, age:"3歳7ヶ月", dur:"3:45", spot:"キッズプラザ大阪", place:"大阪府大阪市北区" },
+  { id:"cMK8fuAJNTg", title:"福知山児童館行ってきた", desc:"", cat:"おでかけ", year:2025, age:"3歳6ヶ月", dur:"2:35", spot:"福知山児童館", place:"京都府福知山市" },
+  { id:"h0_848YlNwk", title:"関西スポーツサイクルセンター行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳4ヶ月", dur:"3:46", spot:"関西サイクルスポーツセンター", place:"大阪府河内長野市" },
+  { id:"UUmYqewz86k", title:"樫原保育園それいけ発表会", desc:"", cat:"保育園", year:2024, age:"3歳3ヶ月", dur:"18:13" },
+  { id:"ox0t2PiO9ns", title:"樫原保育園運動会　2024", desc:"", cat:"保育園", year:2024, age:"3歳3ヶ月", dur:"12:44" },
+  { id:"TMeI60c10Fk", title:"神戸フルーツ・フラワーパーク行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳3ヶ月", dur:"3:14", spot:"神戸フルーツ・フラワーパーク", place:"兵庫県神戸市北区" },
+  { id:"LwqfmfsPo8A", title:"けいはんな記念公園行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳3ヶ月", dur:"2:58", spot:"けいはんな記念公園", place:"京都府精華町" },
+  { id:"GJFYVp9R7FE", title:"ばぁばとカレーを作ろう", desc:"", cat:"体験", year:2024, age:"3歳3ヶ月", dur:"15:59" },
+  { id:"J4q2SZ29600", title:"八幡市スポーツ公園行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳3ヶ月", dur:"2:56", spot:"八幡市スポーツ公園", place:"京都府八幡市" },
+  { id:"lLPHj_QPZ5Y", title:"三世代旅行", desc:"", cat:"旅行", year:2024, age:"3歳2ヶ月", dur:"4:32" },
+  { id:"kuAfARRClkY", title:"七五三のスタジオ撮影してきた", desc:"", cat:"おもいで", year:2024, age:"3歳2ヶ月", dur:"5:18" },
+  { id:"p_SwyiSqo_s", title:"かめプー行ってきた", desc:"", cat:"プール", year:2024, age:"3歳2ヶ月", dur:"4:22", spot:"かめプー（亀岡運動公園プール）", place:"京都府亀岡市" },
+  { id:"Wpds4mdrP7g", title:"デカパトス行ってきた", desc:"", cat:"プール", year:2024, age:"3歳1ヶ月", dur:"4:29", spot:"デカパトス", place:"兵庫県神戸市東灘区" },
+  { id:"PMQQIThAEJQ", title:"1秒動画Apr-Jun 2024", desc:"", cat:"おもいで", year:2024, age:"3歳1ヶ月", dur:"0:37" },
+  { id:"e53OgeuTk2c", title:"石垣小浜島旅行　ダイジェストVer.", desc:"", cat:"旅行", year:2024, age:"3歳1ヶ月", dur:"4:19" },
+  { id:"7MIPROpqfBI", title:"父の日にピザ作ったよ", desc:"", cat:"体験", year:2024, age:"3歳1ヶ月", dur:"17:13" },
+  { id:"A2Du4bLR9c8", title:"沖縄石垣旅行", desc:"", cat:"旅行", year:2024, age:"3歳0ヶ月", dur:"1:14:03" },
+  { id:"m5L6LvTuXXg", title:"それいけ！さくらんぼ", desc:"", cat:"保育園", year:2024, age:"3歳0ヶ月", dur:"3:17" },
+  { id:"-4cr0NCSCzM", title:"ユニバ行ってきた", desc:"", cat:"おでかけ", year:2024, age:"3歳0ヶ月", dur:"3:15", spot:"ユニバーサル・スタジオ・ジャパン", place:"大阪府大阪市此花区" },
+  { id:"LnMsZGVSqmY", title:"Happy 3rd Birthday", desc:"", cat:"おもいで", year:2024, age:"2歳11ヶ月", dur:"4:15" },
+  { id:"8iipQanlXnY", title:"母の日にケーキ作ったよ", desc:"", cat:"体験", year:2024, age:"2歳11ヶ月", dur:"9:27" },
+  { id:"PNomK_iVBl0", title:"二色浜に潮干狩りに行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳10ヶ月", dur:"3:56", spot:"二色の浜", place:"大阪府貝塚市" },
+  { id:"kavQEhdpwv4", title:"七谷川BBQ行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳10ヶ月", dur:"2:19", spot:"七谷川", place:"京都府亀岡市" },
+  { id:"8eWp7QaLxf0", title:"1秒動画Jan-Mar 2024", desc:"", cat:"おもいで", year:2024, age:"2歳10ヶ月", dur:"0:37" },
+  { id:"xY9-jK1q6ss", title:"諏訪ファミリーとアドベンチャーワールド行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳10ヶ月", dur:"3:41", spot:"アドベンチャーワールド", place:"和歌山県白浜町" },
+  { id:"hEhw5jgmKzg", title:"大宮交通公園行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳9ヶ月", dur:"3:06", spot:"大宮交通公園", place:"京都府京都市北区" },
+  { id:"GyFUeR_07OM", title:"神戸動物王国に行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳8ヶ月", dur:"3:16", spot:"神戸どうぶつ王国", place:"兵庫県神戸市中央区" },
+  { id:"8qED0ONC1s0", title:"バレンタインに手作りクッキーを作ったよ", desc:"", cat:"体験", year:2024, age:"2歳8ヶ月", dur:"8:57" },
+  { id:"0xpFFWRRPOA", title:"鳥取砂丘行ってきた", desc:"", cat:"旅行", year:2024, age:"2歳7ヶ月", dur:"4:29", spot:"鳥取砂丘", place:"鳥取県鳥取市" },
+  { id:"1EM_AiFL_mQ", title:"城崎温泉行ってきた", desc:"", cat:"旅行", year:2024, age:"2歳7ヶ月", dur:"4:52", spot:"城崎温泉", place:"兵庫県豊岡市" },
+  { id:"xADSRCG8auI", title:"1秒動画 Oct-Dec 2023", desc:"", cat:"おもいで", year:2024, age:"2歳7ヶ月", dur:"0:37" },
+  { id:"6WIhPUPh6Aw", title:"それいけ発表会", desc:"", cat:"保育園", year:2024, age:"2歳7ヶ月", dur:"11:57" },
+  { id:"M1oPQJc4ZOg", title:"リトルプラネットに行ってきた", desc:"", cat:"おでかけ", year:2024, age:"2歳6ヶ月", dur:"2:40", spot:"リトルプラネット（ララポート和泉）", place:"大阪府和泉市" },
+  { id:"xhsvv2clFCk", title:"クリスマスパーティ行ってきた", desc:"", cat:"おもいで", year:2023, age:"2歳6ヶ月", dur:"3:48", spot:"ザ オーク ガーデン", place:"京都府京都市中京区" },
+  { id:"BiceEPBppc0", title:"クリスマスツリーを飾ったよ", desc:"", cat:"おもいで", year:2023, age:"2歳5ヶ月", dur:"5:44" },
+  { id:"5AuNHfpQA94", title:"夢ナリエに行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳5ヶ月", dur:"2:11", spot:"京都丹波KAMEOKA夢ナリエ", place:"京都府亀岡市" },
+  { id:"xbXbV7rmDMs", title:"天王寺動物園行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳5ヶ月", dur:"4:15", spot:"天王寺動物園", place:"大阪府大阪市天王寺区" },
+  { id:"rs-luj8TtXs", title:"1秒動画 Jul-Sep 2023", desc:"", cat:"おもいで", year:2023, age:"2歳4ヶ月", dur:"0:37" },
+  { id:"IdxdCtY2Kt0", title:"王子動物園行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳4ヶ月", dur:"4:54", spot:"王子動物園", place:"兵庫県神戸市灘区" },
+  { id:"bxZPollkhcs", title:"東条湖おもちゃ王国行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳4ヶ月", dur:"4:44", spot:"東条湖おもちゃ王国", place:"兵庫県加東市" },
+  { id:"Nq7VOD7cPaU", title:"樫原保育園運動会　2023", desc:"", cat:"保育園", year:2023, age:"2歳4ヶ月", dur:"15:08" },
+  { id:"Gg1OGZfTwPY", title:"金魚ミュージアム行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳3ヶ月", dur:"4:16", spot:"金魚ミュージアム", place:"奈良県奈良市" },
+  { id:"JgnA72OioPI", title:"こどもの国行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳3ヶ月", dur:"3:12", spot:"滋賀県立びわ湖こどもの国", place:"滋賀県高島市" },
+  { id:"a0prZN0vADw", title:"ブルーメの丘行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳2ヶ月", dur:"3:11", spot:"ブルーメの丘", place:"滋賀県日野町" },
+  { id:"WHNc-GPukdQ", title:"じぃじから梨が届いたよ", desc:"", cat:"おもいで", year:2023, age:"2歳2ヶ月", dur:"0:53" },
+  { id:"UxIIkrqiWF8", title:"服部緑地ウォーターランド行ってきた", desc:"", cat:"プール", year:2023, age:"2歳2ヶ月", dur:"3:12", spot:"服部緑地ウォーターランド", place:"大阪府豊中市" },
+  { id:"IecUcbUXWak", title:"1秒動画 Apl-Jun 2023", desc:"", cat:"おもいで", year:2023, age:"2歳1ヶ月", dur:"0:37" },
+  { id:"KHCesxsEWwg", title:"太陽が丘ファミリープール行ってきた", desc:"", cat:"プール", year:2023, age:"2歳1ヶ月", dur:"3:58", spot:"太陽が丘プール（山城総合運動公園）", place:"京都府宇治市" },
+  { id:"Z5i6-Kjd3TQ", title:"沖縄旅行 ダイジェストver", desc:"", cat:"旅行", year:2023, age:"2歳1ヶ月", dur:"5:18" },
+  { id:"kAvbkuxH1EM", title:"沖縄旅行 Day3", desc:"", cat:"旅行", year:2023, age:"2歳1ヶ月", dur:"12:57" },
+  { id:"3sIsUZ-hwjM", title:"沖縄旅行 Day2", desc:"", cat:"旅行", year:2023, age:"2歳1ヶ月", dur:"24:12" },
+  { id:"j9JO95pAkO8", title:"沖縄旅行Day1", desc:"", cat:"旅行", year:2023, age:"2歳0ヶ月", dur:"11:34" },
+  { id:"TB3jD75FBss", title:"アンパンマンミュージアム行ってきた", desc:"", cat:"おでかけ", year:2023, age:"2歳0ヶ月", dur:"4:19", spot:"神戸アンパンマンこどもミュージアム", place:"兵庫県神戸市中央区" },
+  { id:"DjTwTOux0zk", title:"Happy 2nd Birthday", desc:"", cat:"おもいで", year:2023, age:"2歳0ヶ月", dur:"3:39" },
+  { id:"qqTv2wkMlvg", title:"どんどんでてこい　かわいい　いちご", desc:"", cat:"保育園", year:2023, age:"1歳11ヶ月", dur:"2:25" },
+  { id:"OtTn7lddDNM", title:"山城総合運動公園 (太陽が丘)行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳11ヶ月", dur:"2:03", spot:"山城総合運動公園（太陽が丘）", place:"京都府宇治市" },
+  { id:"j669e5XfClA", title:"母の日にフルーツケーキ作ったよ", desc:"", cat:"体験", year:2023, age:"1歳10ヶ月", dur:"7:29" },
+  { id:"jpG_Zcwk_tI", title:"2023GW ダイジェスト", desc:"", cat:"おもいで", year:2023, age:"1歳10ヶ月", dur:"3:36" },
+  { id:"VS4g1aoZ-mQ", title:"1秒動画Jan-Mar 2023", desc:"", cat:"おもいで", year:2023, age:"1歳10ヶ月", dur:"0:37" },
+  { id:"12GcfWttqDU", title:"海遊館に行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳10ヶ月", dur:"3:00", spot:"海遊館", place:"大阪府大阪市港区" },
+  { id:"6HG9Gf8vBDY", title:"生駒山上遊園地行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳10ヶ月", dur:"9:26", spot:"生駒山上遊園地", place:"奈良県生駒市" },
+  { id:"pHUdcTF_23Q", title:"京都市動物園行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳9ヶ月", dur:"2:13", spot:"京都市動物園", place:"京都府京都市左京区" },
+  { id:"RRZfdw27Vds", title:"はじめの遊園地", desc:"", cat:"おでかけ", year:2023, age:"1歳9ヶ月", dur:"5:23", spot:"ひらかたパーク", place:"大阪府枚方市" },
+  { id:"eGtTajQE-_4", title:"今年もさくら祭り行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳9ヶ月", dur:"2:32", spot:"京都やわた背割堤さくらまつり", place:"京都府八幡市" },
+  { id:"AsncTRjb3ho", title:"伊丹スカイパークに行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳8ヶ月", dur:"2:45", spot:"伊丹スカイパーク", place:"兵庫県伊丹市" },
+  { id:"DbsBF49vxyU", title:"宝ヶ池公園こどもの楽園に行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳8ヶ月", dur:"2:45", spot:"宝ヶ池公園", place:"京都府京都市左京区" },
+  { id:"2J2ruYQARAU", title:"春のいちご狩り行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳8ヶ月", dur:"2:40", spot:"道の駅 アグリパーク竜王", place:"滋賀県竜王町" },
+  { id:"XlTaoaBk6zU", title:"思い出スライドショー2022年", desc:"", cat:"おもいで", year:2023, age:"1歳7ヶ月", dur:"1:12" },
+  { id:"DZrudxcnOR0", title:"神戸どうぶつ王国行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳7ヶ月", dur:"3:32", spot:"神戸どうぶつ王国", place:"兵庫県神戸市中央区" },
+  { id:"QNUHug7TtU8", title:"ニフレル行ってきた", desc:"", cat:"おでかけ", year:2023, age:"1歳7ヶ月", dur:"0:35", spot:"ニフレル", place:"大阪府吹田市" },
+  { id:"x61q6hl7xb8", title:"2023年元旦", desc:"", cat:"おもいで", year:2023, age:"1歳6ヶ月", dur:"0:40" },
+  { id:"0HYu3ZRt4R8", title:"CHRISTMAS PARTY @ザ オークガーデン", desc:"", cat:"おもいで", year:2022, age:"1歳6ヶ月", dur:"1:07" },
+  { id:"j9QAuw0LP60", title:"朝会してた", desc:"", cat:"おもいで", year:2022, age:"1歳5ヶ月", dur:"1:01" },
+  { id:"cqIlCdhwmpg", title:"秋の運動会", desc:"", cat:"保育園", year:2022, age:"1歳3ヶ月", dur:"1:30" },
+  { id:"cJstEfdNlIk", title:"夏の思い出@宮津プール編", desc:"", cat:"プール", year:2022, age:"1歳2ヶ月", dur:"0:41", spot:"宮津プール", place:"京都府宮津市" },
+  { id:"8F6h0cfGGIY", title:"さらの成長記録0歳", desc:"さらの成長記録0歳", cat:"おもいで", year:2022, age:"1歳2ヶ月", dur:"1:01" },
+  { id:"2S3BSH-qw4g", title:"ゆうひの成長記録0歳", desc:"", cat:"おもいで", year:2022, age:"1歳2ヶ月", dur:"1:01" },
+  { id:"r4ZC4sF5ZVw", title:"サンクスパーティー@オークガーデン", desc:"", cat:"おもいで", year:2022, age:"1歳1ヶ月", dur:"0:24" },
+  { id:"Cbp02qBpqTk", title:"つかみ食べ", desc:"", cat:"おもいで", year:2022, age:"1歳0ヶ月", dur:"0:31" },
+  { id:"sXHUBFroiSs", title:"ボール入れられるかな？", desc:"", cat:"おもいで", year:2022, age:"0歳11ヶ月", dur:"1:25" },
+  { id:"QQvgNEsJnz8", title:"お母さんいつもありがとう", desc:"", cat:"おもいで", year:2022, age:"0歳11ヶ月", dur:"3:33" },
+  { id:"5jvmO1Y6_GA", title:"2022年6月11日", desc:"由陽の1人遊び", cat:"おもいで", year:2022, age:"0歳11ヶ月", dur:"0:30" },
+  { id:"x7sXCSjag4Q", title:"思い出スライドショー 2021", desc:"", cat:"おもいで", year:2022, age:"0歳11ヶ月", dur:"1:23" },
+  { id:"ctLQCTnebMM", title:"1秒動画Jan-Mar 2022", desc:"", cat:"おもいで", year:2022, age:"0歳10ヶ月", dur:"0:37" },
+  { id:"oOlVkJ1fDH0", title:"ちょっと前に進んだ❣️", desc:"", cat:"おもいで", year:2022, age:"0歳9ヶ月", dur:"0:39" },
+  { id:"taEKZVy-FRQ", title:"京都府立植物園行ってきた", desc:"", cat:"おでかけ", year:2022, age:"0歳8ヶ月", dur:"1:56", spot:"京都府立植物園", place:"京都府京都市左京区" },
+  { id:"dVNbXDEe3nw", title:"NAGISA TERRACE行ってきた", desc:"", cat:"おでかけ", year:2022, age:"0歳8ヶ月", dur:"1:56", spot:"NAGISA TERRACE", place:"滋賀県大津市" },
+  { id:"TsJU5CJh5ao", title:"寝返りできたよ", desc:"", cat:"おもいで", year:2022, age:"0歳8ヶ月", dur:"1:25" },
+  { id:"F7NBY2WIQOU", title:"お父さんと遊ぶよ", desc:"", cat:"おもいで", year:2022, age:"0歳8ヶ月", dur:"2:34" },
+  { id:"WDeGWOQmnM0", title:"イタタタタタタ", desc:"", cat:"おもいで", year:2022, age:"0歳8ヶ月", dur:"0:05" },
+  { id:"q9oJ-45ulAc", title:"余興動画　あゆみ保育園", desc:"", cat:"おもいで", year:2021, age:"0歳6ヶ月", dur:"4:17" },
+  { id:"IS2N7ofCjeo", title:"エンドロール", desc:"", cat:"おもいで", year:2021, age:"0歳6ヶ月", dur:"5:47" },
+  { id:"2G78EEZILYs", title:"余興動画　鬼ご", desc:"", cat:"おもいで", year:2021, age:"0歳6ヶ月", dur:"6:28" },
+  { id:"awFJ3lpV3LI", title:"1秒動画 Jul-Sep 2021", desc:"", cat:"おもいで", year:2021, age:"0歳5ヶ月", dur:"0:37" },
+  { id:"VLeVnq2skfU", title:"1秒動画 Apl-Jun 2021", desc:"", cat:"おもいで", year:2021, age:"0歳5ヶ月", dur:"0:37" },
+  { id:"e5MzX9oVvqU", title:"プロフィールムービー", desc:"", cat:"おもいで", year:2021, age:"0歳5ヶ月", dur:"4:50" },
+  { id:"V2UzOPOZd4A", title:"宝ヶ池にお散歩", desc:"", cat:"おでかけ", year:2021, age:"0歳3ヶ月", dur:"7:22", spot:"宝ヶ池公園", place:"京都府京都市左京区" },
+  { id:"CpAvGcuNJH8", title:"100日記念　お宮参り&お食い初め", desc:"", cat:"おもいで", year:2021, age:"0歳3ヶ月", dur:"5:21" },
+  { id:"bHHkilE3cuI", title:"安満遺跡公園でピクニック", desc:"", cat:"おでかけ", year:2021, age:"0歳3ヶ月", dur:"15:38", spot:"安満遺跡公園", place:"大阪府高槻市" },
+  { id:"xwqGieYEgdQ", title:"嵐山旅行", desc:"", cat:"旅行", year:2021, age:"0歳3ヶ月", dur:"5:02" },
+  { id:"P6x_dBdYG1c", title:"そうだ、梅小路公園行こう", desc:"", cat:"おでかけ", year:2021, age:"0歳2ヶ月", dur:"8:39", spot:"梅小路公園", place:"京都府京都市下京区" },
+  { id:"fd0t7wsQEbg", title:"御礼参り", desc:"", cat:"おもいで", year:2021, age:"0歳2ヶ月", dur:"6:45" },
+  { id:"E_Y4N0OKkwk", title:"ワンオペってこんな感じ", desc:"", cat:"おもいで", year:2021, age:"0歳2ヶ月", dur:"0:21" },
+  { id:"Gb-mqfSYPjk", title:"里帰り育児物語", desc:"", cat:"おもいで", year:2021, age:"0歳2ヶ月", dur:"5:48" },
+  { id:"MpDOC1tSwwY", title:"ベビーマッサージ", desc:"", cat:"体験", year:2021, age:"0歳1ヶ月", dur:"4:26" },
+  { id:"zlcI0iAuvBw", title:"ゆうひのなつやすみ", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月", dur:"3:42" },
+  { id:"lTuwiYgiRkw", title:"さらのなつやすみ", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月", dur:"3:44" },
+  { id:"FD0t4sj7mf8", title:"イクメンの育児記録", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月", dur:"15:25" },
+  { id:"EG8kj67IjyU", title:"smile", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月", dur:"3:47" },
+  { id:"YeRjzPpk0js", title:"深夜の授乳", desc:"生後1ヶ月の深夜の授乳\nさやかは紗良に母乳\nじゅんは由陽にミルクを飲ませる\n由陽のいつもと違うように疑問を持つ2人の様子をご覧ください", cat:"おもいで", year:2021, age:"0歳1ヶ月", dur:"7:31" },
+  { id:"WrKBJQkPu0Q", title:"はじめての喧嘩", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月", dur:"0:56" },
+  { id:"_ixtealK7p0", title:"さやかのすべらない話", desc:"妹さんと久々の再会\n出産の体験談を話して盛り上がるさやか\nすべらない話3本セットをどうぞ。", cat:"おもいで", year:2021, age:"0歳1ヶ月", dur:"4:40" },
+  { id:"ggfqfl_YQHc", title:"あなたに出会えたキセキ", desc:"", cat:"おもいで", year:2021, age:"0歳1ヶ月", dur:"3:16" },
+  { id:"L3M_Zpqqgqc", title:"最高のgift", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"4:59" },
+  { id:"x5WAZFj01yo", title:"沐浴の仕方", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"7:00" },
+  { id:"dp3eFRUL3eE", title:"紗良と由陽のお昼寝の時間", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"3:50" },
+  { id:"2xhiQUMI5lk", title:"由陽　はじめての浣腸", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"3:23" },
+  { id:"TET2xoQAaRI", title:"エコー検査記録", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"1:21:52" },
+  { id:"LhCIxg4sy68", title:"紗良vlog 2021/7/5", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"1:40" },
+  { id:"bHHimTw-z0o", title:"紗良と過ごす週末パート2", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"1:41" },
+  { id:"t8eygMA2oeU", title:"紗良と過ごす週末", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"1:03" },
+  { id:"C-f-3ni7yj8", title:"由陽初対面", desc:"", cat:"おもいで", year:2021, age:"0歳0ヶ月", dur:"1:12" },
+  { id:"PR5AQcCkY-A", title:"じゅんちゃんのモーニングルーティン", desc:"", cat:"おもいで", year:2021, dur:"11:38" },
 ];
 // AUTO-GENERATED:VIDEOS-END
 
@@ -589,7 +616,7 @@ const VIDEOS = [
 
 
 // 画面の変更が反映されたかを見分けるためのバージョン表示。機能追加・UI変更のたびに更新する
-const APP_VERSION = '1.3.1';
+const APP_VERSION = '1.4.0';
 const APP_VERSION_DATE = '2026-10-31';
 const CATS = ['すべて','プール','旅行','保育園','体験','おでかけ','おもいで'];
 const YEARS = ['すべて','2026','2025','2024','2023','2022','2021'];
@@ -1095,7 +1122,12 @@ function CatBadge({ cat, style={} }) {
 // ─────────────────────────────────────────────
 // CHAT SEARCH — 文章で動画をさがす（AI）。/api/chat に質問を送る。会話はこの画面の中だけに持ち、保存しない
 // ─────────────────────────────────────────────
-const CHAT_EXAMPLES = ['雨の日に行けるところ', '3歳のころのプール', '電車や乗り物が好きな日に', '京都で行ったところ'];
+const CHAT_CHIPS = [
+  { label:'雨の日', icon:'icons/ui-rain.png', query:'雨の日に行けるところ' },
+  { label:'3歳と一緒', icon:'icons/child-icon.png', query:'3歳のころに行ったところ' },
+  { label:'電車が好き', icon:'icons/ui-train.png', query:'電車や乗り物が好きな日に' },
+  { label:'京都', icon:'icons/ui-kyoto.png', query:'京都で行ったところ' },
+];
 const CHAT_ERRORS = {
   limit_ip: 'きょうは たくさん使ったので、ここまでです。あしたまたきてね',
   limit_all: 'きょうは たくさん使われたので、ここまでです。あしたまたきてね',
@@ -1143,6 +1175,8 @@ function ChatSearch({ onPlay, primary }) {
     }
   };
 
+  const askChip = (query) => { setOpen(true); send(query); };
+
   const bubble = (mine) => ({
     alignSelf: mine ? 'flex-end' : 'flex-start', maxWidth:'88%',
     background: mine ? primary : '#fffdf8', color: mine ? 'white' : '#3d2e1e',
@@ -1151,29 +1185,29 @@ function ChatSearch({ onPlay, primary }) {
   });
 
   return (
-    <div data-ui="chat" style={{maxWidth:'480px', margin:'-6px auto 16px'}}>
-      <button onClick={()=>setOpen(o=>!o)} aria-expanded={open} data-ui="chip" data-active={open?'1':'0'} style={{
-        display:'flex', alignItems:'center', justifyContent:'center', gap:'6px', width:'100%',
-        padding:'8px 14px', borderRadius:'14px', border:`2px solid ${open ? primary : '#d4c8b8'}`,
-        background: open ? primary : 'white', color: open ? 'white' : '#6a5a4a',
-        fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'13px', fontWeight:'700', cursor:'pointer'
-      }}>
-        <span aria-hidden="true">💬</span>文章で さがす（AI）<span aria-hidden="true" style={{fontSize:'10px'}}>{open ? '▲' : '▼'}</span>
+    <div data-ui="chat" style={{maxWidth:'480px', margin:'0 auto 16px'}}>
+      <button className="ai-card" onClick={()=>setOpen(o=>!o)} aria-expanded={open} data-ui="chip" data-active={open?'1':'0'}>
+        <img src="icons/ui-chat.png" alt="" width="48" height="48"/>
+        <span>
+          <span className="ai-card-title">AIに相談して探す</span>
+          <span className="ai-card-sub">行きたい場所を文章で伝えてね</span>
+        </span>
+        <span className="ai-card-arrow" aria-hidden="true">{open ? '⌃' : '›'}</span>
       </button>
+      <div className="ai-chips">
+        {CHAT_CHIPS.map(c => (
+          <button key={c.label} className="ai-chip" onClick={()=>askChip(c.query)} disabled={busy}>
+            <img src={c.icon} alt="" width="22" height="22"/>{c.label}
+          </button>
+        ))}
+      </div>
       {open && (
-        <div style={{marginTop:'8px', background:'#fffaf0', border:'2px solid #e4d8c4', borderRadius:'16px', padding:'10px'}}>
+        <div style={{marginTop:'10px', background:'#fffaf0', border:'2px solid #e4d8c4', borderRadius:'16px', padding:'10px'}}>
           <div ref={listRef} aria-live="polite" style={{display:'flex', flexDirection:'column', gap:'8px', maxHeight:'340px', overflowY:'auto', padding:'2px'}}>
             {msgs.length===0 && !pending && (
               <div style={{textAlign:'center', color:'#8a7a6a', fontSize:'12px', lineHeight:1.7}}>
                 どんなおでかけを みたいですか？<br/>
-                <span style={{display:'flex', flexWrap:'wrap', gap:'6px', justifyContent:'center', marginTop:'6px'}}>
-                  {CHAT_EXAMPLES.map(ex => (
-                    <button key={ex} onClick={()=>send(ex)} disabled={busy} style={{
-                      border:'1.5px solid #d4c8b8', background:'white', color:'#6a5a4a', borderRadius:'16px',
-                      padding:'4px 12px', fontSize:'12px', fontFamily:"'Zen Maru Gothic',sans-serif", cursor:'pointer'
-                    }}>{ex}</button>
-                  ))}
-                </span>
+                下に入力するか、上のボタンを押してね
               </div>
             )}
             {msgs.map((m, i) => (
@@ -1228,7 +1262,14 @@ function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, pri
   const nActive = (activeCat!=='すべて'?1:0) + (activeYear!=='すべて'?1:0);
   return (
     <div>
-      <window.SearchAuto value={search} onChange={onSearch} videos={VIDEOS}/>
+      {variant==='A' && (
+        <h2 className="sheet-title">
+          <img src="icons/ui-sprout.png" alt="" width="36" height="36"/>今日はどこへおでかけ？
+          <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" style={{marginLeft:'-2px', alignSelf:'flex-start'}}><path d="M7 19 L12 8" stroke="#F0A030" stroke-width="3" stroke-linecap="round"/><path d="M15 21 L24 12" stroke="#F0A030" stroke-width="3" stroke-linecap="round"/></svg>
+        </h2>
+      )}
+      <window.SearchAuto value={search} onChange={onSearch} videos={VIDEOS}
+        onSubmit={()=>{const el=document.getElementById('results'); if(el) el.scrollIntoView({behavior:'smooth', block:'start'});}}/>
       <ChatSearch onPlay={onPlay} primary={primary}/>
       <div className="fb-mobile">
         <button className="fb-open" data-ui="chip" data-active="0" onClick={()=>setSheet(true)}>
@@ -1305,6 +1346,7 @@ function CardA({ video, onPlay, primary, delayIdx=0, decoSide=null }) {
         }}/>
         {thumbState===0 && <div className="sk" aria-hidden="true"></div>}
         {thumbState===2 && <div className="sk-err"><span>🍂</span>サムネイルを読みこめませんでした</div>}
+        {video.dur && <span className="dur-badge">{video.dur}</span>}
         <div style={{
           position:'absolute', inset:0,
           background: hovered ? 'rgba(10,30,5,0.32)' : 'rgba(10,30,5,0)',
@@ -1606,7 +1648,7 @@ function HeaderA({ siteName, siteSubtitle, onAi }) {
       </div>
 
       {/* Watercolor edge bleed into content area */}
-      <div style={{
+      <div className="hero-strip" style={{
         position:'absolute', bottom:0, left:0, right:0, height:'80px', zIndex:3
       }}>
         <WatercolorStrip/>
@@ -1760,13 +1802,14 @@ function App() {
             <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
               search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A" onPlay={setModalVideo}/>
           </div>
-          <Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/>
+          <div className="mob-hide"><Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/></div>
         </div>
 
         {activeCat==='すべて' && activeYear==='すべて' && !search.trim() && (
-          <window.Carousel title="さいきんの おでかけ" videos={VIDEOS.slice(0,10)} onPlay={setModalVideo} Card={CardA} primary={primary}/>
+          <window.Carousel title="さいきんの おでかけ" videos={VIDEOS.slice(0,10)} onPlay={setModalVideo} Card={CardA} primary={primary}
+            onMore={()=>{const el=document.getElementById('results'); if(el) el.scrollIntoView({behavior:'smooth', block:'start'});}}/>
         )}
-        <main style={{maxWidth:'1240px', margin:'28px auto', padding:'0 16px 60px', position:'relative'}}>
+        <main id="results" style={{maxWidth:'1240px', margin:'28px auto', padding:'0 16px 60px', position:'relative'}}>
           {/* 散らばるキャラクター */}
           <Character kind="donguri" size={78} top={'8%'} left={-30} rotate={-8} z={5}/>
           <Character kind="tanuki" size={110} top={'38%'} right={-40} rotate={6} alt z={5}
