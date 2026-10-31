@@ -53,7 +53,7 @@ function SearchAuto({ value, onChange, videos, onSubmit }){
         boxShadow:'0 2px 12px rgba(60,40,10,0.1)'
       }}>
         <img className="sa-icon" src="icons/ui-search.png" alt="" width="24" height="24" style={{flexShrink:0}}/>
-        <input type="text" value={text} placeholder={narrow?'場所・施設・キーワードで探す':'動画を検索…（例：プール、万博）'}
+        <input type="text" value={text} placeholder={narrow?'プール、京都、雨の日などで探す':'動画を検索…（例：プール、万博）'}
           role="combobox" aria-expanded={showList} aria-controls="sa-list" aria-autocomplete="list"
           aria-activedescendant={hi>=0?`sa-opt-${hi}`:undefined}
           onChange={e=>{setText(e.target.value);setOpen(true);setHi(-1);if(!composing.current&&!e.nativeEvent.isComposing) onChange(e.target.value);}}

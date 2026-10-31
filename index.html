@@ -245,19 +245,18 @@ html,body{overflow-x:hidden}
 .hero-c{height:380px}
 
 /* ─── 新しいスマホの見た目（幅640px以下）。AIカードは全幅で共通 ─── */
-.ai-card{display:flex;align-items:center;gap:12px;width:100%;padding:12px 16px;border-radius:18px;border:none;background:#FCEBD3;cursor:pointer;text-align:left;font-family:'Zen Maru Gothic',sans-serif}
+.ai-card{display:flex;align-items:center;gap:10px;width:100%;padding:8px 14px;border-radius:16px;border:none;background:#FBF1E0;cursor:pointer;text-align:left;font-family:'Zen Maru Gothic',sans-serif}
 .ai-card[data-active="1"]{background:#F8DDB4}
 .ai-card img{flex-shrink:0}
-.ai-card-title{display:block;font-size:17px;font-weight:700;color:#3d2e1e;line-height:1.3}
-.ai-card-sub{display:block;font-size:12px;color:#8a7a6a;margin-top:2px;line-height:1.4}
-.ai-card-arrow{margin-left:auto;font-size:28px;color:#e89a2c;line-height:1;flex-shrink:0}
-.ai-chips{display:flex;gap:5px;margin-top:10px;overflow-x:auto;scrollbar-width:none;padding:2px 1px}
-.ai-chips::-webkit-scrollbar{display:none}
+.ai-card-title{display:block;font-size:15px;font-weight:700;color:#3d2e1e;line-height:1.3}
+.ai-card-arrow{margin-left:auto;font-size:22px;color:#e89a2c;line-height:1;flex-shrink:0}
+.ai-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;padding:2px 1px}
 .ai-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;padding:5px 9px 5px 5px;border-radius:999px;border:none;background:#F2EDDF;color:#3d2e1e;font-family:'Zen Maru Gothic',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
 .ai-chip:disabled{opacity:.5;cursor:default}
 .sheet-title,.sa-go{display:none}
 .dur-badge{position:absolute;right:8px;bottom:8px;background:rgba(30,22,10,.72);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:8px;letter-spacing:.02em}
 .cr-more{display:none}
+.list-head{display:none}
 @media (max-width:640px){
   .hero-strip{display:none}
   [data-ui="panel"]{margin:-28px 0 0 !important;border-radius:30px 30px 0 0 !important;padding:22px 16px 10px !important;max-width:none !important;box-shadow:0 -6px 18px rgba(60,40,10,.10) !important;background:#FFFBF2 !important;backdrop-filter:none !important}
@@ -267,8 +266,16 @@ html,body{overflow-x:hidden}
   .sa-go{display:block;flex-shrink:0;background:#E8A33D;color:#fff;border:none;border-radius:999px;padding:0 14px;min-height:44px;font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
   [data-ui="search"] input{font-size:13px !important}
   .mob-hide{display:none}
-  .cr-btns{display:none}
-  .cr-more{display:block;background:none;border:none;color:#8a7a6a;font-family:'Zen Maru Gothic',sans-serif;font-size:14px;cursor:pointer;white-space:nowrap}
+  /* 一覧の見出し（スマホだけ）：さいきんの おでかけ ○本 ［絞り込み］。しぼりこみは、動画を見ながら選べるこの位置に置く */
+  .cr-head{display:none}
+  .cr{margin-top:4px}
+  .list-head{display:flex;align-items:center;gap:8px;max-width:1240px;margin:22px auto 4px;padding:0 16px;position:relative;z-index:2}
+  .list-head h2{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;color:#3d2e1e;white-space:nowrap}
+  .list-count{color:#d98a1c;font-weight:700;font-size:17px;white-space:nowrap}
+  .list-filter{margin-left:auto;display:inline-flex;align-items:center;gap:6px;border:2px solid #4b5a3a;background:#fff;border-radius:999px;padding:6px 13px;font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:#3d2e1e;cursor:pointer;white-space:nowrap}
+  .list-filter .fb-badge{margin-left:2px}
+  .fb-A .fb-mobile{display:none !important}
+  .fb-A .cnt{display:none}
 }
 @media (max-width:640px){.hero-a{height:280px}.hero-c{height:260px}.hero-title{transform:translateY(-44px)}}
 .fb-open{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 20px;border-radius:999px;font-family:var(--tf,'Zen Maru Gothic'),sans-serif;font-size:14px;cursor:pointer;background:#fffaf0;color:var(--ink,#3d2e1e);border:2.5px solid var(--ink,#5a4a3a)}
@@ -616,7 +623,7 @@ const VIDEOS = [
 
 
 // 画面の変更が反映されたかを見分けるためのバージョン表示。機能追加・UI変更のたびに更新する
-const APP_VERSION = '1.4.0';
+const APP_VERSION = '1.4.1';
 const APP_VERSION_DATE = '2026-10-31';
 const CATS = ['すべて','プール','旅行','保育園','体験','おでかけ','おもいで'];
 const YEARS = ['すべて','2026','2025','2024','2023','2022','2021'];
@@ -1185,29 +1192,26 @@ function ChatSearch({ onPlay, primary }) {
   });
 
   return (
-    <div data-ui="chat" style={{maxWidth:'480px', margin:'0 auto 16px'}}>
+    <div data-ui="chat" style={{maxWidth:'480px', margin:'0 auto 12px'}}>
       <button className="ai-card" onClick={()=>setOpen(o=>!o)} aria-expanded={open} data-ui="chip" data-active={open?'1':'0'}>
-        <img src="icons/ui-chat.png" alt="" width="48" height="48"/>
-        <span>
-          <span className="ai-card-title">AIに相談して探す</span>
-          <span className="ai-card-sub">行きたい場所を文章で伝えてね</span>
-        </span>
-        <span className="ai-card-arrow" aria-hidden="true">{open ? '⌃' : '›'}</span>
+        <img src="icons/ui-chat.png" alt="" width="34" height="34"/>
+        <span className="ai-card-title">文章で相談して探す</span>
+        <span className="ai-card-arrow" aria-hidden="true">{open ? '⌃' : '⌄'}</span>
       </button>
-      <div className="ai-chips">
-        {CHAT_CHIPS.map(c => (
-          <button key={c.label} className="ai-chip" onClick={()=>askChip(c.query)} disabled={busy}>
-            <img src={c.icon} alt="" width="22" height="22"/>{c.label}
-          </button>
-        ))}
-      </div>
       {open && (
-        <div style={{marginTop:'10px', background:'#fffaf0', border:'2px solid #e4d8c4', borderRadius:'16px', padding:'10px'}}>
+        <div style={{marginTop:'8px', background:'#fffaf0', border:'2px solid #e4d8c4', borderRadius:'16px', padding:'10px'}}>
+          <div className="ai-chips">
+            {CHAT_CHIPS.map(c => (
+              <button key={c.label} className="ai-chip" onClick={()=>askChip(c.query)} disabled={busy}>
+                <img src={c.icon} alt="" width="22" height="22"/>{c.label}
+              </button>
+            ))}
+          </div>
           <div ref={listRef} aria-live="polite" style={{display:'flex', flexDirection:'column', gap:'8px', maxHeight:'340px', overflowY:'auto', padding:'2px'}}>
             {msgs.length===0 && !pending && (
               <div style={{textAlign:'center', color:'#8a7a6a', fontSize:'12px', lineHeight:1.7}}>
                 どんなおでかけを みたいですか？<br/>
-                下に入力するか、上のボタンを押してね
+                上のボタンを押すか、下に入力してね
               </div>
             )}
             {msgs.map((m, i) => (
@@ -1256,16 +1260,18 @@ function ChatSearch({ onPlay, primary }) {
 // ─────────────────────────────────────────────
 // FILTER BAR (shared)
 // ─────────────────────────────────────────────
-function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, primary, count, variant, onPlay }) {
+function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, primary, count, variant, onPlay, sheetOpen, onSheet }) {
   const isTabStyle = variant === 'B';
-  const [sheet, setSheet] = useState(false);
+  const [localSheet, setLocalSheet] = useState(false);
+  const sheet = sheetOpen !== undefined ? sheetOpen : localSheet;
+  const setSheet = onSheet || setLocalSheet;
   const nActive = (activeCat!=='すべて'?1:0) + (activeYear!=='すべて'?1:0);
   return (
-    <div>
+    <div className={variant==='A' ? 'fb-A' : ''}>
       {variant==='A' && (
         <h2 className="sheet-title">
-          <img src="icons/ui-sprout.png" alt="" width="36" height="36"/>今日はどこへおでかけ？
-          <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" style={{marginLeft:'-2px', alignSelf:'flex-start'}}><path d="M7 19 L12 8" stroke="#F0A030" stroke-width="3" stroke-linecap="round"/><path d="M15 21 L24 12" stroke="#F0A030" stroke-width="3" stroke-linecap="round"/></svg>
+          <img src="icons/ui-sprout.png" alt="" width="36" height="36"/>どこへおでかけする？
+          <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" style={{marginLeft:'-2px', alignSelf:'flex-start'}}><path d="M7 19 L12 8" stroke="#F0A030" strokeWidth="3" strokeLinecap="round"/><path d="M15 21 L24 12" stroke="#F0A030" strokeWidth="3" strokeLinecap="round"/></svg>
         </h2>
       )}
       <window.SearchAuto value={search} onChange={onSearch} videos={VIDEOS}
@@ -1765,6 +1771,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [modalVideo, setModalVideo] = useState(null);
   const [showAi, setShowAi] = useState(false);
+  const [sheetA, setSheetA] = useState(false); // スマホ（variant A）のしぼりこみシート
 
   const filtered = useMemo(() => VIDEOS.filter(v => {
     const matchCat  = activeCat  === 'すべて' || v.cat  === activeCat;
@@ -1800,11 +1807,21 @@ function App() {
         <div style={{position:'relative', maxWidth:'820px', margin:'0 auto'}}>
           <div data-ui="panel" style={{background:'rgba(255,252,245,0.96)', margin:'10px 16px 0', borderRadius:'18px', padding:'20px 20px 16px', maxWidth:'700px', marginLeft:'auto', marginRight:'auto', boxShadow:'0 4px 24px rgba(60,40,10,0.14)', position:'relative', zIndex:2, backdropFilter:'blur(8px)'}}>
             <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
-              search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A" onPlay={setModalVideo}/>
+              search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A" onPlay={setModalVideo}
+              sheetOpen={sheetA} onSheet={setSheetA}/>
           </div>
           <div className="mob-hide"><Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/></div>
         </div>
 
+        <div className="list-head">
+          <img src="icons/ui-sprout.png" alt="" width="30" height="30"/>
+          <h2>{(activeCat==='すべて' && activeYear==='すべて' && !search.trim()) ? 'さいきんの動画' : 'さがした動画'}</h2>
+          <span className="list-count">{filtered.length}本</span>
+          <button className="list-filter" onClick={()=>setSheetA(true)}>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h9M14 5h2M2 13h2M7 13h9" stroke="#3d2e1e" strokeWidth="2" strokeLinecap="round" fill="none"/><circle cx="12.5" cy="5" r="1.8" fill="none" stroke="#3d2e1e" strokeWidth="2"/><circle cx="5.5" cy="13" r="1.8" fill="none" stroke="#3d2e1e" strokeWidth="2"/></svg>
+            絞り込み{((activeCat!=='すべて'?1:0)+(activeYear!=='すべて'?1:0))>0 && <span className="fb-badge">{(activeCat!=='すべて'?1:0)+(activeYear!=='すべて'?1:0)}</span>}
+          </button>
+        </div>
         {activeCat==='すべて' && activeYear==='すべて' && !search.trim() && (
           <window.Carousel title="さいきんの おでかけ" videos={VIDEOS.slice(0,10)} onPlay={setModalVideo} Card={CardA} primary={primary}
             onMore={()=>{const el=document.getElementById('results'); if(el) el.scrollIntoView({behavior:'smooth', block:'start'});}}/>
