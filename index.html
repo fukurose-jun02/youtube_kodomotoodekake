@@ -585,7 +585,7 @@ const VIDEOS = [
 
 
 // 画面の変更が反映されたかを見分けるためのバージョン表示。機能追加・UI変更のたびに更新する
-const APP_VERSION = '1.2.2';
+const APP_VERSION = '1.3.0';
 const APP_VERSION_DATE = '2026-10-31';
 const CATS = ['すべて','プール','旅行','保育園','体験','おでかけ','おもいで'];
 const YEARS = ['すべて','2026','2025','2024','2023','2022','2021'];
@@ -1089,15 +1089,143 @@ function CatBadge({ cat, style={} }) {
 }
 
 // ─────────────────────────────────────────────
+// CHAT SEARCH — 文章で動画をさがす（AI）。/api/chat に質問を送る。会話はこの画面の中だけに持ち、保存しない
+// ─────────────────────────────────────────────
+const CHAT_EXAMPLES = ['雨の日に行けるところ', '3歳のころのプール', '電車や乗り物が好きな日に', '京都で行ったところ'];
+const CHAT_ERRORS = {
+  limit_ip: 'きょうは たくさん使ったので、ここまでです。あしたまたきてね',
+  limit_all: 'きょうは たくさん使われたので、ここまでです。あしたまたきてね',
+  unavailable: 'いま、おへんじができません。上の検索ボックスを使ってね',
+};
+
+function ChatSearch({ onPlay, primary }) {
+  const [open, setOpen] = useState(false);
+  const [msgs, setMsgs] = useState([]);       // 終わった往復だけ（user と assistant が交互）
+  const [pending, setPending] = useState(''); // 送信中の質問
+  const [text, setText] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const listRef = useRef(null);
+  const byId = useMemo(() => Object.fromEntries(VIDEOS.map(v => [v.id, v])), []);
+
+  useEffect(() => {
+    if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
+  }, [msgs, pending, open]);
+
+  const send = async (q) => {
+    const message = (q === undefined ? text : q).trim();
+    if (!message || busy) return;
+    if (message.length > 200) { setError('200文字までで入力してね'); return; }
+    setError(''); setBusy(true); setPending(message); setText('');
+    try {
+      const history = msgs.slice(-12).map(m => m.role === 'assistant' ? { role: m.role, text: m.text, ids: m.ids } : { role: m.role, text: m.text });
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, history }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(CHAT_ERRORS[data.error] || (res.status === 400 ? 'うまく読みとれませんでした。ことばを変えてみてね' : CHAT_ERRORS.unavailable));
+        setText(message);
+        return;
+      }
+      setMsgs(prev => [...prev, { role: 'user', text: message }, { role: 'assistant', text: data.reply || '', ids: data.videoIds || [] }]);
+    } catch (e) {
+      setError(CHAT_ERRORS.unavailable);
+      setText(message);
+    } finally {
+      setPending(''); setBusy(false);
+    }
+  };
+
+  const bubble = (mine) => ({
+    alignSelf: mine ? 'flex-end' : 'flex-start', maxWidth:'88%',
+    background: mine ? primary : '#fffdf8', color: mine ? 'white' : '#3d2e1e',
+    border: mine ? 'none' : '1.5px solid #e4d8c4', borderRadius: mine ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
+    padding:'8px 12px', fontSize:'13px', lineHeight:1.6, whiteSpace:'pre-wrap', wordBreak:'break-word', textAlign:'left'
+  });
+
+  return (
+    <div data-ui="chat" style={{maxWidth:'480px', margin:'-6px auto 16px'}}>
+      <button onClick={()=>setOpen(o=>!o)} aria-expanded={open} data-ui="chip" data-active={open?'1':'0'} style={{
+        display:'flex', alignItems:'center', justifyContent:'center', gap:'6px', width:'100%',
+        padding:'8px 14px', borderRadius:'14px', border:`2px solid ${open ? primary : '#d4c8b8'}`,
+        background: open ? primary : 'white', color: open ? 'white' : '#6a5a4a',
+        fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'13px', fontWeight:'700', cursor:'pointer'
+      }}>
+        <span aria-hidden="true">💬</span>文章で さがす（AI）<span aria-hidden="true" style={{fontSize:'10px'}}>{open ? '▲' : '▼'}</span>
+      </button>
+      {open && (
+        <div style={{marginTop:'8px', background:'#fffaf0', border:'2px solid #e4d8c4', borderRadius:'16px', padding:'10px'}}>
+          <div ref={listRef} aria-live="polite" style={{display:'flex', flexDirection:'column', gap:'8px', maxHeight:'340px', overflowY:'auto', padding:'2px'}}>
+            {msgs.length===0 && !pending && (
+              <div style={{textAlign:'center', color:'#8a7a6a', fontSize:'12px', lineHeight:1.7}}>
+                どんなおでかけを みたいですか？<br/>
+                <span style={{display:'flex', flexWrap:'wrap', gap:'6px', justifyContent:'center', marginTop:'6px'}}>
+                  {CHAT_EXAMPLES.map(ex => (
+                    <button key={ex} onClick={()=>send(ex)} disabled={busy} style={{
+                      border:'1.5px solid #d4c8b8', background:'white', color:'#6a5a4a', borderRadius:'16px',
+                      padding:'4px 12px', fontSize:'12px', fontFamily:"'Zen Maru Gothic',sans-serif", cursor:'pointer'
+                    }}>{ex}</button>
+                  ))}
+                </span>
+              </div>
+            )}
+            {msgs.map((m, i) => (
+              <React.Fragment key={i}>
+                <div style={bubble(m.role==='user')}>{m.text}</div>
+                {m.role==='assistant' && m.ids.map(id => byId[id] && (
+                  <button key={id} onClick={()=>onPlay(byId[id])} style={{
+                    display:'flex', gap:'10px', alignItems:'center', textAlign:'left', width:'100%',
+                    background:'white', border:'1.5px solid #e4d8c4', borderRadius:'12px', padding:'6px', cursor:'pointer'
+                  }}>
+                    <img src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`} alt="" loading="lazy" style={{width:'84px', height:'47px', objectFit:'cover', borderRadius:'6px', flexShrink:0, background:'#e8ddd0'}}/>
+                    <span style={{minWidth:0}}>
+                      <span style={{display:'block', fontSize:'13px', fontWeight:'700', color:'#3d2e1e', lineHeight:1.4}}>{byId[id].title}</span>
+                      <span style={{display:'block', fontSize:'11px', color:'#a09080'}}>{byId[id].year}<AgeTag video={byId[id]} style={{marginLeft:'8px'}}/></span>
+                      <SpotLine video={byId[id]}/>
+                    </span>
+                  </button>
+                ))}
+              </React.Fragment>
+            ))}
+            {pending && <div style={bubble(true)}>{pending}</div>}
+            {busy && <div style={{...bubble(false), color:'#8a7a6a'}}>さがしています…</div>}
+          </div>
+          {error && <p role="alert" style={{margin:'8px 2px 0', fontSize:'12px', color:'#b5502d', lineHeight:1.5}}>{error}</p>}
+          <div style={{display:'flex', gap:'6px', marginTop:'8px'}}>
+            <input type="text" value={text} maxLength={200} placeholder="例：雨の日に行けるところ"
+              aria-label="さがしたい動画を文章で入力"
+              onChange={e=>setText(e.target.value)}
+              onKeyDown={e=>{ if (e.key==='Enter' && !e.nativeEvent.isComposing && e.keyCode!==229) { e.preventDefault(); send(); } }}
+              style={{flex:1, minWidth:0, border:'2px solid #d4c8b8', borderRadius:'12px', padding:'8px 12px', fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'14px', color:'#3d2e1e', outline:'none', background:'#fffdf8'}}/>
+            <button onClick={()=>send()} disabled={busy || !text.trim()} style={{
+              border:'none', borderRadius:'12px', padding:'0 16px', background: (busy || !text.trim()) ? '#c8c0b0' : primary, color:'white',
+              fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'13px', fontWeight:'700', cursor: (busy || !text.trim()) ? 'default' : 'pointer', minHeight:'40px'
+            }}>送る</button>
+          </div>
+          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:'6px', gap:'8px'}}>
+            <span style={{fontSize:'10px', color:'#a09080', lineHeight:1.5, textAlign:'left'}}>AIのこたえは、まちがえることがあります。質問は、サーバーに保存しません。</span>
+            {msgs.length>0 && <button onClick={()=>{setMsgs([]); setError('');}} style={{background:'none', border:'none', color:'#8a7a6a', fontSize:'11px', cursor:'pointer', textDecoration:'underline', whiteSpace:'nowrap', fontFamily:"'Zen Maru Gothic',sans-serif"}}>はじめから</button>}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────
 // FILTER BAR (shared)
 // ─────────────────────────────────────────────
-function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, primary, count, variant }) {
+function FilterBar({ activeCat, activeYear, onCat, onYear, search, onSearch, primary, count, variant, onPlay }) {
   const isTabStyle = variant === 'B';
   const [sheet, setSheet] = useState(false);
   const nActive = (activeCat!=='すべて'?1:0) + (activeYear!=='すべて'?1:0);
   return (
     <div>
       <window.SearchAuto value={search} onChange={onSearch} videos={VIDEOS}/>
+      <ChatSearch onPlay={onPlay} primary={primary}/>
       <div className="fb-mobile">
         <button className="fb-open" data-ui="chip" data-active="0" onClick={()=>setSheet(true)}>
           しぼりこみ（年・カテゴリ）{nActive>0 && <span className="fb-badge">{nActive}</span>}
@@ -1626,7 +1754,7 @@ function App() {
         <div style={{position:'relative', maxWidth:'820px', margin:'0 auto'}}>
           <div data-ui="panel" style={{background:'rgba(255,252,245,0.96)', margin:'10px 16px 0', borderRadius:'18px', padding:'20px 20px 16px', maxWidth:'700px', marginLeft:'auto', marginRight:'auto', boxShadow:'0 4px 24px rgba(60,40,10,0.14)', position:'relative', zIndex:2, backdropFilter:'blur(8px)'}}>
             <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
-              search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A"/>
+              search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="A" onPlay={setModalVideo}/>
           </div>
           <Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/>
         </div>
@@ -1719,7 +1847,7 @@ function App() {
         </div>
         <div style={{position:'relative', maxWidth:'860px', margin:'-8px auto 0', padding:'0 20px 16px'}}>
           <FilterBar activeCat={activeCat} activeYear={activeYear} onCat={setActiveCat} onYear={setActiveYear}
-            search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="C"/>
+            search={search} onSearch={setSearch} primary={primary} count={filtered.length} variant="C" onPlay={setModalVideo}/>
           <Character kind="happa" size={78} top={-30} right={'2%'} rotate={12} alt z={3}/>
         </div>
         <main style={{maxWidth:'1240px', margin:'0 auto', padding:'0 20px 80px', position:'relative'}}>

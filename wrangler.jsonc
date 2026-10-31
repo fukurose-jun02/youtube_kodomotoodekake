@@ -1,8 +1,26 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "kodomo-odekake",
+  "main": "worker/index.mjs",
   "compatibility_date": "2026-10-18",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS",
+    // /api/* だけWorkerが先に処理し、それ以外は今までどおり静的ファイルを返す
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "kodomo-odekake-chat",
+      "database_id": "7ee81f5a-986e-4b7f-a2b4-564470e8df31",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "GEMINI_MODEL": "gemini-3.1-flash-lite",
+    // チャットの1日の上限（1人あたり／サイト全体）。変えるときは、ここを直して再デプロイする
+    "LIMIT_PER_IP": "15",
+    "LIMIT_ALL": "50"
   }
 }

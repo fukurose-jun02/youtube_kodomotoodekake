@@ -4,3 +4,6 @@
 
 # wrangler dev のローカル状態
 .wrangler/
+
+# wrangler dev のローカル用の秘密情報（Gemini APIキーなど）
+.dev.vars
