@@ -585,7 +585,7 @@ const VIDEOS = [
 
 
 // 画面の変更が反映されたかを見分けるためのバージョン表示。機能追加・UI変更のたびに更新する
-const APP_VERSION = '1.2.1';
+const APP_VERSION = '1.2.2';
 const APP_VERSION_DATE = '2026-10-31';
 const CATS = ['すべて','プール','旅行','保育園','体験','おでかけ','おもいで'];
 const YEARS = ['すべて','2026','2025','2024','2023','2022','2021'];
@@ -869,7 +869,7 @@ function SpotLine({ video, style }) {
   if (!video.spot) return null;
   return (
     <p style={{fontSize:'11px', color:'#7a8a5a', lineHeight:1.5, ...style}}>
-      📍 {video.spot}<span style={{color:'#a0a890'}}> ・ {video.place}</span>
+      <img src="icons/map-pin.svg" alt="" width="10" height="14" style={{verticalAlign:'-2px', marginRight:'5px'}}/>{video.spot}<span style={{color:'#a0a890'}}> ・ {video.place}</span>
     </p>
   );
 }
