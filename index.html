@@ -623,7 +623,7 @@ const VIDEOS = [
 
 
 // 画面の変更が反映されたかを見分けるためのバージョン表示。機能追加・UI変更のたびに更新する
-const APP_VERSION = '1.4.1';
+const APP_VERSION = '1.4.2';
 const APP_VERSION_DATE = '2026-10-31';
 const CATS = ['すべて','プール','旅行','保育園','体験','おでかけ','おもいで'];
 const YEARS = ['すべて','2026','2025','2024','2023','2022','2021'];
@@ -1208,12 +1208,6 @@ function ChatSearch({ onPlay, primary }) {
             ))}
           </div>
           <div ref={listRef} aria-live="polite" style={{display:'flex', flexDirection:'column', gap:'8px', maxHeight:'340px', overflowY:'auto', padding:'2px'}}>
-            {msgs.length===0 && !pending && (
-              <div style={{textAlign:'center', color:'#8a7a6a', fontSize:'12px', lineHeight:1.7}}>
-                どんなおでかけを みたいですか？<br/>
-                上のボタンを押すか、下に入力してね
-              </div>
-            )}
             {msgs.map((m, i) => (
               <React.Fragment key={i}>
                 <div style={bubble(m.role==='user')}>{m.text}</div>
@@ -1247,10 +1241,9 @@ function ChatSearch({ onPlay, primary }) {
               fontFamily:"'Zen Maru Gothic',sans-serif", fontSize:'13px', fontWeight:'700', cursor: (busy || !text.trim()) ? 'default' : 'pointer', minHeight:'40px'
             }}>送る</button>
           </div>
-          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:'6px', gap:'8px'}}>
-            <span style={{fontSize:'10px', color:'#a09080', lineHeight:1.5, textAlign:'left'}}>AIのこたえは、まちがえることがあります。質問は、サーバーに保存しません。</span>
-            {msgs.length>0 && <button onClick={()=>{setMsgs([]); setError('');}} style={{background:'none', border:'none', color:'#8a7a6a', fontSize:'11px', cursor:'pointer', textDecoration:'underline', whiteSpace:'nowrap', fontFamily:"'Zen Maru Gothic',sans-serif"}}>はじめから</button>}
-          </div>
+          {msgs.length>0 && <div style={{display:'flex', justifyContent:'flex-end', marginTop:'6px'}}>
+            <button onClick={()=>{setMsgs([]); setError('');}} style={{background:'none', border:'none', color:'#8a7a6a', fontSize:'11px', cursor:'pointer', textDecoration:'underline', whiteSpace:'nowrap', fontFamily:"'Zen Maru Gothic',sans-serif"}}>はじめから</button>
+          </div>}
         </div>
       )}
     </div>
