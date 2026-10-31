@@ -260,7 +260,7 @@ async function getVideoDetails(accessToken, ids) {
   const details = [];
   for (let i = 0; i < ids.length; i += 50) {
     const batch = ids.slice(i, i + 50);
-    const data = await apiGet('videos', { part: 'snippet', id: batch.join(',') }, accessToken);
+    const data = await apiGet('videos', { part: 'snippet,contentDetails', id: batch.join(',') }, accessToken);
     details.push(...data.items);
   }
   return details;
@@ -289,6 +289,7 @@ function buildVideos(details) {
       cat: pickCategory(s.tags, item.id, s.title, warnings),
       year: new Date(s.publishedAt).getFullYear(),
       publishedAt: s.publishedAt,
+      duration: (item.contentDetails && item.contentDetails.duration) || '',
     };
   });
   videos.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
@@ -357,7 +358,16 @@ function writeCsvFile(videos) {
   console.log(`data/videos.csv を更新しました（${videos.length}件）`);
 }
 
-// 年齢・スポット名・住所は、あるものだけ末尾に足す（画面側は無ければ表示しない）
+// YouTubeの長さ（ISO 8601。例: PT1H2M3S）を「1:02:03」「12:34」にする。不明なら空文字
+function formatDuration(iso) {
+  const m = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/.exec(iso || '');
+  if (!m) return '';
+  const [h, min, sec] = [m[1], m[2], m[3]].map(x => Number(x || 0));
+  const ss = String(sec).padStart(2, '0');
+  return h ? `${h}:${String(min).padStart(2, '0')}:${ss}` : `${min}:${ss}`;
+}
+
+// 年齢・長さ・スポット名・住所は、あるものだけ末尾に足す（画面側は無ければ表示しない）
 // チャット（worker/）がGeminiに渡す動画の一覧。説明は先頭60文字まで（Geminiへ渡す量を抑えるため）
 function buildCatalog(videos, spots = loadSpots()) {
   return videos.map(v => {
@@ -386,6 +396,8 @@ function formatEntry(v, spots = loadSpots()) {
   const extra = [];
   const age = calcAge(v.publishedAt);
   if (age) extra.push(`age:${esc(age)}`);
+  const dur = formatDuration(v.duration);
+  if (dur) extra.push(`dur:${esc(dur)}`);
   const spot = spots[v.id];
   if (spot) extra.push(`spot:${esc(spot.spot)}`, `place:${esc(placeOf(spot))}`);
   return `  { id:${esc(v.id)}, title:${esc(v.title)}, desc:${esc(v.desc)}, cat:${esc(v.cat)}, year:${v.year}${extra.length ? ', ' + extra.join(', ') : ''} },`;
@@ -461,4 +473,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { toJstDate, calcAge, buildCatalog, buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };
+module.exports = { toJstDate, calcAge, formatDuration, buildCatalog, buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };
