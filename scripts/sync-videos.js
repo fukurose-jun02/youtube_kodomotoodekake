@@ -25,6 +25,7 @@ const DATA_PATH = path.join(ROOT, 'data', 'videos.json');
 const CSV_PATH = path.join(ROOT, 'data', 'videos.csv');
 const CLAIMS_PATH = path.join(ROOT, 'data', 'claims.json');
 const SPOTS_PATH = path.join(ROOT, 'data', 'spots.json');
+const CATALOG_PATH = path.join(ROOT, 'worker', 'catalog.json');
 // 子どもの当時の年齢を出すための基準日（誕生日）
 const CHILD_BIRTHDAY = '2021-06-22';
 const INDEX_PATH = path.join(ROOT, 'index.html');
@@ -357,6 +358,29 @@ function writeCsvFile(videos) {
 }
 
 // 年齢・スポット名・住所は、あるものだけ末尾に足す（画面側は無ければ表示しない）
+// チャット（worker/）がGeminiに渡す動画の一覧。説明は先頭60文字まで（Geminiへ渡す量を抑えるため）
+function buildCatalog(videos, spots = loadSpots()) {
+  return videos.map(v => {
+    const spot = spots[v.id];
+    return {
+      id: v.id,
+      title: v.title,
+      cat: v.cat,
+      date: v.publishedAt.slice(0, 7),
+      age: calcAge(v.publishedAt),
+      spot: spot ? spot.spot : '',
+      place: placeOf(spot),
+      desc: (v.desc || '').replace(/\s+/g, ' ').slice(0, 60),
+    };
+  });
+}
+
+function writeCatalogFile(videos) {
+  fs.mkdirSync(path.dirname(CATALOG_PATH), { recursive: true });
+  fs.writeFileSync(CATALOG_PATH, JSON.stringify(buildCatalog(videos), null, 2) + '\n');
+  console.log(`worker/catalog.json を更新しました（${videos.length}件）`);
+}
+
 function formatEntry(v, spots = loadSpots()) {
   const esc = s => JSON.stringify(s);
   const extra = [];
@@ -418,6 +442,7 @@ async function main() {
 
   writeDataFile(videos);
   writeCsvFile(videos);
+  writeCatalogFile(videos);
   updateIndexHtml(videos);
 
   if (warnings.length) {
@@ -436,4 +461,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { toJstDate, calcAge, buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };
+module.exports = { toJstDate, calcAge, buildCatalog, buildCsv, formatEntry, updateIndexHtml, buildVideos, pickCategory };
