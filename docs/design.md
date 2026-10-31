@@ -77,3 +77,28 @@
 - Geminiの新しい認証キー（先頭が `AQ.`）は、今の呼び出し方（`x-goog-api-key` ヘッダー）で使えることを確認した
 - 続けての絞り込みの精度：結果が毎回少しばらつく。改善の余地：モデルを強いもの（`GEMINI_MODEL`）に変える、または年齢を月数の数値で持つ
 - `wrangler dev --remote` は、Cloudflareに設定した秘密情報（`GEMINI_API_KEY`）を使わない。実際のGeminiの確認は、`.dev.vars` を使ったローカル実行で行う
+
+---
+
+###### 設計書：スマホのUIを新しいイメージに変更（Issue #31）
+
+最終更新：2026-10-31
+
+###### 方針
+- スマホ幅だけの変更は、CSSの `@media (max-width:640px)` で行う。インラインの指定を上書きするため、`!important` を使う（`[data-ui="panel"]`・`[data-ui="search"]`）
+- 新しい要素は、スマホ幅だけで出すもの（`.sheet-title`・`.sa-go`・`.cr-more`）は、通常は `display:none`、スマホ幅で表示。全幅で出すもの（`.ai-card`・`.ai-chips`・`.dur-badge`）は、そのまま
+
+###### 部品
+- 丸い面：`[data-ui="panel"]`（variant A の検索ブロック）をスマホ幅で、角丸30px・上に重ねる（`margin-top:-28px`）。ヘッダーの飾り（`.hero-strip`）は非表示
+- 見出し：`FilterBar`（variant A のみ）の `.sheet-title`。ふたばのアイコンと、きらめき（SVG）
+- 検索：`SearchAuto`（`ux-parts.jsx`）に、`.sa-go`（「検索する」）と `onSubmit` を追加。スマホ幅ではプレースホルダーを短くする（`matchMedia`）。🔍 をアイコン画像（`icons/ui-search.png`）に変更
+- AIカード・ボタン：`ChatSearch`。カード（`.ai-card`）と、ボタン4つ（`.ai-chips`、`CHAT_CHIPS`）。ボタンは、チャットを開いて、決まった質問（`query`）を送る
+- 長さのバッジ：`CardA` のサムネイルの右下（`.dur-badge`）。データは `VIDEOS` の `dur`
+- 「もっと見る」：`Carousel` の `onMore`。結果の位置（`#results`）へスクロール
+
+###### データ
+- `scripts/sync-videos.js` が、YouTube から `contentDetails.duration`（ISO 8601）を取得し、`data/videos.json` の `duration` に保存。`formatDuration` で「5:11」「1:02:03」にして、`VIDEOS` の `dur` に入れる
+- 素材：`icons/ui-{rain,train,kyoto,chat,sprout,search}.png`（256×256、背景透明）。シート（`design-assets/出力/icons-sheet.png`）から、外側の白を透明にして切り出した
+
+###### 素材づくりの流れ
+- ユーザーがChatGPTで作成。指示書と参考画像は `design-assets/`（Gitには入れていない）
