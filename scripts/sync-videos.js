@@ -23,6 +23,7 @@ const ROOT = path.resolve(__dirname, '..');
 const ENV_PATH = path.join(ROOT, '.env');
 const DATA_PATH = path.join(ROOT, 'data', 'videos.json');
 const CSV_PATH = path.join(ROOT, 'data', 'videos.csv');
+const CLAIMS_PATH = path.join(ROOT, 'data', 'claims.json');
 const INDEX_PATH = path.join(ROOT, 'index.html');
 const START_MARKER = '// AUTO-GENERATED:VIDEOS-START';
 const END_MARKER = '// AUTO-GENERATED:VIDEOS-END';
@@ -301,12 +302,26 @@ function csvCell(value) {
   return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
+// YouTube Studioから読み取った著作権の申立（data/claims.json）。無ければ申立列は空にする
+function loadClaims() {
+  if (!fs.existsSync(CLAIMS_PATH)) return {};
+  return JSON.parse(fs.readFileSync(CLAIMS_PATH, 'utf8')).videos || {};
+}
+
+// 申立が複数ある動画は、曲名・歌手名とも同じ順番で ' ; ' でつなぐ（歌手名が無い申立は空欄）
+const CLAIM_SEPARATOR = ' ; ';
+
 // 先頭にBOMを付け、Excel等でも日本語が文字化けしないようにする
-function buildCsv(videos) {
-  const header = ['id', 'title', 'cat', 'year', 'published', 'url', 'desc'];
-  const rows = videos.map(v => [
-    v.id, v.title, v.cat, v.year, v.publishedAt, `https://www.youtube.com/watch?v=${v.id}`, v.desc,
-  ].map(csvCell).join(','));
+function buildCsv(videos, claims = loadClaims()) {
+  const header = ['id', 'title', 'cat', 'year', 'published', 'url', 'desc', '申立_曲名', '申立_歌手名'];
+  const rows = videos.map(v => {
+    const list = claims[v.id] || [];
+    return [
+      v.id, v.title, v.cat, v.year, v.publishedAt, `https://www.youtube.com/watch?v=${v.id}`, v.desc,
+      list.map(c => c.title).join(CLAIM_SEPARATOR),
+      list.map(c => c.artist || '').join(CLAIM_SEPARATOR),
+    ].map(csvCell).join(',');
+  });
   return '\uFEFF' + [header.join(','), ...rows].join('\r\n') + '\r\n';
 }
 
