@@ -15,7 +15,7 @@
 ###### 反映先
 - CSV（`buildCsv`）：末尾に「年齢」「スポット名」「住所」を追加
 - `index.html` の `VIDEOS`（`formatEntry`）：`age` / `spot` / `place` を、あるときだけ追加
-- 画面：`AgeTag`（👶 年齢）と `SpotLine`（📍 スポット名 ・ 住所）。カードA・B・再生画面は両方、ポラロイド（C）は余白が小さいので年齢のみ
+- 画面：`AgeTag`（子どものアイコン画像 `icons/child-icon.png` ＋ 年齢。v1.2.1 で絵文字から変更）と `SpotLine`（📍 スポット名 ・ 住所）。カードA・B・再生画面は両方、ポラロイド（C）は余白が小さいので年齢のみ
 - 検索（`index.html` の絞り込み）と候補（`ux-parts.jsx` の `SearchAuto`）：題名に一致しなければ、スポット名・住所で一致させる
 
 ###### 決めたこと／理由
